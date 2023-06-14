@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+    <head>
+
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport"content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+
+        <title>Sing up</title>
+
+    </head>
+
+    <body>
+
+        <div id="sign_up">
+            <form class="card">
+                <div class="card-header-signup">
+                    <h2>Sign up</h2>
+                </div>
+
+                <div class="card-content">
+                    <div class="card-content-area">
+                        <label for="user">Username</label>
+                        <input type="text" id="user" autocomplete="off" placeholder="Username">
+                    </div>
+
+                    <div class="card-content-area">
+                        <div class="pass">
+                            <label for="password">Password</label> <br>
+                            <input type="password" id="pass" autocomplete="off" placeholder="Password">
+                            <img src="https://cdn0.iconfinder.com/data/icons/ui-icons-pack/100/ui-icon-pack-14-512.png" id="olho" class="olho"> <br>
+                        
+                            <label for="password">Confirm your password</label>
+                            <input type="password" id="pass" autocomplete="off" placeholder="Password">
+                            <img src="https://cdn0.iconfinder.com/data/icons/ui-icons-pack/100/ui-icon-pack-14-512.png" id="olho" class="olho">
+                        </div>
+                </div>
+
+                <div class="card-footer">
+                    <input type="submit" value="Submit" class="submit">
+                </div>
+
+                <div class="card-footer">
+                    <a href="C:\Users\User\Desktop\projects\Password_forget.HTML" class="recuperar_senha">Forget your password?</a>
+                </div>
+            </form>
+
+            <script>
+                document.getElementById('olho').addEventListener('mousedown', function() {
+                  document.getElementById('pass').type = 'text';
+                });
+    
+                document.getElementById('olho').addEventListener('mouseup', function() {
+                  document.getElementById('pass').type = 'password';
+                });
+    
+                document.getElementById('olho').addEventListener('mousemove', function() {
+                document.getElementById('pass').type = 'password';
+                });
+            </script>
+        </div>
+
+    </body>
+
+</html>

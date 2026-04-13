@@ -94,7 +94,7 @@ export const translations = {
           tags: ['React', 'JavaScript', 'Vite', 'Vercel'],
           lang: 'JavaScript',
           github: 'https://github.com/LeoGotardo/reportGen',
-          live: 'https://report-gen-orpin.vercel.app',
+          live: 'https://reportgen.vercel.app',
         },
         {
           icon: 'MW',
@@ -156,6 +156,7 @@ export const translations = {
           tags: ['Python', 'Threading', 'PyPI', 'Open Source', 'MIT'],
           lang: 'Python',
           github: 'https://github.com/LeoGotardo/CustomThread',
+          live: 'https://pypi.org/project/CustomThread/',
         },
         {
           icon: 'MZ',
@@ -171,6 +172,7 @@ export const translations = {
           tags: ['JavaScript', 'Algorithms', 'DFS', 'BFS', 'Data Structures', 'MIT'],
           lang: 'JavaScript',
           github: 'https://github.com/LeoGotardo/RedBlackTree',
+          live: 'dfsxbfs.vercel.app'
         },
         {
           icon: 'HT',

@@ -53,12 +53,14 @@ export const translations = {
     skills: {
       title: 'Skills',
       groups: [
-        { name: 'Languages',          pills: ['Python', 'JavaScript', 'Java', 'C', 'HTML', 'CSS', 'TypeScript', 'Lua', 'Bash'] },
-        { name: 'Backend & APIs',     pills: ['Flask', 'FastAPI', 'Laravel', 'REST API', 'WebSocket', 'JWT', 'SQLAlchemy', 'Bcrypt'] },
-        { name: 'Frontend',           pills: ['React', 'Vite'] },
+        { name: 'Languages',          pills: ['Python', 'JavaScript', 'TypeScript', 'Java', 'C', 'HTML', 'CSS', 'Lua', 'Bash'] },
+        { name: 'Backend & APIs',     pills: ['Flask', 'FastAPI', 'Laravel', 'REST API', 'WebSocket', 'JWT', 'SQLAlchemy', 'Bcrypt', 'Alembic'] },
+        { name: 'Frontend',           pills: ['React', 'Vite', 'Tailwind CSS', 'React Router', 'React Hooks'] },
         { name: 'Databases',          pills: ['MongoDB', 'MySQL', 'PostgreSQL', 'SQLite'] },
         { name: 'Systems & Hardware', pills: ['Linux', 'SSH', 'Embedded', 'NFC', 'GPIO', 'Hardware', 'Threading', 'Socket'] },
-        { name: 'Tools',              pills: ['Git', 'PyPI', 'IoT'] },
+        { name: 'Tools',              pills: ['Git', 'PyPI', 'IoT', 'Vercel'] },
+        { name: 'Libraries',          pills: ['tkinter', 'customtkinter', 'cryptography', 'Pillow', 'pyperclip', 'hashlib', 'ctypes', 'CTkColorPicker', 'CTkTable'] },
+        { name: 'Patterns',           pills: ['MVC', 'CRUD', 'REST', 'Observer', 'Singleton'] },
       ],
     },
     projects: {

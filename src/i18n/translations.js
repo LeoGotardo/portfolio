@@ -10,7 +10,7 @@ export const translations = {
     about: {
       title: 'About',
       p1a: 'Software Developer based in Londrina, Brasil. Currently working at ',
-      p1b: ' — a Brazilian fintech converting traditional machines into smart vending systems via proprietary payment technology — where I work across the full stack: embedded systems, REST APIs, IoT, and web development.',
+      p1b: ' — a Brazilian fintech converting traditional machines into smart vending systems via proprietary payment technology — where I work across the full stack: embedded systems, automation, REST APIs, sockets, cryptography, IoT, and web development.',
       p2: "I'm pursuing a degree in Analysis and Systems Development at IFPR while building side projects that push me to learn new areas — from cryptography and GUI programming to building and publishing Python libraries on PyPI.",
       meta: [
         { label: 'Location',   value: 'Londrina, Brasil' },
@@ -53,17 +53,44 @@ export const translations = {
     skills: {
       title: 'Skills',
       groups: [
-        { name: 'Languages',          pills: ['Python', 'JavaScript', 'Java', 'C', 'HTML', 'CSS'] },
-        { name: 'Backend & APIs',     pills: ['Flask', 'FastAPI', 'Laravel', 'REST API', 'JWT', 'SQLAlchemy', 'Bcrypt'] },
-        { name: 'Frontend',           pills: ['React', 'Vite', 'WebSocket'] },
+        { name: 'Languages',          pills: ['Python', 'JavaScript', 'Java', 'C', 'HTML', 'CSS', 'TypeScript', 'Lua', 'Bash'] },
+        { name: 'Backend & APIs',     pills: ['Flask', 'FastAPI', 'Laravel', 'REST API', 'WebSocket', 'JWT', 'SQLAlchemy', 'Bcrypt'] },
+        { name: 'Frontend',           pills: ['React', 'Vite'] },
         { name: 'Databases',          pills: ['MongoDB', 'MySQL', 'PostgreSQL', 'SQLite'] },
-        { name: 'Systems & Hardware', pills: ['Linux', 'SSH', 'Embedded', 'NFC', 'Hardware', 'Threading', 'Socket'] },
+        { name: 'Systems & Hardware', pills: ['Linux', 'SSH', 'Embedded', 'NFC', 'GPIO', 'Hardware', 'Threading', 'Socket'] },
         { name: 'Tools',              pills: ['Git', 'PyPI', 'IoT'] },
       ],
     },
     projects: {
       title: 'Projects',
       items: [
+        {
+          icon: 'FT',
+          name: 'FreeTap',
+          period: '2024 - 2025',
+          desc: '',
+          bullets: ['REDACTED'],
+          tags: ["REDACTED"],
+          lang: 'REDACTED',
+        },
+        {
+          icon: 'PF',
+          name: 'Perfect Fill',
+          period: '2024 - 2026',
+          desc: '',
+          bullets: ['REDACTED'],
+          tags: ["REDACTED"],
+          lang: 'REDACTED',
+        },
+        {
+          icon: 'QY',
+          name: 'Quantify',
+          period: '2024 - 2026',
+          desc: '',
+          bullets: ['REDACTED'],
+          tags: ["REDACTED"],
+          lang: 'REDACTED',
+        },
         {
           icon: 'NH',
           name: 'noHarmBack',
@@ -213,7 +240,7 @@ export const translations = {
     about: {
       title: 'Sobre',
       p1a: 'Desenvolvedor de Software baseado em Londrina, Brasil. Atualmente trabalhando na ',
-      p1b: ' — uma fintech brasileira que converte máquinas tradicionais em sistemas de venda inteligentes via tecnologia de pagamento proprietária — onde atuo em toda a stack: sistemas embarcados, APIs REST, IoT e desenvolvimento web.',
+      p1b: ' — uma fintech brasileira que converte máquinas tradicionais em sistemas de venda inteligentes via tecnologia de pagamento proprietária — onde atuo em toda a stack: sistemas embarcados, automação, APIs REST, sockets, cryptografia, IoT e desenvolvimento web.',
       p2: 'Curso Análise e Desenvolvimento de Sistemas no IFPR enquanto construo projetos pessoais que me desafiam a aprender novas áreas — desde criptografia e programação GUI até construir e publicar bibliotecas Python no PyPI.',
       meta: [
         { label: 'Localização',  value: 'Londrina, Brasil' },
@@ -267,6 +294,33 @@ export const translations = {
     projects: {
       title: 'Projetos',
       items: [
+        {
+          icon: 'FT',
+          name: 'FreeTap',
+          period: '2024 - 2025',
+          desc: '',
+          bullets: ['CONFIDENCIAL'],
+          tags: ["CONFIDENCIAL"],
+          lang: 'CONFIDENCIAL',
+        },
+        {
+          icon: 'PF',
+          name: 'Perfect Fill',
+          period: '2024 - 2026',
+          desc: '',
+          bullets: ['CONFIDENCIAL'],
+          tags: ["CONFIDENCIAL"],
+          lang: 'CONFIDENCIAL',
+        },
+        {
+          icon: 'QY',
+          name: 'Quantify',
+          period: '2024 - 2026',
+          desc: '',
+          bullets: ['CONFIDENCIAL'],
+          tags: ["CONFIDENCIAL"],
+          lang: 'CONFIDENCIAL',
+        },
         {
           icon: 'NH',
           name: 'noHarmBack',

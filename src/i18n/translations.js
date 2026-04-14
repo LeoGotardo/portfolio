@@ -6,6 +6,7 @@ export const translations = {
       subtitle:
         'Building embedded systems, REST APIs, and web applications. Passionate about learning hard things — from IoT hardware to full-stack development.',
       downloadResume: 'Download Resume',
+      seeMyWork: 'See my work',
     },
     about: {
       title: 'About',
@@ -238,6 +239,7 @@ export const translations = {
       subtitle:
         'Desenvolvendo sistemas embarcados, APIs REST e aplicações web. Apaixonado por aprender coisas difíceis — de hardware IoT a desenvolvimento full-stack.',
       downloadResume: 'Baixar Currículo',
+      seeMyWork: 'Ver projetos',
     },
     about: {
       title: 'Sobre',

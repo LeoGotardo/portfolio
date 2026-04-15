@@ -68,33 +68,6 @@ export const translations = {
       title: 'Projects',
       items: [
         {
-          icon: 'FT',
-          name: 'FreeTap',
-          period: '2024 - 2025',
-          desc: '',
-          bullets: ['REDACTED'],
-          tags: ["REDACTED"],
-          lang: 'REDACTED',
-        },
-        {
-          icon: 'PF',
-          name: 'Perfect Fill',
-          period: '2024 - 2026',
-          desc: '',
-          bullets: ['REDACTED'],
-          tags: ["REDACTED"],
-          lang: 'REDACTED',
-        },
-        {
-          icon: 'QY',
-          name: 'Quantify',
-          period: '2024 - 2026',
-          desc: '',
-          bullets: ['REDACTED'],
-          tags: ["REDACTED"],
-          lang: 'REDACTED',
-        },
-        {
           icon: 'NH',
           name: 'noHarmBack',
           period: '2025 — Present',
@@ -298,33 +271,6 @@ export const translations = {
     projects: {
       title: 'Projetos',
       items: [
-        {
-          icon: 'FT',
-          name: 'FreeTap',
-          period: '2024 - 2025',
-          desc: '',
-          bullets: ['CONFIDENCIAL'],
-          tags: ["CONFIDENCIAL"],
-          lang: 'CONFIDENCIAL',
-        },
-        {
-          icon: 'PF',
-          name: 'Perfect Fill',
-          period: '2024 - 2026',
-          desc: '',
-          bullets: ['CONFIDENCIAL'],
-          tags: ["CONFIDENCIAL"],
-          lang: 'CONFIDENCIAL',
-        },
-        {
-          icon: 'QY',
-          name: 'Quantify',
-          period: '2024 - 2026',
-          desc: '',
-          bullets: ['CONFIDENCIAL'],
-          tags: ["CONFIDENCIAL"],
-          lang: 'CONFIDENCIAL',
-        },
         {
           icon: 'NH',
           name: 'noHarmBack',

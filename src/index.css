@@ -376,12 +376,14 @@ nav.hidden { transform: translateY(-100%); }
 }
 .skill-pills { display: flex; flex-wrap: wrap; gap: .4rem; }
 .skill-pill {
+  display: inline-flex; align-items: center; gap: .35rem;
   background: rgba(42,52,65,.7); border: 1px solid var(--steel-dark);
   color: var(--text-primary); padding: .2rem .65rem; border-radius: 6px;
   font-size: .8rem; font-weight: 500;
   transition: border-color .2s, color .2s;
 }
 .skill-pill:hover { border-color: var(--accent-cyan); color: var(--accent-cyan); }
+.skill-pill-icon { width: .9rem; height: .9rem; flex-shrink: 0; }
 
 /* ── PROJECTS ── */
 .projects-grid { display: flex; flex-direction: column; gap: 1.25rem; }

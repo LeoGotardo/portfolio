@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import SectionHeader from './SectionHeader'
 import { useReveal } from './useReveal'
 import { useApp } from '../context/AppContext'
@@ -21,6 +22,24 @@ const LANG_COLORS = {
   TypeScript: '#3178c6',
   Python:     '#3572A5',
   C:          '#555555',
+}
+
+const WEB_LIVE_RE = /^https?:\/\//
+
+function ProjectPreview({ url }) {
+  const [loaded, setLoaded] = useState(false)
+  if (!WEB_LIVE_RE.test(url)) return null
+  const src = `https://api.microlink.io/?url=${encodeURIComponent(url)}&screenshot=true&meta=false&embed=screenshot.url`
+  return (
+    <div className="project-preview">
+      <div className={`project-preview-thumb${loaded ? ' loaded' : ''}`}>
+        <img src={src} alt="preview" loading="lazy" onLoad={() => setLoaded(true)} />
+      </div>
+      <div className="project-preview-popup">
+        <img src={src} alt="preview large" />
+      </div>
+    </div>
+  )
 }
 
 function ProjectCard({ icon, name, period, desc, bullets, tags, lang, github, live }) {
@@ -59,6 +78,7 @@ function ProjectCard({ icon, name, period, desc, bullets, tags, lang, github, li
           {tags.map(t => <span className="tag" key={t}>{t}</span>)}
         </div>
       </div>
+      {live && <ProjectPreview url={live} />}
     </div>
   )
 }

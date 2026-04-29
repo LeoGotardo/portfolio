@@ -31,27 +31,29 @@ function ProjectPreview({ url }) {
   if (!WEB_LIVE_RE.test(url)) return null
   const src = `https://api.microlink.io/?url=${encodeURIComponent(url)}&screenshot=true&meta=false&embed=screenshot.url`
   return (
-    <div className="project-preview">
-      <div className={`project-preview-thumb${loaded ? ' loaded' : ''}`}>
-        <img src={src} alt="preview" loading="lazy" onLoad={() => setLoaded(true)} />
-      </div>
-      <div className="project-preview-popup">
-        <img src={src} alt="preview large" />
-      </div>
+    <div className={`project-preview${loaded ? ' loaded' : ''}`}>
+      <img src={src} alt="preview" loading="lazy" onLoad={() => setLoaded(true)} />
+      <a className="project-preview-overlay" href={url} target="_blank" rel="noopener">
+        <span className="project-preview-open"><ExternalIcon /> Open Live</span>
+      </a>
     </div>
   )
 }
 
 function ProjectCard({ icon, name, period, desc, bullets, tags, lang, github, live }) {
   const ref = useReveal()
+  const hasPreview = live && WEB_LIVE_RE.test(live)
   return (
-    <div className="project-card reveal" ref={ref}>
-      <div className="project-icon">{icon}</div>
-      <div className="project-info">
+    <div className={`project-card reveal${hasPreview ? ' has-preview' : ''}`} ref={ref}>
+      {hasPreview && <ProjectPreview url={live} />}
+      <div className="project-card-body">
         <div className="project-card-top">
-          <div>
-            <div className="project-name">{name}</div>
-            <div className="project-period">{period}</div>
+          <div className="project-card-title-row">
+            <div className="project-icon">{icon}</div>
+            <div>
+              <div className="project-name">{name}</div>
+              <div className="project-period">{period}</div>
+            </div>
           </div>
           <div className="project-card-actions">
             {lang && (
@@ -78,7 +80,6 @@ function ProjectCard({ icon, name, period, desc, bullets, tags, lang, github, li
           {tags.map(t => <span className="tag" key={t}>{t}</span>)}
         </div>
       </div>
-      {live && <ProjectPreview url={live} />}
     </div>
   )
 }

@@ -29,7 +29,8 @@ const WEB_LIVE_RE = /^https?:\/\//
 function ProjectPreview({ url }) {
   const [loaded, setLoaded] = useState(false)
   if (!WEB_LIVE_RE.test(url)) return null
-  const src = `https://api.microlink.io/?url=${encodeURIComponent(url)}&screenshot=true&meta=false&embed=screenshot.url`
+  const day = Math.floor(Date.now() / (1000 * 60 * 60 * 24))
+  const src = `https://api.microlink.io/?url=${encodeURIComponent(url)}&screenshot=true&meta=false&embed=screenshot.url&v=${day}`
   return (
     <div className={`project-preview${loaded ? ' loaded' : ''}`}>
       <img src={src} alt="preview" loading="lazy" onLoad={() => setLoaded(true)} />

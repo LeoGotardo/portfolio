@@ -58,5 +58,127 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <noscript>
+      <style>
+        .ns-wrap { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; font-family: system-ui, sans-serif; color: #e2e8f0; background: #0a0d12; }
+        .ns-wrap h1 { font-size: 2.5rem; margin-bottom: .25rem; }
+        .ns-wrap h2 { font-size: 1.4rem; color: #ff6b35; margin: 2rem 0 .75rem; border-bottom: 1px solid #2a3441; padding-bottom: .4rem; }
+        .ns-wrap h3 { font-size: 1.1rem; margin: 1rem 0 .25rem; }
+        .ns-wrap p, .ns-wrap li { color: #94a3b8; line-height: 1.7; }
+        .ns-wrap ul { padding-left: 1.25rem; }
+        .ns-wrap a { color: #00d4ff; }
+        .ns-tag { display: inline-block; background: #1a2332; color: #00d4ff; font-size: .75rem; padding: .2rem .5rem; border-radius: 4px; margin: .15rem; }
+        .ns-meta { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem 2rem; margin: 1rem 0; }
+        .ns-meta span { color: #94a3b8; } .ns-meta strong { color: #e2e8f0; }
+        .ns-period { color: #64748b; font-size: .85rem; }
+        .ns-project { border: 1px solid #2a3441; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; }
+      </style>
+      <div class="ns-wrap">
+        <header>
+          <p style="color:#ff6b35;font-size:.9rem;text-transform:uppercase;letter-spacing:.1em">Software Developer &amp; Student</p>
+          <h1>Leonardo Gotardo</h1>
+          <p>Building embedded systems, REST APIs, and web applications. Passionate about learning hard things — from IoT hardware to full-stack development.</p>
+          <p><a href="https://github.com/LeoGotardo">GitHub</a> · <a href="https://www.linkedin.com/in/leogotardo/">LinkedIn</a> · <a href="mailto:leonardo.gotardo2@gmail.com">Email</a></p>
+        </header>
+
+        <main>
+          <section id="about">
+            <h2>About</h2>
+            <p>Software Developer based in Londrina, Brazil. Currently working at <a href="https://irispay.com.br">IrisPay</a> — a Brazilian fintech converting traditional machines into smart vending systems via proprietary payment technology — where I work across the full stack: embedded systems, automation, REST APIs, sockets, cryptography, IoT, and web development.</p>
+            <p>Pursuing a degree in Analysis and Systems Development at IFPR while building side projects that push me to learn new areas — from cryptography and GUI programming to building and publishing Python libraries on PyPI.</p>
+            <div class="ns-meta">
+              <div><strong>Location</strong><br><span>Londrina, Brazil</span></div>
+              <div><strong>Languages</strong><br><span>Portuguese (Native) · English (Full Professional)</span></div>
+              <div><strong>Education</strong><br><span>Analysis &amp; Systems Dev — IFPR</span></div>
+              <div><strong>Focus</strong><br><span>Embedded · IoT · REST APIs · Web</span></div>
+            </div>
+          </section>
+
+          <section id="experience">
+            <h2>Experience</h2>
+            <h3>Software Developer — IrisPay <span class="ns-period">Sep 2024 — Present</span></h3>
+            <p>Brazilian fintech converting traditional machines into smart vending systems. Londrina-PR, Brazil.</p>
+            <ul>
+              <li>Embedded systems development and hardware programming</li>
+              <li>REST API development and integration</li>
+              <li>IoT development with NFC and RFID hardware</li>
+              <li>Web development for internal and client-facing systems</li>
+              <li>SSH remote management and socket communication</li>
+            </ul>
+            <h3>Service Desk — Persis Internet <span class="ns-period">Jul 2023 — Mar 2024</span></h3>
+            <p>Regional ISP with 100k+ clients. Londrina-PR, Brazil.</p>
+            <ul>
+              <li>Solved complex network issues interpreting ambiguous customer descriptions</li>
+              <li>Delivered high-quality technical support under pressure</li>
+            </ul>
+          </section>
+
+          <section id="skills">
+            <h2>Skills</h2>
+            <p><strong>Languages:</strong>
+              <span class="ns-tag">Python</span><span class="ns-tag">JavaScript</span><span class="ns-tag">TypeScript</span><span class="ns-tag">Java</span><span class="ns-tag">C</span><span class="ns-tag">HTML</span><span class="ns-tag">CSS</span><span class="ns-tag">Lua</span><span class="ns-tag">Bash</span>
+            </p>
+            <p><strong>Backend &amp; APIs:</strong>
+              <span class="ns-tag">Flask</span><span class="ns-tag">FastAPI</span><span class="ns-tag">Laravel</span><span class="ns-tag">REST API</span><span class="ns-tag">WebSocket</span><span class="ns-tag">JWT</span><span class="ns-tag">SQLAlchemy</span>
+            </p>
+            <p><strong>Frontend:</strong>
+              <span class="ns-tag">React</span><span class="ns-tag">Vite</span><span class="ns-tag">Tailwind CSS</span><span class="ns-tag">React Router</span>
+            </p>
+            <p><strong>Databases:</strong>
+              <span class="ns-tag">MongoDB</span><span class="ns-tag">MySQL</span><span class="ns-tag">PostgreSQL</span><span class="ns-tag">SQLite</span>
+            </p>
+            <p><strong>Systems &amp; Hardware:</strong>
+              <span class="ns-tag">Linux</span><span class="ns-tag">SSH</span><span class="ns-tag">Embedded</span><span class="ns-tag">NFC</span><span class="ns-tag">GPIO</span><span class="ns-tag">Threading</span><span class="ns-tag">Socket</span>
+            </p>
+            <p><strong>Tools:</strong>
+              <span class="ns-tag">Git</span><span class="ns-tag">PyPI</span><span class="ns-tag">IoT</span><span class="ns-tag">Vercel</span>
+            </p>
+          </section>
+
+          <section id="projects">
+            <h2>Projects</h2>
+            <div class="ns-project">
+              <h3>ReportGen <span class="ns-period">Feb 2026 — Present</span></h3>
+              <p>Web tool for generating professional technical reports with ABNT formatting and severity classification.</p>
+              <p><a href="https://reportgen.vercel.app">Live</a> · <a href="https://github.com/LeoGotardo/reportGen">GitHub</a></p>
+            </div>
+            <div class="ns-project">
+              <h3>MainDug Web <span class="ns-period">Dec 2024 — Present</span></h3>
+              <p>Full-stack web password manager with JWT authentication and encrypted storage. React SPA with RESTful backend.</p>
+              <p><a href="https://main-dug-web.vercel.app">Live</a> · <a href="https://github.com/LeoGotardo/MainDugWeb">GitHub</a></p>
+            </div>
+            <div class="ns-project">
+              <h3>Custom Thread <span class="ns-period">Jun 2024 — Present</span></h3>
+              <p>Python library extending the standard threading module with return values, exception propagation, and callbacks. Published on PyPI.</p>
+              <p><a href="https://pypi.org/project/CustomThread/">PyPI</a> · <a href="https://github.com/LeoGotardo/CustomThread">GitHub</a></p>
+            </div>
+            <div class="ns-project">
+              <h3>ipTool <span class="ns-period">Mar 2026 — Present</span></h3>
+              <p>Geographic IP lookup tool with interactive Leaflet map, IPv4/IPv6 validation, and detailed network data.</p>
+              <p><a href="https://ip-tool.vercel.app">Live</a> · <a href="https://github.com/LeoGotardo/ipTool">GitHub</a></p>
+            </div>
+            <div class="ns-project">
+              <h3>noHarmBack <span class="ns-period">2025 — Present</span></h3>
+              <p>FastAPI backend for an addiction recovery app. Real-time chat via Socket.IO, AES-256 encryption, Neon PostgreSQL, deployed on Vercel.</p>
+              <p><a href="https://github.com/LeoGotardo/noHarmBack">GitHub</a></p>
+            </div>
+          </section>
+
+          <section id="contact">
+            <h2>Contact</h2>
+            <p>Open to new opportunities and interesting projects. Let's build something together.</p>
+            <p>
+              <a href="mailto:leonardo.gotardo2@gmail.com">leonardo.gotardo2@gmail.com</a><br>
+              <a href="https://www.linkedin.com/in/leogotardo/">LinkedIn</a> ·
+              <a href="https://github.com/LeoGotardo">GitHub</a>
+            </p>
+          </section>
+        </main>
+
+        <footer>
+          <p>Leonardo Gotardo · Londrina, Brazil · Software Developer</p>
+        </footer>
+      </div>
+    </noscript>
   </body>
 </html>

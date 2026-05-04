@@ -10,7 +10,7 @@ import Certificates from './components/Certificates'
 import Contact from './components/Contact'
 import ParticleWeb from './components/ParticleWeb'
 import MouseGlow from './components/MouseGlow'
-import { SpeedInsights } from "@vercel/speed-insights/next"
+import { SpeedInsights } from "@vercel/speed-insights/react"
 
 function ScrollBar() {
   const [pct, setPct] = useState(0)

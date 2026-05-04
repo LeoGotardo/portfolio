@@ -10,6 +10,7 @@ import Certificates from './components/Certificates'
 import Contact from './components/Contact'
 import ParticleWeb from './components/ParticleWeb'
 import MouseGlow from './components/MouseGlow'
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 function ScrollBar() {
   const [pct, setPct] = useState(0)
@@ -53,6 +54,7 @@ function AppInner() {
   const { tr } = useApp()
   return (
     <>
+      <SpeedInsights />
       <ScrollBar />
       <ParticleWeb />
       <MouseGlow />

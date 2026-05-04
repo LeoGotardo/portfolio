@@ -37,10 +37,10 @@ export default function Contact() {
         <a className="contact-item" href="mailto:leonardo.gotardo2@gmail.com">
           <EmailIcon /> leonardo.gotardo2@gmail.com
         </a>
-        <a className="contact-item" href="https://www.linkedin.com/in/leogotardo/" target="_blank" rel="noopener">
+        <a className="contact-item" href="https://www.linkedin.com/in/leogotardo/" target="_blank" rel="noopener noreferrer">
           <LinkedInIcon /> LinkedIn
         </a>
-        <a className="contact-item" href="https://github.com/LeoGotardo" target="_blank" rel="noopener">
+        <a className="contact-item" href="https://github.com/LeoGotardo" target="_blank" rel="noopener noreferrer">
           <GitHubIcon /> GitHub
         </a>
         <a className="contact-item" href="tel:+5543988177963">

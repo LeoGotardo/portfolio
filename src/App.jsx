@@ -73,8 +73,8 @@ function AppInner() {
             <p className="footer-tagline">{tr.footer}</p>
           </div>
           <div className="footer-right">
-            <a className="footer-link" href="https://github.com/LeoGotardo" target="_blank" rel="noopener">GitHub</a>
-            <a className="footer-link" href="https://www.linkedin.com/in/leogotardo/" target="_blank" rel="noopener">LinkedIn</a>
+            <a className="footer-link" href="https://github.com/LeoGotardo" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a className="footer-link" href="https://www.linkedin.com/in/leogotardo/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
             <a className="footer-link" href="mailto:leonardo.gotardo2@gmail.com">Email</a>
           </div>
         </div>

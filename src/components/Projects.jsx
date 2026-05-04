@@ -34,7 +34,7 @@ function ProjectPreview({ url }) {
   return (
     <div className={`project-preview${loaded ? ' loaded' : ''}`}>
       <img src={src} alt="preview" loading="lazy" onLoad={() => setLoaded(true)} />
-      <a className="project-preview-overlay" href={url} target="_blank" rel="noopener">
+      <a className="project-preview-overlay" href={url} target="_blank" rel="noopener noreferrer">
         <span className="project-preview-open"><ExternalIcon /> Open Live</span>
       </a>
     </div>
@@ -64,11 +64,11 @@ function ProjectCard({ icon, name, period, desc, bullets, tags, lang, github, li
               </span>
             )}
             {live && (
-              <a className="project-link-btn" href={live} target="_blank" rel="noopener" title="Live demo">
+              <a className="project-link-btn" href={live} target="_blank" rel="noopener noreferrer" title="Live demo">
                 <ExternalIcon /> Demo
               </a>
             )}
-            <a className="project-link-btn project-link-btn--gh" href={github} target="_blank" rel="noopener" title="GitHub repo">
+            <a className="project-link-btn project-link-btn--gh" href={github} target="_blank" rel="noopener noreferrer" title="GitHub repo">
               <GitHubIcon /> Code
             </a>
           </div>

@@ -1,0 +1,137 @@
+# Leonardo Gotardo
+
+> Software Developer based in Londrina, Brazil. Specializing in embedded systems, REST APIs, IoT, and full-stack web development. Currently working at IrisPay (Brazilian fintech). Pursuing Analysis and Systems Development degree at IFPR.
+
+## About
+
+Leonardo Gotardo is a Software Developer based in Londrina, Paraná, Brazil. He works at IrisPay — a Brazilian fintech converting traditional vending machines into smart payment systems via proprietary hardware — working across the full stack: embedded systems, automation, REST APIs, sockets, cryptography, IoT, and web development.
+
+Simultaneously pursuing a degree in Analysis and Systems Development at IFPR and building open-source side projects covering cryptography, GUI programming, algorithms, and Python libraries published on PyPI.
+
+- Location: Londrina, Paraná, Brazil
+- Languages: Portuguese (Native), English (Full Professional)
+- Education: Analysis & Systems Development — IFPR
+- Email: leonardo.gotardo2@gmail.com
+- GitHub: https://github.com/LeoGotardo
+- LinkedIn: https://www.linkedin.com/in/leogotardo/
+- Portfolio: https://leogotardo.vercel.app
+
+## Experience
+
+### Software Developer — IrisPay (Sep 2024 — Present)
+Brazilian fintech converting traditional vending machines into smart systems via proprietary payment technology. Londrina-PR, Brazil.
+- Embedded systems development and hardware programming
+- REST API development and integration
+- IoT development with NFC and RFID hardware
+- Web development for internal and client-facing systems
+- SSH remote management and socket communication
+Tags: Embedded Systems, REST API, IoT, Hardware, NFC, RFID, SSH, WebSocket, Web Dev
+
+### Service Desk — Persis Internet (Jul 2023 — Mar 2024)
+Regional ISP with 100k+ clients. Londrina-PR, Brazil.
+- Diagnosed and resolved complex network issues from ambiguous customer descriptions
+- Delivered high-quality technical support under pressure
+- Converted recurring client issues into actionable internal feedback
+Tags: Networking, Technical Support, Problem Solving, Customer Service
+
+## Skills
+
+- Languages: Python, JavaScript, TypeScript, Java, C, HTML, CSS, Lua, Bash
+- Backend & APIs: Flask, FastAPI, Laravel, REST API, WebSocket, JWT, SQLAlchemy, Bcrypt, Alembic
+- Frontend: React, Vite, Tailwind CSS, React Router, React Hooks
+- Databases: MongoDB, MySQL, PostgreSQL, SQLite
+- Systems & Hardware: Linux, SSH, Embedded Systems, NFC, GPIO, Hardware Programming, Threading, Socket Programming
+- Tools: Git, PyPI, Vercel, IoT
+- Libraries: tkinter, customtkinter, cryptography, Pillow, pyperclip, hashlib, ctypes
+- Patterns: MVC, CRUD, REST, Observer, Singleton
+
+## Projects
+
+### ReportGen (Feb 2026 — Present)
+Web tool for generating professional technical reports with ABNT formatting and severity classification.
+- Two templates: Security/Bug Report and Changelog
+- ABNT-compliant formatting with severity levels (High / Medium / Low)
+- React component architecture with live preview
+- Live: https://reportgen.vercel.app
+- GitHub: https://github.com/LeoGotardo/reportGen
+- Stack: React, JavaScript, Vite, Vercel
+
+### MainDug Web (Dec 2024 — Present)
+Full-stack web password manager — securely stores and manages credentials with JWT authentication and encrypted storage.
+- Full-stack rewrite of the original Python desktop app
+- JWT-based authentication with encrypted storage
+- React SPA with RESTful backend
+- Live: https://main-dug-web.vercel.app
+- GitHub: https://github.com/LeoGotardo/MainDugWeb
+- Stack: React, JavaScript, JWT, REST API, Vercel
+
+### DDGame (Feb 2026 — Present)
+Browser-based game built with TypeScript, deployed on Vercel.
+- TypeScript with strict typing throughout
+- Client-side game loop and state management
+- Live: https://ddgame-eta.vercel.app
+- GitHub: https://github.com/LeoGotardo/ddgame
+- Stack: TypeScript, Vite, Vercel
+
+### Custom Thread (Jun 2024 — Present)
+Python library extending the standard threading module — published and maintained on PyPI.
+- Extends stdlib Thread with return values, exception propagation, and callbacks
+- Zero external dependencies
+- MIT licensed open-source
+- Live: https://pypi.org/project/CustomThread/
+- GitHub: https://github.com/LeoGotardo/CustomThread
+- Stack: Python, Threading, PyPI
+
+### ipTool (Mar 2026 — Present)
+Geographic IP lookup tool with interactive Leaflet map, IPv4/IPv6 validation, and detailed network data.
+- IPv4 and IPv6 address validation
+- Interactive Leaflet map with precise coordinate markers
+- Network data: connection type, routing, ISP information
+- Location details: timezone, languages, calling codes, EU membership
+- Live: https://ip-tool.vercel.app
+- GitHub: https://github.com/LeoGotardo/ipTool
+- Stack: React, JavaScript, Vite, Leaflet, REST API
+
+### Maze Solver (Jun 2025 — Present)
+Interactive maze generator and solver implementing DFS and BFS search algorithms with step-by-step visualization.
+- Procedural maze generation with configurable dimensions
+- DFS and BFS solvers with animated visualization
+- Matrix-based representation: 0 = path, 1 = wall
+- Live: https://dfsxbfs.vercel.app
+- GitHub: https://github.com/LeoGotardo/RedBlackTree
+- Stack: JavaScript, Algorithms, DFS, BFS, Data Structures
+
+### noHarmBack (2025 — Present)
+Backend service for noHarm, a mobile addiction recovery app. Clean Architecture with real-time chat, streak tracking, and AES-256 encrypted user data.
+- FastAPI REST API with JWT authentication and token blacklisting
+- Real-time messaging via Socket.IO WebSockets
+- Streak tracking system with achievement badges
+- AES-256 field-level encryption, rate limiting, XSS sanitization
+- Alembic migrations with Neon PostgreSQL, deployed on Vercel
+- GitHub: https://github.com/LeoGotardo/noHarmBack
+- Stack: Python, FastAPI, PostgreSQL, Socket.IO, SQLAlchemy, JWT, Vercel
+
+### GeoKnocker (Jun 2024 — Aug 2024)
+GUI desktop tool for port scanning and IP geolocation with dark/light theme and concurrent scanning.
+- Port scanning via raw Python sockets
+- IP geolocation using public REST APIs
+- Concurrent scans with threading for performance
+- CustomTkinter GUI with dark/light theme toggle and loading animations
+- GitHub: https://github.com/LeoGotardo/GeoKnocker
+- Stack: Python, Sockets, Threading, Tkinter, CustomTkinter
+
+### Hash Table (Nov 2025 — Dec 2025)
+Hash table implementation in C with chaining for collision resolution and automatic rehashing at 75% load factor.
+- CPF-keyed records storing name and age
+- Separate chaining via linked lists for collision handling
+- Auto-rehash: doubles capacity when load factor ≥ 0.75
+- Insert, search, delete, and statistical analysis operations
+- GitHub: https://github.com/LeoGotardo/hashtable
+- Stack: C, Data Structures, Algorithms
+
+## Contact
+
+- Email: leonardo.gotardo2@gmail.com
+- LinkedIn: https://www.linkedin.com/in/leogotardo/
+- GitHub: https://github.com/LeoGotardo
+- Portfolio: https://leogotardo.vercel.app

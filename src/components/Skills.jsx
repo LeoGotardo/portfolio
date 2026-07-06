@@ -3,13 +3,15 @@ import {
   SiGnubash, SiFlask, SiFastapi, SiLaravel, SiJsonwebtokens,
   SiReact, SiVite, SiTailwindcss, SiReactrouter,
   SiMongodb, SiMysql, SiPostgresql, SiSqlite,
-  SiLinux, SiGit, SiPypi, SiVercel, SiSocketdotio, SiRaspberrypi
+  SiLinux, SiGit, SiPypi, SiVercel, SiSocketdotio, SiRaspberrypi,
+  SiExpress, SiZod, SiRadixui, SiFramer, SiPydantic, SiLeaflet,
+  SiI18Next, SiLucide, SiNpm, SiPnpm, SiRender, SiExpo,
 } from 'react-icons/si'
 import { FaJava, FaRobot } from 'react-icons/fa'
 import SectionHeader from './SectionHeader'
 import { useReveal } from './useReveal'
 import { useApp } from '../context/AppContext'
-import { TbBrandPowershell, TbCpu } from "react-icons/tb";
+import { TbBrandPowershell, TbCpu, TbBrandReactNative } from "react-icons/tb";
 
 const ICON_MAP = {
   'Python':       SiPython,
@@ -42,7 +44,21 @@ const ICON_MAP = {
   'WebSocket':    SiSocketdotio,
   'Hardware':     TbCpu,
   'Embedded':     SiRaspberrypi,
+  'Embarcados':   SiRaspberrypi,
   'GPIO':         FaRobot,
+  'Express.js':   SiExpress,
+  'React Native': TbBrandReactNative,
+  'Zod':          SiZod,
+  'Radix UI / shadcn': SiRadixui,
+  'Framer Motion': SiFramer,
+  'Pydantic':     SiPydantic,
+  'Leaflet':      SiLeaflet,
+  'i18next':      SiI18Next,
+  'lucide-react': SiLucide,
+  'npm':          SiNpm,
+  'pnpm':         SiPnpm,
+  'Render':       SiRender,
+  'Expo Image Picker': SiExpo,
 }
 
 function Pill({ name }) {

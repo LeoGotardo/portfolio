@@ -21,7 +21,7 @@ const MoonIcon = () => (
   </svg>
 )
 
-const sectionIds = ['about', 'experience', 'skills', 'projects', 'certificates', 'contact']
+const sectionIds = ['about', 'experience', 'skills', 'projects', 'certificates', 'interests', 'contact']
 
 export default function Nav() {
   const { theme, toggleTheme, lang, toggleLang, tr } = useApp()

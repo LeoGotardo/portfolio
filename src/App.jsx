@@ -7,6 +7,7 @@ import Experience from './components/Experience'
 import Skills from './components/Skills'
 import Projects from './components/Projects'
 import Certificates from './components/Certificates'
+import Interests from './components/Interests'
 import Contact from './components/Contact'
 import ParticleWeb from './components/ParticleWeb'
 import MouseGlow from './components/MouseGlow'
@@ -66,6 +67,7 @@ function AppInner() {
       <Skills />
       <Projects />
       <Certificates />
+      <Interests />
       <Divider />
       <Contact />
       <footer>

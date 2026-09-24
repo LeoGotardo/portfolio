@@ -47,6 +47,19 @@ Tags: Networking, Technical Support, Problem Solving, Customer Service
 
 ## Projects
 
+### noHarm (2025 — Present)
+Mobile addiction recovery app with a JavaScript/Capacitor frontend and a FastAPI backend (Clean Architecture). Real-time chat, streak tracking, and AES-256 encrypted user data.
+- Vite + Capacitor frontend for web and mobile, E2E tested with Playwright
+- FastAPI REST API with JWT authentication and token blacklisting
+- Real-time messaging via Socket.IO WebSockets
+- Streak tracking system with achievement badges
+- AES-256 field-level encryption, rate limiting, XSS sanitization
+- Alembic migrations with Neon PostgreSQL, deployed on Vercel
+- Live: https://noharm.site
+- GitHub (frontend): https://github.com/LeoGotardo/noHarm
+- GitHub (backend): https://github.com/LeoGotardo/noHarmBack
+- Stack: JavaScript, Capacitor, Python, FastAPI, PostgreSQL, Socket.IO, SQLAlchemy, JWT, Vercel
+
 ### ReportGen (Feb 2026 — Present)
 Web tool for generating professional technical reports with ABNT formatting and severity classification.
 - Two templates: Security/Bug Report and Changelog
@@ -55,32 +68,6 @@ Web tool for generating professional technical reports with ABNT formatting and 
 - Live: https://reportgen.vercel.app
 - GitHub: https://github.com/LeoGotardo/reportGen
 - Stack: React, JavaScript, Vite, Vercel
-
-### MainDug Web (Dec 2024 — Present)
-Full-stack web password manager — securely stores and manages credentials with JWT authentication and encrypted storage.
-- Full-stack rewrite of the original Python desktop app
-- JWT-based authentication with encrypted storage
-- React SPA with RESTful backend
-- Live: https://main-dug-web.vercel.app
-- GitHub: https://github.com/LeoGotardo/MainDugWeb
-- Stack: React, JavaScript, JWT, REST API, Vercel
-
-### DDGame (Feb 2026 — Present)
-Browser-based game built with TypeScript, deployed on Vercel.
-- TypeScript with strict typing throughout
-- Client-side game loop and state management
-- Live: https://ddgame-eta.vercel.app
-- GitHub: https://github.com/LeoGotardo/ddgame
-- Stack: TypeScript, Vite, Vercel
-
-### Custom Thread (Jun 2024 — Present)
-Python library extending the standard threading module — published and maintained on PyPI.
-- Extends stdlib Thread with return values, exception propagation, and callbacks
-- Zero external dependencies
-- MIT licensed open-source
-- Live: https://pypi.org/project/CustomThread/
-- GitHub: https://github.com/LeoGotardo/CustomThread
-- Stack: Python, Threading, PyPI
 
 ### ipTool (Mar 2026 — Present)
 Geographic IP lookup tool with interactive Leaflet map, IPv4/IPv6 validation, and detailed network data.
@@ -92,6 +79,32 @@ Geographic IP lookup tool with interactive Leaflet map, IPv4/IPv6 validation, an
 - GitHub: https://github.com/LeoGotardo/ipTool
 - Stack: React, JavaScript, Vite, Leaflet, REST API
 
+### Custom Thread (Jun 2024 — Present)
+Python library extending the standard threading module — published and maintained on PyPI.
+- Extends stdlib Thread with return values, exception propagation, and callbacks
+- Zero external dependencies
+- MIT licensed open-source
+- Live: https://pypi.org/project/CustomThread/
+- GitHub: https://github.com/LeoGotardo/CustomThread
+- Stack: Python, Threading, PyPI
+
+### DDGame (Feb 2026 — Present)
+Browser-based game built with TypeScript, deployed on Vercel.
+- TypeScript with strict typing throughout
+- Client-side game loop and state management
+- Live: https://ddgame-eta.vercel.app
+- GitHub: https://github.com/LeoGotardo/ddgame
+- Stack: TypeScript, Vite, Vercel
+
+### MainDug Web (Dec 2024 — Present)
+Full-stack web password manager — securely stores and manages credentials with JWT authentication and encrypted storage.
+- Full-stack rewrite of the original Python desktop app
+- JWT-based authentication with encrypted storage
+- React SPA with RESTful backend
+- Live: https://main-dug-web.vercel.app
+- GitHub: https://github.com/LeoGotardo/MainDugWeb
+- Stack: React, JavaScript, JWT, REST API, Vercel
+
 ### Maze Solver (Jun 2025 — Present)
 Interactive maze generator and solver implementing DFS and BFS search algorithms with step-by-step visualization.
 - Procedural maze generation with configurable dimensions
@@ -100,16 +113,6 @@ Interactive maze generator and solver implementing DFS and BFS search algorithms
 - Live: https://dfsxbfs.vercel.app
 - GitHub: https://github.com/LeoGotardo/RedBlackTree
 - Stack: JavaScript, Algorithms, DFS, BFS, Data Structures
-
-### noHarmBack (2025 — Present)
-Backend service for noHarm, a mobile addiction recovery app. Clean Architecture with real-time chat, streak tracking, and AES-256 encrypted user data.
-- FastAPI REST API with JWT authentication and token blacklisting
-- Real-time messaging via Socket.IO WebSockets
-- Streak tracking system with achievement badges
-- AES-256 field-level encryption, rate limiting, XSS sanitization
-- Alembic migrations with Neon PostgreSQL, deployed on Vercel
-- GitHub: https://github.com/LeoGotardo/noHarmBack
-- Stack: Python, FastAPI, PostgreSQL, Socket.IO, SQLAlchemy, JWT, Vercel
 
 ### GeoKnocker (Jun 2024 — Aug 2024)
 GUI desktop tool for port scanning and IP geolocation with dark/light theme and concurrent scanning.

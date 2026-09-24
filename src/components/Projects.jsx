@@ -41,7 +41,7 @@ function ProjectPreview({ url }) {
   )
 }
 
-function ProjectCard({ icon, name, period, desc, bullets, tags, lang, github, live }) {
+function ProjectCard({ icon, name, period, desc, bullets, tags, lang, github, repos, live }) {
   const ref = useReveal()
   const hasPreview = live && WEB_LIVE_RE.test(live)
   return (
@@ -68,9 +68,11 @@ function ProjectCard({ icon, name, period, desc, bullets, tags, lang, github, li
                 <ExternalIcon /> Demo
               </a>
             )}
-            <a className="project-link-btn project-link-btn--gh" href={github} target="_blank" rel="noopener noreferrer" title="GitHub repo">
-              <GitHubIcon /> Code
-            </a>
+            {(repos ?? [{ label: 'Code', url: github }]).map(r => (
+              <a key={r.url} className="project-link-btn project-link-btn--gh" href={r.url} target="_blank" rel="noopener noreferrer" title="GitHub repo">
+                <GitHubIcon /> {r.label}
+              </a>
+            ))}
           </div>
         </div>
         <p className="project-desc">{desc}</p>

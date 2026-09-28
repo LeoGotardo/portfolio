@@ -14,7 +14,7 @@ Simultaneously pursuing a degree in Analysis and Systems Development at IFPR and
 - Email: leonardo.gotardo2@gmail.com
 - GitHub: https://github.com/LeoGotardo
 - LinkedIn: https://www.linkedin.com/in/leogotardo/
-- Portfolio: https://leogotardo.vercel.app
+- Portfolio: https://www.leogotardo.com.br
 
 ## Experience
 
@@ -65,7 +65,7 @@ Web tool for generating professional technical reports with ABNT formatting and 
 - Two templates: Security/Bug Report and Changelog
 - ABNT-compliant formatting with severity levels (High / Medium / Low)
 - React component architecture with live preview
-- Live: https://reportgen.vercel.app
+- Live: https://reportgen.leogotardo.com.br
 - GitHub: https://github.com/LeoGotardo/reportGen
 - Stack: React, JavaScript, Vite, Vercel
 
@@ -75,7 +75,7 @@ Geographic IP lookup tool with interactive Leaflet map, IPv4/IPv6 validation, an
 - Interactive Leaflet map with precise coordinate markers
 - Network data: connection type, routing, ISP information
 - Location details: timezone, languages, calling codes, EU membership
-- Live: https://ip-tool.vercel.app
+- Live: https://iptool.leogotardo.com.br
 - GitHub: https://github.com/LeoGotardo/ipTool
 - Stack: React, JavaScript, Vite, Leaflet, REST API
 
@@ -92,7 +92,7 @@ Python library extending the standard threading module — published and maintai
 Browser-based game built with TypeScript, deployed on Vercel.
 - TypeScript with strict typing throughout
 - Client-side game loop and state management
-- Live: https://ddgame-eta.vercel.app
+- Live: https://ddgame.leogotardo.com.br
 - GitHub: https://github.com/LeoGotardo/ddgame
 - Stack: TypeScript, Vite, Vercel
 
@@ -101,7 +101,7 @@ Full-stack web password manager — securely stores and manages credentials with
 - Full-stack rewrite of the original Python desktop app
 - JWT-based authentication with encrypted storage
 - React SPA with RESTful backend
-- Live: https://main-dug-web.vercel.app
+- Live: https://maindug.leogotardo.com.br
 - GitHub: https://github.com/LeoGotardo/MainDugWeb
 - Stack: React, JavaScript, JWT, REST API, Vercel
 
@@ -110,7 +110,7 @@ Interactive maze generator and solver implementing DFS and BFS search algorithms
 - Procedural maze generation with configurable dimensions
 - DFS and BFS solvers with animated visualization
 - Matrix-based representation: 0 = path, 1 = wall
-- Live: https://dfsxbfs.vercel.app
+- Live: https://maze.leogotardo.com.br
 - GitHub: https://github.com/LeoGotardo/RedBlackTree
 - Stack: JavaScript, Algorithms, DFS, BFS, Data Structures
 
@@ -137,4 +137,4 @@ Hash table implementation in C with chaining for collision resolution and automa
 - Email: leonardo.gotardo2@gmail.com
 - LinkedIn: https://www.linkedin.com/in/leogotardo/
 - GitHub: https://github.com/LeoGotardo
-- Portfolio: https://leogotardo.vercel.app
+- Portfolio: https://www.leogotardo.com.br

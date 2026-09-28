@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.leogotardo.com.br/sitemap.xml
+LLMs: https://www.leogotardo.com.br/llms.txt

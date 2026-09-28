@@ -104,7 +104,7 @@ export const translations = {
           tags: ['React', 'JavaScript', 'Vite', 'Express', 'Puppeteer', 'Render'],
           lang: 'JavaScript',
           github: 'https://github.com/LeoGotardo/reportGen',
-          live: 'https://reportgen-zvz0.onrender.com',
+          live: 'https://reportgen.leogotardo.com.br',
         },
         {
           icon: 'IT',
@@ -120,7 +120,7 @@ export const translations = {
           tags: ['React', 'JavaScript', 'Vite', 'Leaflet', 'REST API'],
           lang: 'JavaScript',
           github: 'https://github.com/LeoGotardo/ipTool',
-          live: 'https://ip-tool.vercel.app',
+          live: 'https://iptool.leogotardo.com.br',
         },
         {
           icon: 'CT',
@@ -151,7 +151,7 @@ export const translations = {
           tags: ['TypeScript', 'Vite', 'Vercel'],
           lang: 'TypeScript',
           github: 'https://github.com/LeoGotardo/ddgame',
-          live: 'https://ddgame-eta.vercel.app',
+          live: 'https://ddgame.leogotardo.com.br',
         },
         {
           icon: 'MW',
@@ -167,7 +167,7 @@ export const translations = {
           tags: ['React', 'JavaScript', 'JWT', 'REST API', 'Vercel'],
           lang: 'JavaScript',
           github: 'https://github.com/LeoGotardo/MainDugWeb',
-          live: 'https://main-dug-web.vercel.app',
+          live: 'https://maindug.leogotardo.com.br',
         },
         {
           icon: 'MZ',
@@ -183,7 +183,7 @@ export const translations = {
           tags: ['JavaScript', 'Algorithms', 'DFS', 'BFS', 'Data Structures', 'MIT'],
           lang: 'JavaScript',
           github: 'https://github.com/LeoGotardo/RedBlackTree',
-          live: 'https://dfsxbfs.vercel.app',
+          live: 'https://maze.leogotardo.com.br',
         },
         {
           icon: 'GK',
@@ -229,6 +229,7 @@ export const translations = {
           tags: ['Python', 'Flask', 'SQLAlchemy', 'systemd', 'Raspberry Pi', 'Embedded'],
           lang: 'Python',
           github: 'https://github.com/LeoGotardo/pitest',
+          live: 'https://pitest.leogotardo.com.br',
         },
         {
           icon: 'VG',
@@ -244,7 +245,7 @@ export const translations = {
           tags: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Zustand', 'Capacitor'],
           lang: 'TypeScript',
           github: 'https://github.com/LeoGotardo/venetia-grimory',
-          live: 'https://venetia-grimory.vercel.app/',
+          live: 'https://venetia.leogotardo.com.br',
         },
         {
           icon: 'PD',
@@ -398,7 +399,7 @@ export const translations = {
           tags: ['React', 'JavaScript', 'Vite', 'Express', 'Puppeteer', 'Render'],
           lang: 'JavaScript',
           github: 'https://github.com/LeoGotardo/reportGen',
-          live: 'https://reportgen-zvz0.onrender.com',
+          live: 'https://reportgen.leogotardo.com.br',
         },
         {
           icon: 'IT',
@@ -414,7 +415,7 @@ export const translations = {
           tags: ['React', 'JavaScript', 'Vite', 'Leaflet', 'REST API'],
           lang: 'JavaScript',
           github: 'https://github.com/LeoGotardo/ipTool',
-          live: 'https://ip-tool.vercel.app',
+          live: 'https://iptool.leogotardo.com.br',
         },
         {
           icon: 'CT',
@@ -445,7 +446,7 @@ export const translations = {
           tags: ['TypeScript', 'Vite', 'Vercel'],
           lang: 'TypeScript',
           github: 'https://github.com/LeoGotardo/ddgame',
-          live: 'https://ddgame-eta.vercel.app',
+          live: 'https://ddgame.leogotardo.com.br',
         },
         {
           icon: 'MW',
@@ -461,7 +462,7 @@ export const translations = {
           tags: ['React', 'JavaScript', 'JWT', 'REST API', 'Vercel'],
           lang: 'JavaScript',
           github: 'https://github.com/LeoGotardo/MainDugWeb',
-          live: 'https://main-dug-web.vercel.app',
+          live: 'https://maindug.leogotardo.com.br',
         },
         {
           icon: 'MZ',
@@ -477,7 +478,7 @@ export const translations = {
           tags: ['JavaScript', 'Algoritmos', 'DFS', 'BFS', 'Estruturas de Dados', 'MIT'],
           lang: 'JavaScript',
           github: 'https://github.com/LeoGotardo/RedBlackTree',
-          live: 'https://dfsxbfs.vercel.app',
+          live: 'https://maze.leogotardo.com.br',
         },
         {
           icon: 'GK',
@@ -523,6 +524,7 @@ export const translations = {
           tags: ['Python', 'Flask', 'SQLAlchemy', 'systemd', 'Raspberry Pi', 'Embedded'],
           lang: 'Python',
           github: 'https://github.com/LeoGotardo/pitest',
+          live: 'https://pitest.leogotardo.com.br',
         },
         {
           icon: 'VG',
@@ -538,7 +540,7 @@ export const translations = {
           tags: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Zustand', 'Capacitor'],
           lang: 'TypeScript',
           github: 'https://github.com/LeoGotardo/venetia-grimory',
-          live: 'https://venetia-grimory.vercel.app/',
+          live: 'https://venetia.leogotardo.com.br',
         },
         {
           icon: 'PD',

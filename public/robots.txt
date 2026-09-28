@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://leogotardo.vercel.app/sitemap.xml
-LLMs: https://leogotardo.vercel.app/llms.txt
+Sitemap: https://www.leogotardo.com.br/sitemap.xml
+LLMs: https://www.leogotardo.com.br/llms.txt

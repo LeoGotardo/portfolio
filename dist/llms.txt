@@ -11,7 +11,7 @@ Simultaneously pursuing a degree in Analysis and Systems Development at IFPR and
 - Location: Londrina, Paraná, Brazil
 - Languages: Portuguese (Native), English (Full Professional)
 - Education: Analysis & Systems Development — IFPR
-- Email: leonardo.gotardo2@gmail.com
+- Email: contato@leogotardo.com.br
 - GitHub: https://github.com/LeoGotardo
 - LinkedIn: https://www.linkedin.com/in/leogotardo/
 - Portfolio: https://www.leogotardo.com.br
@@ -134,7 +134,7 @@ Hash table implementation in C with chaining for collision resolution and automa
 
 ## Contact
 
-- Email: leonardo.gotardo2@gmail.com
+- Email: contato@leogotardo.com.br
 - LinkedIn: https://www.linkedin.com/in/leogotardo/
 - GitHub: https://github.com/LeoGotardo
 - Portfolio: https://www.leogotardo.com.br

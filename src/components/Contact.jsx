@@ -34,8 +34,8 @@ export default function Contact() {
       <SectionHeader title={c.title} style={{ justifyContent: 'center' }} />
       <p className="contact-intro reveal" ref={introRef}>{c.intro}</p>
       <div className="contact-grid reveal" ref={gridRef}>
-        <a className="contact-item" href="mailto:leonardo.gotardo2@gmail.com">
-          <EmailIcon /> leonardo.gotardo2@gmail.com
+        <a className="contact-item" href="mailto:contato@leogotardo.com.br">
+          <EmailIcon /> contato@leogotardo.com.br
         </a>
         <a className="contact-item" href="https://www.linkedin.com/in/leogotardo/" target="_blank" rel="noopener noreferrer">
           <LinkedInIcon /> LinkedIn

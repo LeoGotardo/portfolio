@@ -1,9 +1,9 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/rendercv/rendercv/refs/tags/v2.8/schema.json
 cv:
   name: Leonardo Gotardo
-  headline: Desenvolvedor de Software
+  headline: Desenvolvedor Backend Python & React
   location: Londrina, Brasil
-  email: leonardo.gotardo2@gmail.com
+  email: contato@leogotardo.com.br
   phone: "+5543988177963"
   website: https://leogotardo.com.br/
   social_networks:
@@ -13,7 +13,7 @@ cv:
       username: LeoGotardo
   sections:
     Resumo:
-      - "Desenvolvedor de Software com experiência em Linux embarcado/IoT, backend Python e full-stack web/mobile, demonstrada no noHarm (em produção na AWS com Terraform), no PiTest (hardware Raspberry Pi) e no MainDug."
+      - "Desenvolvedor backend Python e full-stack React, com experiência em Linux embarcado/IoT, demonstrada no noHarm (em produção na AWS com Terraform), no PiTest (hardware Raspberry Pi) e no MainDug."
     Experiência:
       - company: IrisPay
         position: Desenvolvedor de Software
@@ -47,7 +47,7 @@ cv:
         highlights:
           - "Backend (173 de 184 commits): FastAPI, Clean Architecture, rotação de JWT com blacklist, chat via Socket.IO, criptografia AES-256 por campo, rate limiting em três camadas no Redis; 1.170 casos de teste pytest."
           - Em produção na AWS com Terraform e GitHub Actions.
-          - "App (77 de 89 commits): React, TypeScript, Capacitor para Android e iOS; 226 execuções Playwright em projetos mobile e desktop."
+          - "App (77 de 89 commits): React (JavaScript), Vite e Capacitor para Android e iOS; 226 execuções Playwright em projetos mobile e desktop."
       - name: "[PiTest](https://pitest.leogotardo.com.br)"
         summary: Bancada de testes de hardware para Raspberry Pi 3B.
         start_date: 2026-06
@@ -98,11 +98,35 @@ design:
     bottom_margin: 0.45in
     left_margin: 0.55in
     right_margin: 0.55in
+  # Matches leogotardo.com.br: Space Grotesk + JetBrains Mono, near-black ink, the site's lime
+  # darkened to lime-700/800 so it reads on white (#bff538 itself would not).
+  colors:
+    body: rgb(27, 29, 33)
+    name: rgb(12, 13, 15)
+    headline: rgb(77, 124, 15)
+    connections: rgb(70, 76, 86)
+    section_titles: rgb(77, 124, 15)
+    links: rgb(63, 98, 18)
   typography:
     line_spacing: 0.5em
+    alignment: left
+    font_family:
+      body: Space Grotesk
+      name: Space Grotesk
+      headline: JetBrains Mono
+      connections: JetBrains Mono
+      section_titles: Space Grotesk
     font_size:
-      body: 9.5pt
-      name: 22pt
+      body: 9.4pt
+      name: 24pt
+      headline: 10pt
+      connections: 8.2pt
+      section_titles: 1.15em
+    bold:
+      name: true
+      section_titles: true
+  links:
+    underline: false
   section_titles:
     space_above: 0.3cm
     space_below: 0.18cm
@@ -111,13 +135,15 @@ design:
     space_between_text_based_entries: 0.1cm
   entries:
     highlights:
+      bullet: "•"
       space_above: 0.05cm
       space_between_items: 0.04cm
   header:
-    space_below_name: 0.3cm
-    space_below_headline: 0.3cm
+    alignment: left
+    space_below_name: 0.25cm
+    space_below_headline: 0.25cm
     space_below_connections: 0.3cm
     connections:
-      phone_number_format: national
+      phone_number_format: international
 locale:
   language: portuguese

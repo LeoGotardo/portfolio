@@ -16,41 +16,41 @@
   page-right-margin: 0.55in,
   page-show-footer: false,
   page-show-top-note: false,
-  colors-body: rgb(0, 0, 0),
-  colors-name: rgb(0, 0, 0),
-  colors-headline: rgb(0, 0, 0),
-  colors-connections: rgb(0, 0, 0),
-  colors-section-titles: rgb(0, 0, 0),
-  colors-links: rgb(0, 0, 0),
+  colors-body: rgb(27, 29, 33),
+  colors-name: rgb(12, 13, 15),
+  colors-headline: rgb(77, 124, 15),
+  colors-connections: rgb(70, 76, 86),
+  colors-section-titles: rgb(77, 124, 15),
+  colors-links: rgb(63, 98, 18),
   colors-footer: rgb(128, 128, 128),
   colors-top-note: rgb(128, 128, 128),
   typography-line-spacing: 0.5em,
-  typography-alignment: "justified",
+  typography-alignment: "left",
   typography-date-and-location-column-alignment: right,
-  typography-font-family-body: "XCharter",
-  typography-font-family-name: "XCharter",
-  typography-font-family-headline: "XCharter",
-  typography-font-family-connections: "XCharter",
-  typography-font-family-section-titles: "XCharter",
-  typography-font-size-body: 9.5pt,
-  typography-font-size-name: 22pt,
+  typography-font-family-body: "Space Grotesk",
+  typography-font-family-name: "Space Grotesk",
+  typography-font-family-headline: "JetBrains Mono",
+  typography-font-family-connections: "JetBrains Mono",
+  typography-font-family-section-titles: "Space Grotesk",
+  typography-font-size-body: 9.4pt,
+  typography-font-size-name: 24pt,
   typography-font-size-headline: 10pt,
-  typography-font-size-connections: 10pt,
-  typography-font-size-section-titles: 1.2em,
+  typography-font-size-connections: 8.2pt,
+  typography-font-size-section-titles: 1.15em,
   typography-small-caps-name: false,
   typography-small-caps-headline: false,
   typography-small-caps-connections: false,
   typography-small-caps-section-titles: false,
-  typography-bold-name: false,
+  typography-bold-name: true,
   typography-bold-headline: false,
   typography-bold-connections: false,
   typography-bold-section-titles: true,
-  links-underline: true,
+  links-underline: false,
   links-show-external-link-icon: false,
-  header-alignment: center,
+  header-alignment: left,
   header-photo-width: 3.5cm,
-  header-space-below-name: 0.3cm,
-  header-space-below-headline: 0.3cm,
+  header-space-below-name: 0.25cm,
+  header-space-below-headline: 0.25cm,
   header-space-below-connections: 0.3cm,
   header-connections-hyperlink: true,
   header-connections-show-icons: false,
@@ -72,7 +72,7 @@
   entries-degree-width: 1cm,
   entries-summary-space-left: 0cm,
   entries-summary-space-above: 0.08cm,
-  entries-highlights-bullet:  text(13pt, [•], baseline: -0.6pt) ,
+  entries-highlights-bullet:  "•" ,
   entries-highlights-nested-bullet:  text(13pt, [•], baseline: -0.6pt) ,
   entries-highlights-space-left: 0cm,
   entries-highlights-space-above: 0.05cm,
@@ -88,11 +88,11 @@
 
 = Leonardo Gotardo
 
-  #headline([Software Developer])
+  #headline([Backend Python & React Developer])
 
 #connections(
   [Londrina, Brazil],
-  [#link("mailto:leonardo.gotardo2@gmail.com", icon: false, if-underline: false, if-color: false)[leonardo.gotardo2\@gmail.com]],
+  [#link("mailto:contato@leogotardo.com.br", icon: false, if-underline: false, if-color: false)[contato\@leogotardo.com.br]],
   [#link("tel:+55-43-98817-7963", icon: false, if-underline: false, if-color: false)[+55 43 98817-7963]],
   [#link("https://leogotardo.com.br/", icon: false, if-underline: false, if-color: false)[leogotardo.com.br]],
   [#link("https://linkedin.com/in/leogotardo", icon: false, if-underline: false, if-color: false)[linkedin.com\/in\/leogotardo]],
@@ -102,7 +102,7 @@
 
 == Summary
 
-Software Developer with embedded Linux\/IoT, Python backend and full-stack web\/mobile experience, shown in noHarm (in production on AWS with Terraform), PiTest (Raspberry Pi hardware) and MainDug.
+Backend Python and full-stack React developer with an embedded Linux\/IoT background, shown in noHarm (in production on AWS with Terraform), PiTest (Raspberry Pi hardware) and MainDug.
 
 == Experience
 
@@ -177,7 +177,7 @@ Software Developer with embedded Linux\/IoT, Python backend and full-stack web\/
 
     - Runs in production on AWS with Terraform and GitHub Actions.
 
-    - App (77 of 89 commits): React, TypeScript, Capacitor for Android and iOS; 226 Playwright runs across mobile and desktop projects.
+    - App (77 of 89 commits): React (JavaScript), Vite and Capacitor for Android and iOS; 226 Playwright runs across mobile and desktop projects.
 
   ],
 )

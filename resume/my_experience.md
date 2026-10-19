@@ -19,7 +19,7 @@
 
 - Name: Leonardo Gotardo
 - Location: Londrina, Paraná, Brazil
-- Email: leonardo.gotardo2@gmail.com
+- Email: contato@leogotardo.com.br
 - Phone: +55 43 98817-7963
 - GitHub: github.com/LeoGotardo
 - LinkedIn: linkedin.com/in/leogotardo
@@ -122,7 +122,7 @@ Small web development studio. I am one of the partners and build client sites.
 - GitHub Actions for deploy and security scans, plus Dependabot. Runbooks for rollback and
   JWT rotation.
 - Backend test suite: 1,170 pytest tests collected (unit + integration).
-- App (77 of 89 commits): Vite + React + TypeScript, packaged for Android and iOS with Capacitor.
+- App (77 of 89 commits): Vite + React in JavaScript (no TypeScript in the repo), packaged for Android and iOS with Capacitor.
   - Firebase authentication, push and local notifications, Socket.IO client.
   - A custom Capacitor plugin for in-app updates.
   - 226 Playwright end-to-end test runs across mobile and desktop projects.

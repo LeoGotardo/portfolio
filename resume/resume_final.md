@@ -1,11 +1,13 @@
 # LEONARDO GOTARDO
 
+Backend Python & React Developer
+
 Londrina, Paraná, Brazil, +55 43 98817-7963, leonardo.gotardo2@gmail.com
 github.com/LeoGotardo, linkedin.com/in/leogotardo, leogotardo.com.br
 
 ## SUMMARY
 
-Software Developer with embedded Linux/IoT, Python backend and full-stack web/mobile experience, shown in noHarm (in production on AWS with Terraform), PiTest (Raspberry Pi hardware) and MainDug.
+Backend Python and full-stack React developer with an embedded Linux/IoT background, shown in noHarm (in production on AWS with Terraform), PiTest (Raspberry Pi hardware) and MainDug.
 
 ## EXPERIENCE
 
@@ -26,7 +28,7 @@ Software Developer with embedded Linux/IoT, Python backend and full-stack web/mo
 **noHarm, addiction-recovery support app, live at noharm.site (Dec 2025 – present), a few beta testers**
 - Backend (173 of 184 commits): FastAPI, Clean Architecture, JWT rotation with blacklist, Socket.IO chat, AES-256 field encryption, three-layer Redis rate limiting; 1,170 pytest test cases.
 - Runs in production on AWS with Terraform and GitHub Actions.
-- App (77 of 89 commits): React, TypeScript, Capacitor for Android and iOS; 226 Playwright runs across mobile and desktop projects.
+- App (77 of 89 commits): React (JavaScript), Vite and Capacitor for Android and iOS; 226 Playwright runs across mobile and desktop projects.
 
 **PiTest, Raspberry Pi 3B hardware test bench (Jun 2026 – present), pitest.leogotardo.com.br**
 - Runs on every boot with no keyboard or SSH: 7 automatic hardware tests, results kept per board (MAC address) in a Flask/PostgreSQL web dashboard.

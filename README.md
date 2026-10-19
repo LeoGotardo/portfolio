@@ -6,33 +6,33 @@ Live at [leogotardo.com.br](https://leogotardo.com.br)
 
 ## Stack
 
-- React 18 + Vite
-- Plain CSS with OKLCH design tokens (no framework); fonts: Mona Sans + Martian Mono
-- Motion (`motion/react`) for scroll reveals and the project hover preview; GSAP SplitText for the hero entrance
-- `prefers-reduced-motion` respected everywhere; light theme by default, dark optional
-- i18n (English / Portuguese) via a custom context provider
-- Deployed on Vercel, with Speed Insights
+- TanStack Start (React 19, server-rendered) on Vite, designed in [Lovable](https://lovable.dev)
+- Tailwind CSS v4 with OKLCH tokens; Lenis smooth scroll; Motion (`motion/react`) for reveals and the scroll-driven project panels
+- Each project is a full-screen panel in that project's own palette and fonts, revealed by a radial wave as you scroll
+- `prefers-reduced-motion` respected: no smooth scroll, stacking or wave
+- Deployed on Vercel through nitro's `vercel` preset (`.vercel/output`), with Speed Insights
 
 ## Structure
 
 ```
 src/
-  components/    Sections (Nav, Hero, Work, Experience, Stack, About, Contact) + Reveal and icons
-  context/       AppContext: language/theme state shared across the app
-  i18n/          Translation strings (en / pt-BR)
-public/          Static assets: resumes (EN/PT PDF), project previews, favicons, sitemap, robots.txt, llms.txt
-docs/            Design brief (see also PRODUCT.md)
+  routes/               __root.tsx (head: SEO, Open Graph, JSON-LD, favicons) and index.tsx (the page)
+  components/portfolio/ Sections (Chrome, Hero, Work, Experience, About) and the project scene mocks
+  data/                 projects.ts (featured work, projects, stack) and themes.ts (per-project palettes)
+  lib/scroll.ts         Lenis instance shared by the page
+public/                 Static assets: resumes (EN/PT PDF), project previews, favicons, og-image, sitemap, robots.txt, llms.txt
+docs/                   Design brief for the previous design (see also PRODUCT.md)
 ```
 
 ## Development
 
 ```bash
-npm install
-npm run dev       # start dev server
-npm run build     # production build to dist/
-npm run preview   # preview the production build locally
+bun install
+bun run dev       # start dev server
+bun run build     # production build to .vercel/output
+bun run lint
 ```
 
 ## Content
 
-Copy for both languages lives in `src/i18n/translations.js`. Update experience, stack and project entries there rather than in the components. Featured projects carry `problem` / `decision` / `result` / `metrics`; screenshots live in `public/previews/`. The portrait is loaded from `public/photo.webp` (the panel shows a monogram until it exists).
+Copy lives in `src/data/projects.ts` (projects, featured case studies, stack) and in the section components (`Experience.tsx`, `About.tsx`). Keep `public/llms.txt` in sync when it changes. Screenshots live in `public/previews/`. The portrait is loaded from `public/photo.webp` (the slot stays empty until it exists).

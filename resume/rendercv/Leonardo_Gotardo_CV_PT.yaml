@@ -1,0 +1,123 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/rendercv/rendercv/refs/tags/v2.8/schema.json
+cv:
+  name: Leonardo Gotardo
+  headline: Desenvolvedor de Software
+  location: Londrina, Brasil
+  email: leonardo.gotardo2@gmail.com
+  phone: "+5543988177963"
+  website: https://leogotardo.com.br/
+  social_networks:
+    - network: LinkedIn
+      username: leogotardo
+    - network: GitHub
+      username: LeoGotardo
+  sections:
+    Resumo:
+      - "Desenvolvedor de Software com experiência em Linux embarcado/IoT, backend Python e full-stack web/mobile, demonstrada no noHarm (em produção na AWS com Terraform), no PiTest (hardware Raspberry Pi) e no MainDug."
+    Experiência:
+      - company: IrisPay
+        position: Desenvolvedor de Software
+        location: Londrina, Brasil
+        start_date: 2024-09
+        end_date: present
+        highlights:
+          - Trabalho com Linux embarcado em dispositivos Raspberry Pi autônomos, serviços Python de controle de hardware, APIs FastAPI/Flask, atualizações remotas (OTA) e manutenção de uma plataforma legada em PHP (Yii2).
+          - Uso watchdogs, rollback automático e estado que sobrevive ao reboot, já que os dispositivos não têm acesso à tela e a rede é instável.
+          - Aprendi a isolar cada camada (hardware, serial, rede, SO) e provar onde a falha acontece antes de corrigi-la.
+      - company: TLG-Web-Dev
+        position: Sócio
+        start_date: 2026-04
+        end_date: present
+        highlights:
+          - Um dos sócios de um pequeno estúdio de desenvolvimento web; 1 cliente pago, GP Barril.
+          - "Site do GP Barril (Next.js; 37 de 82 commits meus): restringi o Image Optimizer a 3 hosts, fechando uma brecha de proxy aberto; limitei o formulário de contato a 3 envios por IP a cada 10 minutos."
+      - company: Persis Internet
+        position: Service Desk
+        location: Londrina, Brasil
+        start_date: 2023-07
+        end_date: 2024-03
+        summary: Provedor de internet regional.
+        highlights:
+          - Resolvi problemas de internet e rede a partir de descrições ambíguas de clientes leigos; transformei problemas recorrentes em feedback.
+    Projetos:
+      - name: "[noHarm](https://noharm.site)"
+        summary: App de apoio à recuperação de dependências, no ar com alguns beta testers.
+        start_date: 2025-12
+        end_date: present
+        highlights:
+          - "Backend (173 de 184 commits): FastAPI, Clean Architecture, rotação de JWT com blacklist, chat via Socket.IO, criptografia AES-256 por campo, rate limiting em três camadas no Redis; 1.170 casos de teste pytest."
+          - Em produção na AWS com Terraform e GitHub Actions.
+          - "App (77 de 89 commits): React, TypeScript, Capacitor para Android e iOS; 226 execuções Playwright em projetos mobile e desktop."
+      - name: "[PiTest](https://pitest.leogotardo.com.br)"
+        summary: Bancada de testes de hardware para Raspberry Pi 3B.
+        start_date: 2026-06
+        end_date: present
+        highlights:
+          - "Roda a cada boot sem teclado nem SSH: 7 testes automáticos de hardware, com resultados guardados por placa (endereço MAC) em um painel web Flask/PostgreSQL."
+      - name: "[MainDug](https://github.com/LeoGotardo/MainDugWeb)"
+        summary: Gerenciador de senhas open-source, TCC do IFPR.
+        start_date: 2024-12
+        end_date: present
+        highlights:
+          - Webservice Flask/PostgreSQL e extensão de navegador; Argon2, detecção de senhas reutilizadas e vazadas, 67 funções de teste pytest, CI com GitHub Actions.
+      - name: "[Grimório de Venetia](https://venetia.leogotardo.com.br)"
+        summary: Criador de personagens de D&D 5.5.
+        start_date: 2026-06
+        end_date: present
+        highlights:
+          - App Android em React, TypeScript e Capacitor; 333 testes Vitest, 108 execuções Playwright.
+      - name: "[Custom Thread](https://pypi.org/project/CustomThread/)"
+        summary: Biblioteca Python no PyPI.
+        start_date: 2024-06
+        end_date: present
+        highlights:
+          - Estende threading.Thread com valores de retorno, propagação de exceções e callbacks; zero dependências, licença MIT.
+    Habilidades:
+      - label: Linguagens
+        details: Python, TypeScript, JavaScript, PHP, SQL, Bash, C
+      - label: Backend/Dados
+        details: FastAPI, Flask, Laravel, Next.js, SQLAlchemy, Socket.IO, PostgreSQL, Redis
+      - label: Frontend/Testes
+        details: React, Tailwind CSS, Capacitor, pytest, Playwright, Vitest
+      - label: DevOps/Embarcados
+        details: Docker, Terraform, AWS, GitHub Actions, systemd, GPIO, LUKS
+      - label: Idiomas
+        details: Português (nativo), Inglês (proficiência profissional plena)
+    Formação:
+      - institution: IFPR (Instituto Federal do Paraná)
+        area: Análise e Desenvolvimento de Sistemas (Tecnólogo)
+        location: Londrina, Brasil
+        start_date: 2022-04
+        end_date: 2026-07
+design:
+  theme: engineeringresumes
+  page:
+    size: a4
+    show_top_note: false
+    top_margin: 0.45in
+    bottom_margin: 0.45in
+    left_margin: 0.55in
+    right_margin: 0.55in
+  typography:
+    line_spacing: 0.5em
+    font_size:
+      body: 9.5pt
+      name: 22pt
+  section_titles:
+    space_above: 0.3cm
+    space_below: 0.18cm
+  sections:
+    space_between_regular_entries: 0.28cm
+    space_between_text_based_entries: 0.1cm
+  entries:
+    highlights:
+      space_above: 0.05cm
+      space_between_items: 0.04cm
+  header:
+    space_below_name: 0.3cm
+    space_below_headline: 0.3cm
+    space_below_connections: 0.3cm
+    connections:
+      phone_number_format: national
+locale:
+  language: portuguese

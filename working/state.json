@@ -1,0 +1,13 @@
+{
+  "active": false,
+  "iteration": 2,
+  "phase": "COMPLETE",
+  "maxIterations": 5,
+  "maxPages": 1,
+  "maxWords": 450,
+  "outputPath": "resume/resume_final.md",
+  "premium": false,
+  "lastVerdict": "READY",
+  "factCheckAttempts": 0,
+  "startedAt": "2026-10-19T13:12:06Z"
+}

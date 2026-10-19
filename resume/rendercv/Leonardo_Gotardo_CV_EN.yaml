@@ -1,0 +1,123 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/rendercv/rendercv/refs/tags/v2.8/schema.json
+cv:
+  name: Leonardo Gotardo
+  headline: Software Developer
+  location: Londrina, Brazil
+  email: leonardo.gotardo2@gmail.com
+  phone: "+5543988177963"
+  website: https://leogotardo.com.br/
+  social_networks:
+    - network: LinkedIn
+      username: leogotardo
+    - network: GitHub
+      username: LeoGotardo
+  sections:
+    Summary:
+      - "Software Developer with embedded Linux/IoT, Python backend and full-stack web/mobile experience, shown in noHarm (in production on AWS with Terraform), PiTest (Raspberry Pi hardware) and MainDug."
+    Experience:
+      - company: IrisPay
+        position: Software Developer
+        location: Londrina, Brazil
+        start_date: 2024-09
+        end_date: present
+        highlights:
+          - Work with embedded Linux on unattended Raspberry Pi devices, Python hardware services, FastAPI/Flask APIs, over-the-air updates, and maintenance of a legacy PHP (Yii2) platform.
+          - Rely on watchdogs, automatic rollback and state that survives reboot, since devices have no screen access and the network is unreliable.
+          - Learned to isolate each layer (hardware, serial, network, OS) and prove where a failure happens before fixing it.
+      - company: TLG-Web-Dev
+        position: Partner
+        start_date: 2026-04
+        end_date: present
+        highlights:
+          - One of the partners of a small web development studio; 1 paid client, GP Barril.
+          - "GP Barril site (Next.js; 37 of 82 commits mine): locked the Image Optimizer to 3 hosts, closing an open-proxy hole; rate-limited the contact form to 3 sends per IP per 10 minutes."
+      - company: Persis Internet
+        position: Service Desk
+        location: Londrina, Brazil
+        start_date: 2023-07
+        end_date: 2024-03
+        summary: Regional ISP.
+        highlights:
+          - Solved internet and network problems from ambiguous descriptions by non-technical customers; turned recurring issues into feedback.
+    Projects:
+      - name: "[noHarm](https://noharm.site)"
+        summary: Addiction-recovery support app, live with a few beta testers.
+        start_date: 2025-12
+        end_date: present
+        highlights:
+          - "Backend (173 of 184 commits): FastAPI, Clean Architecture, JWT rotation with blacklist, Socket.IO chat, AES-256 field encryption, three-layer Redis rate limiting; 1,170 pytest test cases."
+          - Runs in production on AWS with Terraform and GitHub Actions.
+          - "App (77 of 89 commits): React, TypeScript, Capacitor for Android and iOS; 226 Playwright runs across mobile and desktop projects."
+      - name: "[PiTest](https://pitest.leogotardo.com.br)"
+        summary: Raspberry Pi 3B hardware test bench.
+        start_date: 2026-06
+        end_date: present
+        highlights:
+          - "Runs on every boot with no keyboard or SSH: 7 automatic hardware tests, results kept per board (MAC address) in a Flask/PostgreSQL web dashboard."
+      - name: "[MainDug](https://github.com/LeoGotardo/MainDugWeb)"
+        summary: Open-source password manager, IFPR final-year project.
+        start_date: 2024-12
+        end_date: present
+        highlights:
+          - Flask/PostgreSQL webservice and browser extension; Argon2, reused and leaked-password detection, 67 pytest test functions, GitHub Actions CI.
+      - name: "[Grimório de Venetia](https://venetia.leogotardo.com.br)"
+        summary: D&D 5.5 character creator.
+        start_date: 2026-06
+        end_date: present
+        highlights:
+          - React, TypeScript, Capacitor Android app; 333 Vitest tests, 108 Playwright runs.
+      - name: "[Custom Thread](https://pypi.org/project/CustomThread/)"
+        summary: Python library on PyPI.
+        start_date: 2024-06
+        end_date: present
+        highlights:
+          - Extends threading.Thread with return values, exception propagation and callbacks; zero dependencies, MIT.
+    Skills:
+      - label: Programming
+        details: Python, TypeScript, JavaScript, PHP, SQL, Bash, C
+      - label: Backend/Data
+        details: FastAPI, Flask, Laravel, Next.js, SQLAlchemy, Socket.IO, PostgreSQL, Redis
+      - label: Frontend/Testing
+        details: React, Tailwind CSS, Capacitor, pytest, Playwright, Vitest
+      - label: DevOps/Embedded
+        details: Docker, Terraform, AWS, GitHub Actions, systemd, GPIO, LUKS
+      - label: Languages
+        details: Portuguese (native), English (full professional proficiency)
+    Education:
+      - institution: IFPR (Instituto Federal do Paraná)
+        area: Analysis and Systems Development (Tecnólogo)
+        location: Londrina, Brazil
+        start_date: 2022-04
+        end_date: 2026-07
+design:
+  theme: engineeringresumes
+  page:
+    size: a4
+    show_top_note: false
+    top_margin: 0.45in
+    bottom_margin: 0.45in
+    left_margin: 0.55in
+    right_margin: 0.55in
+  typography:
+    line_spacing: 0.5em
+    font_size:
+      body: 9.5pt
+      name: 22pt
+  section_titles:
+    space_above: 0.3cm
+    space_below: 0.18cm
+  sections:
+    space_between_regular_entries: 0.28cm
+    space_between_text_based_entries: 0.1cm
+  entries:
+    highlights:
+      space_above: 0.05cm
+      space_between_items: 0.04cm
+  header:
+    space_below_name: 0.3cm
+    space_below_headline: 0.3cm
+    space_below_connections: 0.3cm
+    connections:
+      phone_number_format: international
+locale:
+  language: english

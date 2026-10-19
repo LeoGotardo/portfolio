@@ -6,7 +6,7 @@ Live at [leogotardo.com.br](https://leogotardo.com.br)
 
 ## Stack
 
-- TanStack Start (React 19, server-rendered) on Vite, designed in [Lovable](https://lovable.dev)
+- TanStack Start (React 19, server-rendered) on Vite
 - Tailwind CSS v4 with OKLCH tokens; Lenis smooth scroll; Motion (`motion/react`) for reveals and the scroll-driven project panels
 - Each project is a full-screen panel in that project's own palette and fonts, revealed by a radial wave as you scroll
 - `prefers-reduced-motion` respected: no smooth scroll, stacking or wave

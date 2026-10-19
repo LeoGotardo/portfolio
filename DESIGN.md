@@ -41,7 +41,7 @@ rounded:
 
 # Design System: Leonardo Gotardo · Portfolio
 
-Designed in Lovable (TanStack Start, Tailwind v4). Tokens live in `src/styles.css`; per-project palettes in `src/data/themes.ts`. The previous design ("The Ultramarine Bench") is archived in `docs/archive/ultramarine/`.
+Built with TanStack Start and Tailwind v4. Tokens live in `src/styles.css`; per-project palettes in `src/data/themes.ts`. The previous design ("The Ultramarine Bench") is archived in `docs/archive/ultramarine/`.
 
 ## 1. Overview
 

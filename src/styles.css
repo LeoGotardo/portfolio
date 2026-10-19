@@ -56,7 +56,7 @@
   --ring: oklch(0.9 0.21 125);
 }
 
-/* Registered so the page chrome cross-fades when the active project changes. */
+/* Registered so the page chrome ([data-chrome]) cross-fades when the active project changes. */
 @property --background { syntax: "<color>"; inherits: true; initial-value: oklch(0.16 0.005 260); }
 @property --foreground { syntax: "<color>"; inherits: true; initial-value: oklch(0.95 0.01 110); }
 @property --card { syntax: "<color>"; inherits: true; initial-value: oklch(0.2 0.006 260); }
@@ -75,7 +75,8 @@
 @property --input { syntax: "<color>"; inherits: true; initial-value: oklch(1 0 0 / 12%); }
 @property --ring { syntax: "<color>"; inherits: true; initial-value: oklch(0.9 0.21 125); }
 
-html {
+/* Only the chrome takes the project theme: transitioning these on <html> restyled the whole page every frame. */
+[data-chrome] {
   transition:
     --background 0.7s cubic-bezier(0.22, 1, 0.36, 1),
     --foreground 0.7s cubic-bezier(0.22, 1, 0.36, 1),

@@ -55,15 +55,17 @@ export function sceneStyle(t: SceneTheme | undefined): CSSProperties | undefined
 }
 
 /**
- * Tints the page chrome (nav, cursor, progress bar) to the active project. Colors only:
- * the page font never swaps, and styles.css registers these properties so they cross-fade.
+ * Tints the page chrome ([data-chrome]: nav, progress bar, cursor, skip button) to the active
+ * project. Colors only: the page font never swaps, and styles.css registers these properties so
+ * they cross-fade. Scoped to those elements so a theme change restyles them, not the whole page.
  */
 export function applyTheme(t: SceneTheme | null) {
-  const s = document.documentElement.style;
-  for (const [k, names] of VARS) {
-    for (const n of names) {
-      if (t) s.setProperty(n, t[k]);
-      else s.removeProperty(n);
+  for (const el of document.querySelectorAll<HTMLElement>("[data-chrome]")) {
+    for (const [k, names] of VARS) {
+      for (const n of names) {
+        if (t) el.style.setProperty(n, t[k]);
+        else el.style.removeProperty(n);
+      }
     }
   }
 }

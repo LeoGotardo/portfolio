@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
-import { useEffect, useState, type ReactNode } from "react";
+import { useContext, useEffect, useState, type ReactNode } from "react";
+import { LiveContext } from "@/lib/live";
 
 // Presentational recreations of each project's UI, rebuilt from the projects' own source
 // (tokens, fonts, labels and component structure). Demo data, no network.
@@ -20,12 +21,15 @@ function Frame({ children, title }: { children: ReactNode; title?: string }) {
   );
 }
 
+/** A looping step counter for the mocks; holds still while the panel is covered or off-screen. */
 function useTick(ms: number, max: number) {
+  const live = useContext(LiveContext);
   const [n, setN] = useState(0);
   useEffect(() => {
+    if (!live) return;
     const id = setInterval(() => setN((v) => (v + 1) % max), ms);
     return () => clearInterval(id);
-  }, [ms, max]);
+  }, [ms, max, live]);
   return n;
 }
 
@@ -194,6 +198,7 @@ function ReportGen() {
 
 /* ipTool: the "IPTool lookup" terminal (Orbitron title, Share Tech Mono data, mint glow). */
 function IpTool() {
+  const live = useContext(LiveContext);
   const orbitron = font('"Orbitron", monospace');
   const fields: [string, string][] = [["Country", "Brazil"], ["Region", "Paraná"], ["Capital", "Brasília"], ["Connection", "Fiber"], ["LATITUDE", "-25.4284"], ["LONGITUDE", "-49.2733"]];
   return (
@@ -209,7 +214,7 @@ function IpTool() {
             {Array.from({ length: 11 }).map((_, i) => <line key={`v${i}`} x1={i * 10} y1="0" x2={i * 10} y2="70" stroke="rgb(0 210 150 / 12%)" strokeWidth="0.4" />)}
             {Array.from({ length: 8 }).map((_, i) => <line key={`h${i}`} x1="0" y1={i * 10} x2="100" y2={i * 10} stroke="rgb(0 210 150 / 12%)" strokeWidth="0.4" />)}
           </svg>
-          <motion.div animate={{ scale: [1, 2.6], opacity: [0.7, 0] }} transition={{ repeat: Infinity, duration: 1.6 }} className="absolute left-[42%] top-[62%] h-5 w-5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary" />
+          {live && <motion.div animate={{ scale: [1, 2.6], opacity: [0.7, 0] }} transition={{ repeat: Infinity, duration: 1.6 }} className="absolute left-[42%] top-[62%] h-5 w-5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary" />}
           <div className="absolute left-[42%] top-[62%] h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary shadow-[0_0_12px_#00d296]" />
           <div className="absolute bottom-1.5 left-2 text-[9px] text-primary">&gt; GEOLOCATION_LOCK</div>
         </div>
@@ -228,6 +233,7 @@ function IpTool() {
 
 /* DDGame: the clicker (XP display, crimson dice and the "Loja de Melhorias" upgrade list). */
 function DDGame() {
+  const live = useContext(LiveContext);
   const xp = 3 + useTick(220, 140);
   const upgrades = [
     { icon: "🗡️", name: "Espada Curta", cost: 15, count: 1, unlockAt: 0 },
@@ -243,7 +249,7 @@ function DDGame() {
           <div className="text-4xl font-bold text-white">{xp}</div>
           <div className="text-sm text-[#90ee90]">⚡ 0.0 XP/s</div>
         </div>
-        <motion.div whileHover={{ scale: 1.05 }} animate={{ rotate: [0, -8, 8, 0] }} transition={{ repeat: Infinity, duration: 2.4, repeatDelay: 1.2 }}
+        <motion.div whileHover={{ scale: 1.05 }} animate={live ? { rotate: [0, -8, 8, 0] } : { rotate: 0 }} transition={live ? { repeat: Infinity, duration: 2.4, repeatDelay: 1.2 } : { duration: 0.2 }}
           className="flex h-24 w-24 items-center justify-center rounded-full border-[5px] border-[#8b0000] bg-[radial-gradient(circle_at_30%_30%,#ff4444_0%,#dc143c_50%,#8b0000_100%)] text-4xl shadow-[0_8px_24px_rgb(139_0_0/50%)]">
           🎲
         </motion.div>

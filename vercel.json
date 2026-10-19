@@ -1,6 +1,0 @@
-{
-  "rewrites": [
-    { "source": "/llms.txt", "destination": "/llms.txt" },
-    { "source": "/(.*)", "destination": "/" }
-  ]
-}

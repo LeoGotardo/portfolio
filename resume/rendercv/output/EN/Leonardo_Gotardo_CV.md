@@ -1,7 +1,7 @@
 # Leonardo Gotardo's CV
 
 - Phone: +55 43 98817 7963
-- Email: [leonardo.gotardo2@gmail.com](mailto:leonardo.gotardo2@gmail.com)
+- Email: [contato@leogotardo.com.br](mailto:contato@leogotardo.com.br)
 - Location: Londrina, Brazil
 - Website: [leogotardo.com.br](https://leogotardo.com.br/)
 - LinkedIn: [leogotardo](https://linkedin.com/in/leogotardo)
@@ -9,7 +9,7 @@
 
 
 # Summary
-Software Developer with embedded Linux/IoT, Python backend and full-stack web/mobile experience, shown in noHarm (in production on AWS with Terraform), PiTest (Raspberry Pi hardware) and MainDug.
+Backend Python and full-stack React developer with an embedded Linux/IoT background, shown in noHarm (in production on AWS with Terraform), PiTest (Raspberry Pi hardware) and MainDug.
 
 # Experience
 ## **Software Developer**, IrisPay -- Londrina, Brazil
@@ -55,7 +55,7 @@ Addiction-recovery support app, live with a few beta testers.
 
 - Runs in production on AWS with Terraform and GitHub Actions.
 
-- App (77 of 89 commits): React, TypeScript, Capacitor for Android and iOS; 226 Playwright runs across mobile and desktop projects.
+- App (77 of 89 commits): React (JavaScript), Vite and Capacitor for Android and iOS; 226 Playwright runs across mobile and desktop projects.
 
 
 

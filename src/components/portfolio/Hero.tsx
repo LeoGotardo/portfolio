@@ -1,4 +1,4 @@
-import { motion, useMotionValue, useSpring, useTransform, useScroll } from "motion/react";
+import { motion, useInView, useMotionValue, useSpring, useTransform, useScroll } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { MediaSlot, Magnetic } from "./primitives";
 import { PORTRAIT, RESUME } from "@/data/projects";
@@ -36,14 +36,15 @@ function useTyped(text: string, start: number) {
   return text.slice(0, n);
 }
 
-function Clock() {
+function Clock({ live }: { live: boolean }) {
   const [t, setT] = useState("");
   useEffect(() => {
+    if (!live) return;
     const f = () => setT(new Date().toLocaleTimeString("en-GB", { timeZone: "America/Sao_Paulo", hour: "2-digit", minute: "2-digit", second: "2-digit" }));
     f();
     const id = setInterval(f, 1000);
     return () => clearInterval(id);
-  }, []);
+  }, [live]);
   return <span className="tabular-nums">{t || "--:--:--"}</span>;
 }
 
@@ -53,6 +54,8 @@ export function Hero() {
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
   const fade = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  // The clock and the bouncing hint only run while the hero is on screen.
+  const live = useInView(ref);
 
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
@@ -71,7 +74,7 @@ export function Hero() {
         <div>
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}
             className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-background/50 px-3 py-1 font-mono text-xs text-muted-foreground backdrop-blur">
-            Londrina, BR · <Clock />
+            Londrina, BR · <Clock live={live} />
           </motion.div>
           <h1 className="font-display text-[15vw] font-bold leading-[0.85] tracking-tighter lg:text-[9vw]">
             <Letters text="Leonardo" delay={0.3} />
@@ -112,7 +115,7 @@ export function Hero() {
         </motion.div>
       </motion.div>
 
-      <motion.div animate={{ y: [0, 10, 0] }} transition={{ repeat: Infinity, duration: 2 }}
+      <motion.div animate={live ? { y: [0, 10, 0] } : { y: 0 }} transition={live ? { repeat: Infinity, duration: 2 } : { duration: 0.2 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
         scroll ↓
       </motion.div>

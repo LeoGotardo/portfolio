@@ -38,6 +38,7 @@ export function Cursor() {
   return (
     <motion.div
       aria-hidden
+      data-chrome
       className="pointer-events-none fixed left-0 top-0 z-[70] hidden rounded-full bg-primary mix-blend-difference [@media(hover:hover)]:block"
       style={{ x: sx, y: sy, translateX: "-50%", translateY: "-50%" }}
       animate={{ width: hover ? 56 : 12, height: hover ? 56 : 12 }}
@@ -59,9 +60,9 @@ export function Nav() {
   const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 30 });
   return (
     <>
-      <motion.div className="fixed inset-x-0 top-0 z-50 h-0.5 origin-left bg-primary" style={{ scaleX: progress }} />
+      <motion.div data-chrome className="fixed inset-x-0 top-0 z-50 h-0.5 origin-left bg-primary" style={{ scaleX: progress }} />
       {/* Always on screen: the projects stack is long, so the way out stays reachable. */}
-      <header className="fixed inset-x-0 top-0 z-40 flex items-center justify-between px-6 py-5 md:px-10">
+      <header data-chrome className="fixed inset-x-0 top-0 z-40 flex items-center justify-between px-6 py-5 md:px-10">
         <a href="#top" className="font-mono text-sm font-bold">
           LG<span className="text-primary animate-blink">_</span>
         </a>

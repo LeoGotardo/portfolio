@@ -86,7 +86,9 @@ export const stack = {
   "Infra & embedded": ["Docker", "Terraform", "AWS", "GitHub Actions", "Linux", "Raspberry Pi", "systemd"],
 };
 
-export const PORTRAIT = "/photo.webp";
+// Drop the portrait at src/assets/photo.webp; until it exists the slot stays empty and nothing is requested.
+const portrait = import.meta.glob<string>("../assets/photo.webp", { eager: true, import: "default" });
+export const PORTRAIT: string | undefined = Object.values(portrait)[0];
 export const RESUME = "/Leonardo_Gotardo_CV_EN.pdf";
 
 projects.push(

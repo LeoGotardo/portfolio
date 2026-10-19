@@ -21,7 +21,7 @@ src/
   data/                 projects.ts (featured work, projects, stack) and themes.ts (per-project palettes)
   lib/scroll.ts         Lenis instance shared by the page
 public/                 Static assets: resumes (EN/PT PDF), project previews, favicons, og-image, sitemap, robots.txt, llms.txt
-docs/                   Design brief for the previous design (see also PRODUCT.md)
+docs/archive/          Docs of the previous design (Ultramarine); current: DESIGN.md and PRODUCT.md
 ```
 
 ## Development
@@ -35,4 +35,4 @@ bun run lint
 
 ## Content
 
-Copy lives in `src/data/projects.ts` (projects, featured case studies, stack) and in the section components (`Experience.tsx`, `About.tsx`). Keep `public/llms.txt` in sync when it changes. Screenshots live in `public/previews/`. The portrait is loaded from `public/photo.webp` (the slot stays empty until it exists).
+Copy lives in `src/data/projects.ts` (projects, featured case studies, stack) and in the section components (`Experience.tsx`, `About.tsx`). Keep `public/llms.txt` in sync when it changes. Screenshots live in `public/previews/`. The portrait is picked up from `src/assets/photo.webp` at build time (the slot stays empty, with no request, until it exists).

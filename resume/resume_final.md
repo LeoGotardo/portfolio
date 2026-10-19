@@ -2,7 +2,7 @@
 
 Backend Python & React Developer
 
-Londrina, Paraná, Brazil, +55 43 98817-7963, leonardo.gotardo2@gmail.com
+Londrina, Paraná, Brazil, +55 43 98817-7963, contato@leogotardo.com.br
 github.com/LeoGotardo, linkedin.com/in/leogotardo, leogotardo.com.br
 
 ## SUMMARY

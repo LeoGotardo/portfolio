@@ -1,7 +1,7 @@
 # Leonardo Gotardo's CV
 
 - Phone: +55 43 98817 7963
-- Email: [leonardo.gotardo2@gmail.com](mailto:leonardo.gotardo2@gmail.com)
+- Email: [contato@leogotardo.com.br](mailto:contato@leogotardo.com.br)
 - Location: Londrina, Brazil
 - Website: [leogotardo.com.br](https://leogotardo.com.br/)
 - LinkedIn: [leogotardo](https://linkedin.com/in/leogotardo)

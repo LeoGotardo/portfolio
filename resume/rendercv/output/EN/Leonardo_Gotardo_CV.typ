@@ -92,7 +92,7 @@
 
 #connections(
   [Londrina, Brazil],
-  [#link("mailto:leonardo.gotardo2@gmail.com", icon: false, if-underline: false, if-color: false)[leonardo.gotardo2\@gmail.com]],
+  [#link("mailto:contato@leogotardo.com.br", icon: false, if-underline: false, if-color: false)[contato\@leogotardo.com.br]],
   [#link("tel:+55-43-98817-7963", icon: false, if-underline: false, if-color: false)[+55 43 98817-7963]],
   [#link("https://leogotardo.com.br/", icon: false, if-underline: false, if-color: false)[leogotardo.com.br]],
   [#link("https://linkedin.com/in/leogotardo", icon: false, if-underline: false, if-color: false)[linkedin.com\/in\/leogotardo]],

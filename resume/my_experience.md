@@ -19,7 +19,7 @@
 
 - Name: Leonardo Gotardo
 - Location: Londrina, Paraná, Brazil
-- Email: leonardo.gotardo2@gmail.com
+- Email: contato@leogotardo.com.br
 - Phone: +55 43 98817-7963
 - GitHub: github.com/LeoGotardo
 - LinkedIn: linkedin.com/in/leogotardo

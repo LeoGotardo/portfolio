@@ -1,58 +1,109 @@
+import { useEffect, useRef, useState } from 'react'
+import gsap from 'gsap'
+import { SplitText } from 'gsap/SplitText'
+import { useGSAP } from '@gsap/react'
 import { useApp } from '../context/AppContext'
+import { ArrowDown } from './icons'
+
+gsap.registerPlugin(useGSAP, SplitText)
+
+function LocalTime({ lang }) {
+  const [now, setNow] = useState(() => new Date())
+  useEffect(() => {
+    const id = setInterval(() => setNow(new Date()), 30_000)
+    return () => clearInterval(id)
+  }, [])
+  const fmt = new Intl.DateTimeFormat(lang === 'pt' ? 'pt-BR' : 'en-GB', {
+    hour: '2-digit', minute: '2-digit', timeZone: 'America/Sao_Paulo',
+  })
+  return <time dateTime={now.toISOString()}>{fmt.format(now)}</time>
+}
+
+// The portrait lands as /photo.webp; until then the panel shows the monogram.
+function Portrait({ alt }) {
+  const [missing, setMissing] = useState(false)
+  return (
+    <figure className="portrait" data-hero="portrait">
+      {missing
+        ? <span className="portrait-fallback" aria-hidden="true">LG</span>
+        : (
+          <img
+            src="/photo.webp"
+            alt={alt}
+            width="960"
+            height="1200"
+            decoding="async"
+            fetchpriority="high"
+            onError={() => setMissing(true)}
+          />
+        )}
+    </figure>
+  )
+}
 
 export default function Hero() {
-  const { tr } = useApp()
+  const { tr, lang } = useApp()
   const h = tr.hero
+  const scope = useRef(null)
+
+  useGSAP(() => {
+    const mm = gsap.matchMedia()
+    mm.add('(prefers-reduced-motion: no-preference)', (context) => {
+      const root = scope.current
+      const name = root.querySelector('.hero-name')
+      const fades = root.querySelectorAll('[data-hero="fade"]')
+      const portrait = root.querySelector('[data-hero="portrait"]')
+      gsap.set(name, { autoAlpha: 0 })
+      gsap.set(fades, { autoAlpha: 0, y: 18 })
+      gsap.set(portrait, { clipPath: 'inset(100% 0% 0% 0%)' })
+
+      let split
+      let cancelled = false
+      // Split only after Mona Sans is in: the wide cut changes the line breaks.
+      document.fonts.ready.then(() => {
+        if (cancelled) return
+        context.add(() => {
+          split = SplitText.create(name, { type: 'chars', mask: 'chars' })
+          gsap.timeline({ defaults: { ease: 'expo.out' } })
+            .set(name, { autoAlpha: 1 })
+            .from(split.chars, { yPercent: 115, duration: 1.15, stagger: 0.024 })
+            .to(portrait, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.4 }, 0.1)
+            .to(fades, { autoAlpha: 1, y: 0, duration: 1, stagger: 0.08 }, 0.4)
+        })
+      })
+      return () => {
+        cancelled = true
+        split?.revert()
+      }
+    })
+  }, { scope })
+
   return (
-    <section id="hero">
-      <div className="hero-inner">
-        <div className="hero-text">
-          <span className="hero-tag">{h.tag}</span>
-          <h1 className="hero-name">
-            <span className="first">Leonardo</span>
-            <span className="last">Gotardo</span>
-          </h1>
-          <p className="hero-subtitle">{h.subtitle}</p>
-          <div className="hero-socials">
-            <a className="hero-icon-btn" href="https://github.com/LeoGotardo" target="_blank" rel="noopener noreferrer">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2C6.477 2 2 6.484 2 12.021c0 4.428 2.865 8.185 6.839 9.504.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.605-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.031 1.531 1.031.892 1.529 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.026 2.747-1.026.546 1.378.202 2.397.1 2.65.64.7 1.028 1.595 1.028 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.579.688.481C19.138 20.203 22 16.447 22 12.021 22 6.484 17.523 2 12 2z"/>
-              </svg>
-              GitHub
+    <section id="top" className="hero" ref={scope} aria-labelledby="hero-name">
+      <div className="hero-grid">
+        <h1 id="hero-name" className="hero-name">
+          <span className="hero-line">Leonardo</span>{' '}
+          <span className="hero-line">Gotardo</span>
+        </h1>
+
+        <div className="hero-copy">
+          <p className="hero-role" data-hero="fade">{h.role}</p>
+          <p className="hero-value" data-hero="fade">{h.value}</p>
+          <div className="hero-actions" data-hero="fade">
+            <a className="btn btn-primary" href="#contact">
+              {h.cta}
+              <ArrowDown />
             </a>
-            <a className="hero-icon-btn" href="https://www.linkedin.com/in/leogotardo/" target="_blank" rel="noopener noreferrer">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M19 3A2 2 0 0 1 21 5v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
-              </svg>
-              LinkedIn
-            </a>
-            <a className="hero-icon-btn" href="mailto:contato@leogotardo.com.br">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                <polyline points="22,6 12,13 2,6"/>
-              </svg>
-              Email
-            </a>
+            <a className="btn btn-ghost" href={h.resumeFile} download>{h.downloadResume}</a>
           </div>
-          <div className="hero-actions">
-            <a className="hero-cta" href="/My Resume.pdf" download>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                <polyline points="7 10 12 15 17 10"/>
-                <line x1="12" y1="15" x2="12" y2="3"/>
-              </svg>
-              {h.downloadResume}
-            </a>
-            <a className="hero-cta-ghost" href="#projects">{h.seeMyWork} ↓</a>
-          </div>
+          <p className="hero-meta" data-hero="fade">
+            <span>{h.location}</span>
+            <span aria-hidden="true">·</span>
+            <span><LocalTime lang={lang} /> {h.localTime}</span>
+          </p>
         </div>
-        <div className="hero-visual">
-          <div className="corner corner-tl" />
-          <div className="corner corner-tr" />
-          <div className="corner corner-bl" />
-          <div className="corner corner-br" />
-          <div className="hero-avatar">LG</div>
-        </div>
+
+        <Portrait alt={h.photoAlt} />
       </div>
     </section>
   )

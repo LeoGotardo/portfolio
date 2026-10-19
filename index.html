@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="google-site-verification" content="94MWrRaes_KHE5hgGSaxF1YYS7p8e3L4Di6WKwrWmCA" />
     <meta name="google-site-verification" content="yBZMYwGP4-yT-0LYC7oPPQU-j8s59r-ABepDJvEjQco" />
-    <meta name="description" content="Leonardo Gotardo — Software Developer specializing in embedded systems, REST APIs, IoT, and web development. Based in Londrina, Brazil." />
+    <meta name="description" content="Leonardo Gotardo, software developer in Londrina, Brazil. Backend Python (FastAPI, Flask) and full-stack React/TypeScript, shipping web and mobile apps end to end." />
     <meta name="keywords" content="Leonardo Gotardo, software developer, full-stack developer, backend developer, embedded systems, REST API, IoT, React, Python, JavaScript, TypeScript, Java, C, HTML, CSS, Lua, Bash, Flask, FastAPI, Laravel, WebSocket, JWT, SQLAlchemy, Vite, Tailwind CSS, React Router, MongoDB, MySQL, PostgreSQL, SQLite, Linux, SSH, NFC, RFID, GPIO, threading, socket programming, Git, PyPI, Vercel, fintech, IrisPay, vending machines, cryptography, AES-256, open source, Python library, web development, Londrina, Paraná, Brazil, Brasil, portfolio, desenvolvedor de software, sistemas embarcados" />
     <meta name="author" content="Leonardo Gotardo" />
     <link rel="canonical" href="https://www.leogotardo.com.br" />
@@ -24,31 +24,44 @@
 
     <!-- Open Graph (LinkedIn, WhatsApp, Facebook) -->
     <meta property="og:site_name" content="Leonardo Gotardo" />
-    <meta property="og:title" content="Leonardo Gotardo — Software Developer" />
-    <meta property="og:description" content="Software Developer specializing in embedded systems, REST APIs, IoT, and web development. Based in Londrina, Brazil." />
+    <meta property="og:title" content="Leonardo Gotardo · Software Developer" />
+    <meta property="og:description" content="Leonardo Gotardo, software developer in Londrina, Brazil. Backend Python (FastAPI, Flask) and full-stack React/TypeScript, shipping web and mobile apps end to end." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.leogotardo.com.br" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:image" content="https://www.leogotardo.com.br/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Leonardo Gotardo — Software Developer" />
+    <meta property="og:image:alt" content="Leonardo Gotardo · Software Developer" />
 
     <!-- Twitter/X -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Leonardo Gotardo — Software Developer" />
-    <meta name="twitter:description" content="Software Developer specializing in embedded systems, REST APIs, IoT, and web development. Based in Londrina, Brazil." />
+    <meta name="twitter:title" content="Leonardo Gotardo · Software Developer" />
+    <meta name="twitter:description" content="Leonardo Gotardo, software developer in Londrina, Brazil. Backend Python (FastAPI, Flask) and full-stack React/TypeScript, shipping web and mobile apps end to end." />
     <meta name="twitter:image" content="https://www.leogotardo.com.br/og-image.png" />
-    <title>Leonardo Gotardo — Software Developer</title>
+    <title>Leonardo Gotardo · Software Developer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Exo+2:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wdth,wght@75..112.5,400..500&family=Mona+Sans:wdth,wght@75..125,400..850&display=swap" rel="stylesheet">
+    <meta name="theme-color" content="#f4f7fc" />
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem('theme');
+          document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : 'light');
+          var l = localStorage.getItem('lang');
+          if (l === 'pt') document.documentElement.lang = 'pt-BR';
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      })();
+    </script>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
       "name": "Leonardo Gotardo",
-      "alternateName": "Leonardo Gotardo — Software Developer",
+      "alternateName": "Leonardo Gotardo · Software Developer",
       "url": "https://www.leogotardo.com.br"
     }
     </script>
@@ -74,126 +87,34 @@
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
     <noscript>
-      <style>
-        .ns-wrap { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; font-family: system-ui, sans-serif; color: #e2e8f0; background: #0a0d12; }
-        .ns-wrap h1 { font-size: 2.5rem; margin-bottom: .25rem; }
-        .ns-wrap h2 { font-size: 1.4rem; color: #ff6b35; margin: 2rem 0 .75rem; border-bottom: 1px solid #2a3441; padding-bottom: .4rem; }
-        .ns-wrap h3 { font-size: 1.1rem; margin: 1rem 0 .25rem; }
-        .ns-wrap p, .ns-wrap li { color: #94a3b8; line-height: 1.7; }
-        .ns-wrap ul { padding-left: 1.25rem; }
-        .ns-wrap a { color: #00d4ff; }
-        .ns-tag { display: inline-block; background: #1a2332; color: #00d4ff; font-size: .75rem; padding: .2rem .5rem; border-radius: 4px; margin: .15rem; }
-        .ns-meta { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem 2rem; margin: 1rem 0; }
-        .ns-meta span { color: #94a3b8; } .ns-meta strong { color: #e2e8f0; }
-        .ns-period { color: #64748b; font-size: .85rem; }
-        .ns-project { border: 1px solid #2a3441; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; }
-      </style>
-      <div class="ns-wrap">
-        <header>
-          <p style="color:#ff6b35;font-size:.9rem;text-transform:uppercase;letter-spacing:.1em">Software Developer &amp; Student</p>
-          <h1>Leonardo Gotardo</h1>
-          <p>Building embedded systems, REST APIs, and web applications. Passionate about learning hard things — from IoT hardware to full-stack development.</p>
-          <p><a href="https://github.com/LeoGotardo">GitHub</a> · <a href="https://www.linkedin.com/in/leogotardo/">LinkedIn</a> · <a href="mailto:contato@leogotardo.com.br">Email</a></p>
-        </header>
-
-        <main>
-          <section id="about">
-            <h2>About</h2>
-            <p>Software Developer based in Londrina, Brazil. Currently working at <a href="https://irispay.com.br">IrisPay</a> — a Brazilian fintech converting traditional machines into smart vending systems via proprietary payment technology — where I work across the full stack: embedded systems, automation, REST APIs, sockets, cryptography, IoT, and web development.</p>
-            <p>Pursuing a degree in Analysis and Systems Development at IFPR while building side projects that push me to learn new areas — from cryptography and GUI programming to building and publishing Python libraries on PyPI.</p>
-            <div class="ns-meta">
-              <div><strong>Location</strong><br><span>Londrina, Brazil</span></div>
-              <div><strong>Languages</strong><br><span>Portuguese (Native) · English (Full Professional)</span></div>
-              <div><strong>Education</strong><br><span>Analysis &amp; Systems Dev — IFPR</span></div>
-              <div><strong>Focus</strong><br><span>Embedded · IoT · REST APIs · Web</span></div>
-            </div>
-          </section>
-
-          <section id="experience">
-            <h2>Experience</h2>
-            <h3>Software Developer — IrisPay <span class="ns-period">Sep 2024 — Present</span></h3>
-            <p>Brazilian fintech converting traditional machines into smart vending systems. Londrina-PR, Brazil.</p>
-            <ul>
-              <li>Embedded systems development and hardware programming</li>
-              <li>REST API development and integration</li>
-              <li>IoT development with NFC and RFID hardware</li>
-              <li>Web development for internal and client-facing systems</li>
-              <li>SSH remote management and socket communication</li>
-            </ul>
-            <h3>Service Desk — Persis Internet <span class="ns-period">Jul 2023 — Mar 2024</span></h3>
-            <p>Regional ISP with 100k+ clients. Londrina-PR, Brazil.</p>
-            <ul>
-              <li>Solved complex network issues interpreting ambiguous customer descriptions</li>
-              <li>Delivered high-quality technical support under pressure</li>
-            </ul>
-          </section>
-
-          <section id="skills">
-            <h2>Skills</h2>
-            <p><strong>Languages:</strong>
-              <span class="ns-tag">Python</span><span class="ns-tag">JavaScript</span><span class="ns-tag">TypeScript</span><span class="ns-tag">Java</span><span class="ns-tag">C</span><span class="ns-tag">HTML</span><span class="ns-tag">CSS</span><span class="ns-tag">Lua</span><span class="ns-tag">Bash</span>
-            </p>
-            <p><strong>Backend &amp; APIs:</strong>
-              <span class="ns-tag">Flask</span><span class="ns-tag">FastAPI</span><span class="ns-tag">Laravel</span><span class="ns-tag">REST API</span><span class="ns-tag">WebSocket</span><span class="ns-tag">JWT</span><span class="ns-tag">SQLAlchemy</span>
-            </p>
-            <p><strong>Frontend:</strong>
-              <span class="ns-tag">React</span><span class="ns-tag">Vite</span><span class="ns-tag">Tailwind CSS</span><span class="ns-tag">React Router</span>
-            </p>
-            <p><strong>Databases:</strong>
-              <span class="ns-tag">MongoDB</span><span class="ns-tag">MySQL</span><span class="ns-tag">PostgreSQL</span><span class="ns-tag">SQLite</span>
-            </p>
-            <p><strong>Systems &amp; Hardware:</strong>
-              <span class="ns-tag">Linux</span><span class="ns-tag">SSH</span><span class="ns-tag">Embedded</span><span class="ns-tag">NFC</span><span class="ns-tag">GPIO</span><span class="ns-tag">Threading</span><span class="ns-tag">Socket</span>
-            </p>
-            <p><strong>Tools:</strong>
-              <span class="ns-tag">Git</span><span class="ns-tag">PyPI</span><span class="ns-tag">IoT</span><span class="ns-tag">Vercel</span>
-            </p>
-          </section>
-
-          <section id="projects">
-            <h2>Projects</h2>
-            <div class="ns-project">
-              <h3>noHarm <span class="ns-period">2025 — Present</span></h3>
-              <p>Addiction recovery app: JavaScript/Capacitor frontend and FastAPI backend. Real-time chat via Socket.IO, AES-256 encryption, Neon PostgreSQL, deployed on Vercel.</p>
-              <p><a href="https://noharm.site">Live</a> · <a href="https://github.com/LeoGotardo/noHarm">GitHub (frontend)</a> · <a href="https://github.com/LeoGotardo/noHarmBack">GitHub (backend)</a></p>
-            </div>
-            <div class="ns-project">
-              <h3>ReportGen <span class="ns-period">Feb 2026 — Present</span></h3>
-              <p>Web tool for generating professional technical reports with ABNT formatting and severity classification.</p>
-              <p><a href="https://reportgen.leogotardo.com.br">Live</a> · <a href="https://github.com/LeoGotardo/reportGen">GitHub</a></p>
-            </div>
-            <div class="ns-project">
-              <h3>ipTool <span class="ns-period">Mar 2026 — Present</span></h3>
-              <p>Geographic IP lookup tool with interactive Leaflet map, IPv4/IPv6 validation, and detailed network data.</p>
-              <p><a href="https://iptool.leogotardo.com.br">Live</a> · <a href="https://github.com/LeoGotardo/ipTool">GitHub</a></p>
-            </div>
-            <div class="ns-project">
-              <h3>Custom Thread <span class="ns-period">Jun 2024 — Present</span></h3>
-              <p>Python library extending the standard threading module with return values, exception propagation, and callbacks. Published on PyPI.</p>
-              <p><a href="https://pypi.org/project/CustomThread/">PyPI</a> · <a href="https://github.com/LeoGotardo/CustomThread">GitHub</a></p>
-            </div>
-            <div class="ns-project">
-              <h3>MainDug Web <span class="ns-period">Dec 2024 — Present</span></h3>
-              <p>Full-stack web password manager with JWT authentication and encrypted storage. React SPA with RESTful backend.</p>
-              <p><a href="https://maindug.leogotardo.com.br">Live</a> · <a href="https://github.com/LeoGotardo/MainDugWeb">GitHub</a></p>
-            </div>
-          </section>
-
-          <section id="contact">
-            <h2>Contact</h2>
-            <p>Open to new opportunities and interesting projects. Let's build something together.</p>
-            <p>
-              <a href="mailto:contato@leogotardo.com.br">contato@leogotardo.com.br</a><br>
-              <a href="https://www.linkedin.com/in/leogotardo/">LinkedIn</a> ·
-              <a href="https://github.com/LeoGotardo">GitHub</a>
-            </p>
-          </section>
-        </main>
-
-        <footer>
-          <p>Leonardo Gotardo · Londrina, Brazil · Software Developer</p>
-        </footer>
-      </div>
+      <main class="noscript">
+        <h1>Leonardo Gotardo</h1>
+        <p><strong>Backend Python &amp; full-stack React/TypeScript developer</strong></p>
+        <p>I design and ship APIs, web and mobile apps end to end: FastAPI and PostgreSQL on AWS, React and Capacitor on the screen, Raspberry Pi when hardware is involved.</p>
+        <p><a href="mailto:contato@leogotardo.com.br">contato@leogotardo.com.br</a> · <a href="https://www.linkedin.com/in/leogotardo/">LinkedIn</a> · <a href="https://github.com/LeoGotardo">GitHub</a> · <a href="/Leonardo_Gotardo_CV_EN.pdf">Resume (PDF)</a></p>
+        <h2>Selected work</h2>
+        <article><h3>noHarm <span class="ns-period">2025 – Present</span></h3><p>Mobile app for addiction recovery support, with a JavaScript/Capacitor frontend and a FastAPI backend built on Clean Architecture. Real-time chat, streak tracking, and encrypted user data.</p><p><a href="https://noharm.site">Live site</a> · <a href="https://github.com/LeoGotardo/noHarm">Front</a> · <a href="https://github.com/LeoGotardo/noHarmBack">Back</a></p></article>
+        <article><h3>MainDug Web <span class="ns-period">Dec 2024 – Present</span></h3><p>Open-source, self-hostable password manager, my IFPR final-year project. A web rewrite of the original Python desktop app.</p><p><a href="https://maindug.leogotardo.com.br">Live site</a> · <a href="https://github.com/LeoGotardo/MainDugWeb">Code</a></p></article>
+        <article><h3>PiTest <span class="ns-period">Jun 2026 – Present</span></h3><p>Hardware diagnostic tool for Raspberry Pi devices: runs a test battery and reports results to a central web dashboard.</p><p><a href="https://pitest.leogotardo.com.br">Live site</a> · <a href="https://github.com/LeoGotardo/pitest">Code</a></p></article>
+        <h2>More projects</h2>
+        <article><h3>ReportGen <span class="ns-period">Feb 2026 – Present</span></h3><p>Web tool for building structured technical reports with live preview and multi-format export: bug reports, study records, and changelogs.</p><p><a href="https://reportgen.leogotardo.com.br">Live site</a> · <a href="https://github.com/LeoGotardo/reportGen">Code</a></p></article>
+        <article><h3>ipTool <span class="ns-period">Mar 2026 – Present</span></h3><p>Geographic IP lookup tool with interactive map, IPv4/IPv6 validation, and detailed network data. Dark terminal aesthetic built with React.</p><p><a href="https://iptool.leogotardo.com.br">Live site</a> · <a href="https://github.com/LeoGotardo/ipTool">Code</a></p></article>
+        <article><h3>Custom Thread <span class="ns-period">Jun 2024 – Present</span></h3><p>Python library extending the standard threading module, published and maintained on PyPI.</p><p><a href="https://pypi.org/project/CustomThread/">Live site</a> · <a href="https://github.com/LeoGotardo/CustomThread">Code</a></p></article>
+        <article><h3>DDGame <span class="ns-period">Feb 2026 – Present</span></h3><p>Browser-based game built with TypeScript, deployed on Vercel.</p><p><a href="https://ddgame.leogotardo.com.br">Live site</a> · <a href="https://github.com/LeoGotardo/ddgame">Code</a></p></article>
+        <article><h3>Maze Solver <span class="ns-period">Jun 2025 – Present</span></h3><p>Interactive maze generator and pathfinding visualizer. Watch DFS and BFS solve the same maze and compare them side by side.</p><p><a href="https://maze.leogotardo.com.br">Live site</a> · <a href="https://github.com/LeoGotardo/RedBlackTree">Code</a></p></article>
+        <article><h3>GeoKnocker <span class="ns-period">Jun 2024 – Aug 2024</span></h3><p>GUI desktop tool for port scanning and IP geolocation with dark/light theme and concurrent scanning via threading.</p><p><a href="https://github.com/LeoGotardo/GeoKnocker">Code</a></p></article>
+        <article><h3>Hash Table <span class="ns-period">Nov 2025 – Dec 2025</span></h3><p>Hash table implementation in C with chaining for collision resolution and automatic rehashing at 75% load factor.</p><p><a href="https://github.com/LeoGotardo/hashtable">Code</a></p></article>
+        <article><h3>Grimório de Venetia <span class="ns-period">Jun 2026 – Present</span></h3><p>D&amp;D 5.5 (2024 edition) character creator and play sheet: a single-page app packaged as an Android app via Capacitor.</p><p><a href="https://venetia.leogotardo.com.br">Live site</a> · <a href="https://github.com/LeoGotardo/venetia-grimory">Code</a></p></article>
+        <article><h3>Phishing Detector <span class="ns-period">May 2026 – Present</span></h3><p>Web tool for checking suspicious URLs, combining local browser heuristics with multiple external blacklist APIs.</p><p><a href="https://github.com/LeoGotardo/phising">Code</a></p></article>
+        <article><h3>Talent Scout <span class="ns-period">Oct 2025 – Present</span></h3><p>Web system for registering, analyzing, and classifying athletes by physical and performance metrics using a KNN machine learning model.</p><p><a href="https://github.com/LeoGotardo/phisics">Code</a></p></article>
+        <h2>Experience</h2>
+        <article><h3>Software Developer, IrisPay <span class="ns-period">Sep 2024 – Present</span></h3><p>Brazilian fintech converting traditional machines into smart vending systems via proprietary payment technology. Londrina-PR, Brazil.</p></article>
+        <article><h3>Partner, TLG-Web-Dev <span class="ns-period">Apr 2026 – Present</span></h3><p>Small web development studio. I am one of the partners and build client sites.</p></article>
+        <article><h3>Service Desk, Persis Internet <span class="ns-period">Jul 2023 – Mar 2024</span></h3><p>Regional ISP with 100k+ clients. Londrina-PR, Brazil.</p></article>
+        <h2>About</h2>
+        <p>Software Developer based in Londrina, Brasil. Currently working at IrisPay, a Brazilian fintech that converts traditional machines into smart vending systems with proprietary payment technology. There I work across the stack: embedded systems, automation, REST APIs, sockets, cryptography, IoT and web development.</p>
+        <p>I graduated in Analysis and Systems Development at IFPR in 2026, and I keep building side projects that push me into new areas: cryptography, GUI programming, mobile apps, cloud infrastructure and Python libraries published on PyPI.</p>
+      </main>
     </noscript>
   </body>
 </html>

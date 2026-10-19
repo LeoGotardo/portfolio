@@ -9,7 +9,7 @@
 
 
 # Resumo
-Desenvolvedor de Software com experiência em Linux embarcado/IoT, backend Python e full-stack web/mobile, demonstrada no noHarm (em produção na AWS com Terraform), no PiTest (hardware Raspberry Pi) e no MainDug.
+Desenvolvedor backend Python e full-stack React, com experiência em Linux embarcado/IoT, demonstrada no noHarm (em produção na AWS com Terraform), no PiTest (hardware Raspberry Pi) e no MainDug.
 
 # Experiência
 ## **Desenvolvedor de Software**, IrisPay -- Londrina, Brasil
@@ -55,7 +55,7 @@ App de apoio à recuperação de dependências, no ar com alguns beta testers.
 
 - Em produção na AWS com Terraform e GitHub Actions.
 
-- App (77 de 89 commits): React, TypeScript, Capacitor para Android e iOS; 226 execuções Playwright em projetos mobile e desktop.
+- App (77 de 89 commits): React (JavaScript), Vite e Capacitor para Android e iOS; 226 execuções Playwright em projetos mobile e desktop.
 
 
 

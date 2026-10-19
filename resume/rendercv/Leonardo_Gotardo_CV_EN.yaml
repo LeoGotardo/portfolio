@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/rendercv/rendercv/refs/tags/v2.8/schema.json
 cv:
   name: Leonardo Gotardo
-  headline: Software Developer
+  headline: Backend Python & React Developer
   location: Londrina, Brazil
   email: leonardo.gotardo2@gmail.com
   phone: "+5543988177963"
@@ -13,7 +13,7 @@ cv:
       username: LeoGotardo
   sections:
     Summary:
-      - "Software Developer with embedded Linux/IoT, Python backend and full-stack web/mobile experience, shown in noHarm (in production on AWS with Terraform), PiTest (Raspberry Pi hardware) and MainDug."
+      - "Backend Python and full-stack React developer with an embedded Linux/IoT background, shown in noHarm (in production on AWS with Terraform), PiTest (Raspberry Pi hardware) and MainDug."
     Experience:
       - company: IrisPay
         position: Software Developer
@@ -47,7 +47,7 @@ cv:
         highlights:
           - "Backend (173 of 184 commits): FastAPI, Clean Architecture, JWT rotation with blacklist, Socket.IO chat, AES-256 field encryption, three-layer Redis rate limiting; 1,170 pytest test cases."
           - Runs in production on AWS with Terraform and GitHub Actions.
-          - "App (77 of 89 commits): React, TypeScript, Capacitor for Android and iOS; 226 Playwright runs across mobile and desktop projects."
+          - "App (77 of 89 commits): React (JavaScript), Vite and Capacitor for Android and iOS; 226 Playwright runs across mobile and desktop projects."
       - name: "[PiTest](https://pitest.leogotardo.com.br)"
         summary: Raspberry Pi 3B hardware test bench.
         start_date: 2026-06
@@ -98,11 +98,35 @@ design:
     bottom_margin: 0.45in
     left_margin: 0.55in
     right_margin: 0.55in
+  # Matches leogotardo.com.br: Space Grotesk + JetBrains Mono, near-black ink, the site's lime
+  # darkened to lime-700/800 so it reads on white (#bff538 itself would not).
+  colors:
+    body: rgb(27, 29, 33)
+    name: rgb(12, 13, 15)
+    headline: rgb(77, 124, 15)
+    connections: rgb(70, 76, 86)
+    section_titles: rgb(77, 124, 15)
+    links: rgb(63, 98, 18)
   typography:
     line_spacing: 0.5em
+    alignment: left
+    font_family:
+      body: Space Grotesk
+      name: Space Grotesk
+      headline: JetBrains Mono
+      connections: JetBrains Mono
+      section_titles: Space Grotesk
     font_size:
-      body: 9.5pt
-      name: 22pt
+      body: 9.4pt
+      name: 24pt
+      headline: 10pt
+      connections: 8.2pt
+      section_titles: 1.15em
+    bold:
+      name: true
+      section_titles: true
+  links:
+    underline: false
   section_titles:
     space_above: 0.3cm
     space_below: 0.18cm
@@ -111,11 +135,13 @@ design:
     space_between_text_based_entries: 0.1cm
   entries:
     highlights:
+      bullet: "•"
       space_above: 0.05cm
       space_between_items: 0.04cm
   header:
-    space_below_name: 0.3cm
-    space_below_headline: 0.3cm
+    alignment: left
+    space_below_name: 0.25cm
+    space_below_headline: 0.25cm
     space_below_connections: 0.3cm
     connections:
       phone_number_format: international

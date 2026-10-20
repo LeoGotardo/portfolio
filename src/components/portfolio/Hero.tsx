@@ -1,9 +1,42 @@
-import { motion, useInView, useMotionValue, useSpring, useTransform, useScroll } from "motion/react";
-import { useEffect, useRef, useState } from "react";
+import { motion, useInView, useReducedMotion, useTransform, useScroll } from "motion/react";
+import { Component, lazy, Suspense, useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import { MediaSlot, Magnetic } from "./primitives";
 import { PORTRAIT, RESUME } from "@/data/projects";
 
 const SUB = "Backend Python & full-stack React/TypeScript developer";
+
+// three.js loads only on the client, after the hero has rendered, and only with WebGL.
+const VoxelCat = lazy(() => import("./VoxelCat"));
+
+/** Whether this browser can draw WebGL; checked on the client so the 3D chunk is never requested without it. */
+function useWebGL() {
+  const [ok, setOk] = useState(false);
+  useEffect(() => {
+    if (typeof WebGLRenderingContext === "undefined") return;
+    try {
+      const gl = document.createElement("canvas").getContext("webgl2") ?? document.createElement("canvas").getContext("webgl");
+      setOk(!!gl);
+      gl?.getExtension("WEBGL_lose_context")?.loseContext();
+    } catch {
+      setOk(false);
+    }
+  }, []);
+  return ok;
+}
+
+/** Keeps a failed 3D load (a stale chunk after a deploy, a lost WebGL context) inside the card instead of the error page. */
+class SceneBoundary extends Component<{ onError: () => void; children: ReactNode }, { failed: boolean }> {
+  override state = { failed: false };
+  static getDerivedStateFromError() {
+    return { failed: true };
+  }
+  override componentDidCatch() {
+    this.props.onError();
+  }
+  override render() {
+    return this.state.failed ? null : this.props.children;
+  }
+}
 
 function Letters({ text, delay }: { text: string; delay: number }) {
   return (
@@ -48,6 +81,40 @@ function Clock({ live }: { live: boolean }) {
   return <span className="tabular-nums">{t || "--:--:--"}</span>;
 }
 
+const Prompt = () => (
+  <>
+    <span className="text-primary">leo@londrina</span>
+    <span className="text-muted-foreground">:~$</span>
+  </>
+);
+
+/** A small terminal window over the corner of the hero scene: types `whoami` once and answers. */
+function Whoami() {
+  const cmd = useTyped("whoami", 3000);
+  const done = cmd.length === "whoami".length;
+  return (
+    <div className="absolute -bottom-6 -left-2 w-60 overflow-hidden rounded-lg border border-border bg-background/90 font-mono text-xs shadow-2xl backdrop-blur md:-left-8">
+      <div className="flex items-center gap-1.5 border-b border-border bg-card px-3 py-2">
+        <span className="h-2.5 w-2.5 rounded-full bg-primary/70" />
+        <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/40" />
+        <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/40" />
+        <span className="ml-2 text-[10px] text-muted-foreground">leo@londrina: ~</span>
+      </div>
+      {/* All three lines are always laid out, so the window never changes height while typing. */}
+      <div className="px-3 py-2.5 leading-relaxed">
+        <p>
+          <Prompt /> {cmd}
+          {!done && <span className="animate-blink">▍</span>}
+        </p>
+        <p className={done ? "text-foreground" : "invisible"}>dev</p>
+        <p className={done ? undefined : "invisible"}>
+          <Prompt /> <span className="animate-blink">▍</span>
+        </p>
+      </div>
+    </div>
+  );
+}
+
 export function Hero() {
   const typed = useTyped(SUB, 1300);
   const ref = useRef<HTMLElement>(null);
@@ -57,13 +124,15 @@ export function Hero() {
   // The clock and the bouncing hint only run while the hero is on screen.
   const live = useInView(ref);
 
-  const mx = useMotionValue(0);
-  const my = useMotionValue(0);
-  const rx = useSpring(useTransform(my, [-0.5, 0.5], [10, -10]), { stiffness: 150, damping: 20 });
-  const ry = useSpring(useTransform(mx, [-0.5, 0.5], [-10, 10]), { stiffness: 150, damping: 20 });
+  const reduce = useReducedMotion();
+  const [failed, setFailed] = useState(false);
+  const onFailed = useCallback(() => setFailed(true), []);
+  const webgl = useWebGL() && !failed;
+  const [ready, setReady] = useState(false);
+  const onReady = useCallback(() => setReady(true), []);
 
   return (
-    <section id="top" ref={ref} className="relative flex min-h-screen items-center overflow-hidden px-6 pt-28 md:px-10">
+    <section id="top" ref={ref} className="relative flex min-h-screen items-center overflow-hidden px-6 pt-28 pb-20 md:px-10 lg:pb-0">
       {/* Background video slot */}
       <div className="absolute inset-0 -z-10">
         <MediaSlot label="Vídeo hero 16:9 · loop" className="h-full w-full rounded-none opacity-40" />
@@ -96,22 +165,28 @@ export function Hero() {
 
         <motion.div
           initial={{ opacity: 0, scale: 0.9, clipPath: "inset(100% 0 0 0)" }}
-          animate={{ opacity: 1, scale: 1, clipPath: "inset(0% 0 0 0)" }}
+          animate={{ opacity: 1, scale: 1, clipPath: "inset(0% 0 0 0)", transitionEnd: { clipPath: "none" } }}
           transition={{ delay: 0.8, duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-          style={{ rotateX: rx, rotateY: ry, transformPerspective: 900 }}
-          onMouseMove={(e) => {
-            const r = e.currentTarget.getBoundingClientRect();
-            mx.set((e.clientX - r.left) / r.width - 0.5);
-            my.set((e.clientY - r.top) / r.height - 0.5);
-          }}
-          onMouseLeave={() => { mx.set(0); my.set(0); }}
-          className="relative mx-auto w-full max-w-sm"
-          data-hover
+          className={`relative mx-auto w-full ${webgl ? "max-w-lg" : "max-w-sm"}`}
         >
-          <MediaSlot src={PORTRAIT} label="Retrato 4:5" alt="Portrait of Leonardo Gotardo" className="aspect-[4/5] glow" />
-          <div className="absolute -bottom-4 -left-4 rounded-md border border-border bg-background px-3 py-2 font-mono text-xs">
-            <span className="text-primary">$</span> whoami → dev
+          {/* The voxel scene floats on the page background and fades in once its chunk has loaded; without WebGL, or if it fails, the portrait slot stays. */}
+          <div
+            role={webgl ? "img" : undefined}
+            aria-label={webgl ? "3D voxel scene, slowly turning: a tabby kitten with lime eyes lying on an office chair in front of a white desk with a PC showing code, a white RGB keyboard and mouse, a Raspberry Pi, a white Monster energy can and a potted cactus, a white PC tower with RGB fans, and an acoustic guitar on a stand" : undefined}
+            className={`relative overflow-hidden rounded-lg ${webgl ? "aspect-square" : "aspect-[4/5]"}`}
+          >
+            {!webgl && <MediaSlot src={PORTRAIT} label="Retrato 4:5" alt="Portrait of Leonardo Gotardo" className="absolute inset-0" />}
+            {webgl && (
+              <div className={`absolute inset-0 transition-opacity duration-700 ${ready ? "opacity-100" : "opacity-0"}`}>
+                <SceneBoundary onError={onFailed}>
+                  <Suspense fallback={null}>
+                    <VoxelCat live={live} still={!!reduce} onReady={onReady} />
+                  </Suspense>
+                </SceneBoundary>
+              </div>
+            )}
           </div>
+          <Whoami />
         </motion.div>
       </motion.div>
 

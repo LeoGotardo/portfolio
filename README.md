@@ -8,8 +8,9 @@ Live at [leogotardo.com.br](https://leogotardo.com.br)
 
 - TanStack Start (React 19, server-rendered) on Vite
 - Tailwind CSS v4 with OKLCH tokens; Lenis smooth scroll; Motion (`motion/react`) for reveals and the scroll-driven project panels
-- Each project is a full-screen panel in that project's own palette and fonts, revealed by a radial wave as you scroll
-- `prefers-reduced-motion` respected: no smooth scroll, stacking or wave
+- Each project is a full-screen panel in that project's own palette and fonts, sliding up over the previous one as you scroll
+- An original voxel scene in the hero (three.js, lazy-loaded), modelled in code: a tabby kitten lying on an office chair at a desk
+- `prefers-reduced-motion` respected: no smooth scroll, stacking or slide transition, and a still voxel scene
 - Deployed on Vercel through nitro's `vercel` preset (`.vercel/output`), with Speed Insights
 
 ## Structure
@@ -35,4 +36,4 @@ bun run lint
 
 ## Content
 
-Copy lives in `src/data/projects.ts` (projects, featured case studies, stack) and in the section components (`Experience.tsx`, `About.tsx`). Keep `public/llms.txt` in sync when it changes. Screenshots live in `public/previews/`. The portrait is picked up from `src/assets/photo.webp` at build time (the slot stays empty, with no request, until it exists).
+Copy lives in `src/data/projects.ts` (projects, featured case studies, stack) and in the section components (`Experience.tsx`, `About.tsx`). Keep `public/llms.txt` in sync when it changes. Screenshots live in `public/previews/`. The portrait is picked up from `src/assets/photo.webp` at build time and only shows where WebGL is unavailable; elsewhere the hero shows the voxel scene (`src/components/portfolio/VoxelCat.tsx`).

@@ -392,9 +392,10 @@ function Venetia() {
 function Code({ title, lines }: { title: string; lines: string[] }) {
   return (
     <Frame title={title}>
-      <pre className="overflow-x-auto font-mono text-[12px] leading-relaxed">
+      {/* No scroll container: long lines wrap under their own number instead of widening the card. */}
+      <pre className="font-mono text-[12px] leading-relaxed">
         {lines.map((l, i) => (
-          <motion.div {...pop(i * 0.3)} key={i}><span className="mr-4 text-muted-foreground">{String(i + 1).padStart(2, " ")}</span><span className={l.startsWith("#") || l.startsWith("//") || l.startsWith(">") ? "text-primary" : ""}>{l}</span></motion.div>
+          <motion.div {...pop(i * 0.3)} key={i} className="flex"><span className="mr-4 shrink-0 text-muted-foreground">{String(i + 1).padStart(2, " ")}</span><span className={`min-w-0 whitespace-pre-wrap break-words ${l.startsWith("#") || l.startsWith("//") || l.startsWith(">") ? "text-primary" : ""}`}>{l}</span></motion.div>
         ))}
       </pre>
     </Frame>

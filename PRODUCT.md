@@ -38,4 +38,4 @@ Creative and bold. The site should be memorable and have a strong point of view,
 
 ## Accessibility & Inclusion
 
-WCAG 2.2 AA: text contrast ≥ 4.5:1 (3:1 for large text), full keyboard navigation with visible focus, semantic landmarks and headings, `prefers-reduced-motion` honored for all decorative animation (smooth scroll, stacked panels, radial wave, reveals), and every project palette held to the same contrast bar as the portfolio theme.
+WCAG 2.2 AA: text contrast ≥ 4.5:1 (3:1 for large text), full keyboard navigation with visible focus, semantic landmarks and headings, `prefers-reduced-motion` honored for all decorative animation (smooth scroll, stacked panels and their slide transition, reveals), and every project palette held to the same contrast bar as the portfolio theme.

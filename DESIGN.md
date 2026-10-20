@@ -1,6 +1,6 @@
 ---
 name: Leonardo Gotardo · Portfolio
-description: A dark terminal base with one lime accent; each project takes over the whole screen in its own palette, revealed by a radial wave.
+description: A dark terminal base with one lime accent; each project takes over the whole screen in its own palette, sliding up over the previous one, which recedes.
 colors:
   background: "oklch(0.16 0.005 260)"
   card: "oklch(0.2 0.006 260)"
@@ -45,7 +45,7 @@ Built with TanStack Start and Tailwind v4. Tokens live in `src/styles.css`; per-
 
 ## 1. Overview
 
-One dark, quiet base (near-black, warm off-white text, a single lime accent) that steps aside for the work. Each project is a full-screen panel dressed in **that project's real palette and fonts**, with a mock of its actual UI, so the visitor sees the products rather than reading about them. Panels stack: the next one grows from the centre of the screen as a circle (the radial wave) over the one underneath, and the page chrome cross-fades to the active project's colors.
+One dark, quiet base (near-black, warm off-white text, a single lime accent) that steps aside for the work. Each project is a full-screen panel dressed in **that project's real palette and fonts**, with a mock of its actual UI, so the visitor sees the products rather than reading about them. Panels stack: the next one slides up over the one underneath, which sinks back (scales down, drifts up and darkens), and the page chrome cross-fades to the active project's colors.
 
 ## 2. Colors
 
@@ -68,7 +68,7 @@ Flat. Depth comes from the stacked panels themselves, a `glow` (lime box-shadow)
 
 - **Nav**: always fixed; mono links in a blurred pill, lime "Resume" button; a 2px lime scroll-progress bar on top.
 - **Hero**: name in display type, typed role in lime mono, intro, "Get in touch" and "Resume (PDF)" magnetic buttons, portrait card with pointer tilt, clock badge (Londrina).
-- **Work panels** (`Work.tsx`): sticky `h-svh` sections, 5/7 grid: index and period, title, Problem/Decision/Result rows or a lede, counters, tags, links; the right side renders `SceneWidget` (the project's UI mock). Wave: `clip-path: circle(r% at 50% 50%)` driven by scroll over `WAVE = 0.9` viewports, then a `DWELL = 0.4` pause.
+- **Work panels** (`Work.tsx`): sticky `h-svh` sections, 5/7 grid: index and period, title, Problem/Decision/Result rows or a lede, counters, tags, links; the right side renders `SceneWidget` (the project's UI mock). Transition: the next panel scrolls up natively over one viewport and pins; meanwhile the covered one goes to `scale 0.94`, `y -10%` and a black overlay at 0.6 (transform and opacity only), with a shadow on the incoming top edge. Each panel then holds for `DWELL = 0.6` viewports.
 - **Skip projects**: fixed bottom-right button, shown only inside the stack, jumps and moves focus to Experience.
 - **Experience**: vertical timeline whose lime line grows with scroll; cards with intro, points and tags.
 - **About & stack**: statement, facts list, stack groups as chips that spring in.
@@ -79,7 +79,7 @@ Flat. Depth comes from the stacked panels themselves, a `glow` (lime box-shadow)
 
 - Lenis smooth scroll (`lerp 0.1`); in-page jumps go through `src/lib/scroll.ts`.
 - Reveals: 0.8s, `cubic-bezier(0.22, 1, 0.36, 1)`, from 40px down with an 8px blur.
-- `prefers-reduced-motion`: no Lenis, no stacking, no wave; panels become ordinary full-height sections. Stacking also needs at least 1024px of width.
+- `prefers-reduced-motion`: no Lenis, no stacking, no slide or recede; panels become ordinary full-height sections. Stacking also needs at least 1024px of width.
 
 ## 7. Do's and Don'ts
 

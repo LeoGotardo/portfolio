@@ -58,11 +58,13 @@ export function About() {
 export function Contact() {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end end"] });
-  const x = useTransform(scrollYProgress, [0, 1], ["30%", "-10%"]);
+  // Slides in from the right and settles flush with the content by the time it reaches mid-screen;
+  // ending past 0% pushed the first letter off the left edge. At 17vw the line fits inside the side padding.
+  const x = useTransform(scrollYProgress, [0, 0.75], ["30%", "0%"]);
   return (
     <section id="contact" ref={ref} className="relative overflow-hidden px-6 pb-12 pt-32 md:px-10">
       <SectionLabel n="04">Contact</SectionLabel>
-      <motion.h2 style={{ x }} className="whitespace-nowrap font-display text-[18vw] font-bold leading-none tracking-tighter">
+      <motion.h2 style={{ x }} className="whitespace-nowrap font-display text-[17vw] font-bold leading-none tracking-tighter">
         Let's <span className="text-primary">talk</span> <span className="text-outline">→</span>
       </motion.h2>
       <Reveal>

@@ -2,7 +2,6 @@ import {
   motion,
   type MotionStyle,
   type MotionValue,
-  useMotionTemplate,
   useMotionValue,
   useMotionValueEvent,
   useReducedMotion,
@@ -68,10 +67,9 @@ function useThemeConductor(names: string[]) {
   return { report, setAfter };
 }
 
-// Scroll distance, in viewport heights, that each wave takes to cover the screen, and the
-// pause on a fully revealed project before the next wave starts.
-const WAVE = 0.9;
-const DWELL = 1.2;
+// Scroll distance, in viewport heights, that a fully revealed project holds still before the next one
+// starts sliding over it. The slide itself takes one viewport: the next panel scrolls up natively.
+const DWELL = 0.6;
 
 /** Document position of a non-sticky element (offsetTop of a sticky one includes its current shift). */
 function docTop(el: HTMLElement) {
@@ -87,7 +85,7 @@ type SceneEls = { marker: HTMLDivElement | null; section: HTMLElement | null };
 /**
  * Measures the stack off the scroll path: on mount, when stacking switches, and whenever the page
  * resizes (fonts, images, viewport). Reading layout inside scroll handlers forced a reflow per panel
- * per frame, right after the waves had written their clip-paths. `version` ticks after each measure.
+ * per frame, right after the panels had written their transforms. `version` ticks after each measure.
  */
 function useStackLayout(stack: RefObject<HTMLDivElement | null>, els: RefObject<SceneEls[]>, stacking: boolean) {
   const layout = useRef<StackLayout>({ vh: 0, stackTop: 0, stackBottom: 0, tops: [], bottoms: [] });
@@ -136,28 +134,25 @@ const Scene = memo(function Scene(p: SceneProps & SceneCtx) {
   const stacking = useRef(p.stacking);
   stacking.current = p.stacking;
 
-  // Stacked: 0 when the panel pins to the top, 1 once its wave has covered the screen.
-  // Unstacked: 0 when its top enters at the bottom of the screen, 1 when it reaches the top.
-  const measure = (y: number) => {
+  // 0 when a panel's top enters at the bottom of the screen, 1 when it reaches the top (where,
+  // stacked, it pins over the previous one).
+  const entered = (y: number, top: number | undefined) => {
     const l = layout.current;
-    const top = l.tops[i];
     if (!l.vh || top === undefined) return 0;
-    const start = stacking.current ? top : top - l.vh;
-    const span = stacking.current ? l.vh * WAVE : l.vh;
-    return Math.min(1, Math.max(0, (y - start) / span));
+    return Math.min(1, Math.max(0, (y - top + l.vh) / l.vh));
   };
-  // Live while any of it can be seen: stacked, from just before its wave until the next wave has
-  // covered it (the last one until the stack scrolls away); unstacked, while it crosses the viewport.
+  // Live while any of it can be seen: stacked, from when it enters until the next panel has covered
+  // it (the last one until the stack scrolls away); unstacked, while it crosses the viewport.
   const isLive = (y: number) => {
     const l = layout.current;
     const top = l.tops[i];
     if (!l.vh || top === undefined) return false;
-    if (!stacking.current) return y + l.vh > top && y < (l.bottoms[i] ?? top);
-    const next = l.tops[i + 1];
-    const coveredAt = next === undefined ? l.stackBottom : next + l.vh * WAVE;
-    return y >= top - l.vh * 0.25 && y < coveredAt;
+    const end = stacking.current ? (l.tops[i + 1] ?? l.stackBottom) : (l.bottoms[i] ?? top);
+    return y + l.vh > top && y < end;
   };
-  const progress = useTransform([scrollY, p.version], ([y]: number[]) => measure(y ?? 0));
+  const progress = useTransform([scrollY, p.version], ([y]: number[]) => entered(y ?? 0, layout.current.tops[i]));
+  // How far the next panel has slid over this one.
+  const covered = useTransform([scrollY, p.version], ([y]: number[]) => (stacking.current ? entered(y ?? 0, layout.current.tops[i + 1]) : 0));
   const liveValue = useTransform([scrollY, p.version], ([y]: number[]) => (isLive(y ?? 0) ? 1 : 0));
   const [live, setLive] = useState(false);
   useMotionValueEvent(progress, "change", (v) => p.report(i, v));
@@ -167,23 +162,26 @@ const Scene = memo(function Scene(p: SceneProps & SceneCtx) {
     setLive(liveValue.get() === 1);
   }, [p.stacking]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // The radial wave: the project's theme grows from the centre of the screen over the one underneath.
-  const radius = useTransform(progress, [0, 1], [0, 75]);
-  const clipPath = useMotionTemplate`circle(${radius}% at 50% 50%)`;
+  // The recede: while the next panel slides up over it, this one sinks back, drifts up slower than the
+  // scroll and darkens. Transform and opacity only, so scrolling never repaints the panel.
+  const scale = useTransform(covered, [0, 1], [1, 0.94]);
+  const drift = useTransform(covered, [0, 1], ["0%", "-10%"]);
+  const shade = useTransform(covered, [0, 1], [0, 0.6]);
   const marker = useCallback((el: HTMLDivElement | null) => register(i, { marker: el }), [register, i]);
   const section = useCallback((el: HTMLElement | null) => register(i, { section: el }), [register, i]);
 
   return (
     <LiveContext.Provider value={live}>
-    {/* Stacked, each panel overlaps the previous one by a full screen; the marker carries that offset. */}
-    <div ref={marker} aria-hidden className={p.stacking && i > 0 ? "-mt-[100svh]" : undefined} />
-    {/* Covered panels stop painting (visibility) and their mocks stop animating (LiveContext). */}
+    {/* Where the panel's box starts in the flow; measured instead of the sticky panel. */}
+    <div ref={marker} aria-hidden />
+    {/* Covered panels stop painting (visibility) and their mocks stop animating (LiveContext).
+        The shadow on the top edge separates two dark palettes while one slides over the other. */}
     <motion.section
       ref={section}
-      style={{ ...(sceneStyle(themes[p.name]) as MotionStyle), ...(p.stacking ? { clipPath, visibility: live ? "visible" : "hidden" } : {}) }}
-      className={`relative flex items-center overflow-hidden bg-background text-foreground ${p.stacking ? "sticky top-0 h-svh" : "min-h-svh"}`}
+      style={{ ...(sceneStyle(themes[p.name]) as MotionStyle), ...(p.stacking ? { scale, y: drift, visibility: live ? "visible" : "hidden", willChange: live ? "transform" : undefined } : {}) }}
+      className={`relative flex items-center overflow-hidden bg-background text-foreground ${p.stacking ? "sticky top-0 h-svh" : "min-h-svh"} ${p.stacking && i > 0 ? "shadow-[0_-24px_48px_-12px_rgb(0_0_0/0.5)]" : ""}`}
     >
-      <div className="mx-auto grid w-full max-w-[1600px] items-center gap-12 px-6 py-24 md:px-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
+      <div className="mx-auto grid w-full max-w-[1600px] grid-cols-[minmax(0,1fr)] items-center gap-12 px-6 py-24 md:px-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
         <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}>
           <div className="flex items-baseline gap-4 font-mono text-xs text-muted-foreground">
             <span className="text-primary">{p.index}</span><span>{p.period}</span>
@@ -228,6 +226,7 @@ const Scene = memo(function Scene(p: SceneProps & SceneCtx) {
           <SceneWidget name={p.name} />
         </motion.div>
       </div>
+      {p.stacking && <motion.div aria-hidden className="pointer-events-none absolute inset-0 bg-black" style={{ opacity: shade }} />}
     </motion.section>
     </LiveContext.Provider>
   );
@@ -307,16 +306,16 @@ export function Work() {
       </button>
       </div>
       {/*
-        One containing block, so every panel stays pinned while the next one covers it.
-        Stacked, each panel overlaps the previous one by a full screen (negative margin) and is
-        followed by a spacer that buys scroll room for its wave plus a reading pause.
+        One containing block, so every panel stays pinned while the next one slides over it.
+        Stacked, each panel is followed by a spacer that holds it still for a reading pause
+        before the next one scrolls up.
       */}
       <div ref={stack} className="relative">
         {scenes.map(({ anchor, ...s }, i) => (
           <Fragment key={s.name}>
             {anchor && <div id={anchor} aria-hidden />}
             <Scene {...s} i={i} stacking={stacking} report={report} register={register} layout={layout} version={version} />
-            {stacking && <div aria-hidden style={{ height: `${(WAVE + DWELL) * 100}svh` }} />}
+            {stacking && <div aria-hidden style={{ height: `${DWELL * 100}svh` }} />}
           </Fragment>
         ))}
       </div>

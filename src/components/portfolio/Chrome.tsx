@@ -1,5 +1,5 @@
-import { motion, useScroll, useSpring, useMotionValue } from "motion/react";
-import { useEffect, useState } from "react";
+import { motion, useScroll, useSpring } from "motion/react";
+import { useEffect, useRef, useState } from "react";
 import Lenis from "lenis";
 import { RESUME } from "@/data/projects";
 import { getLenis, setLenis } from "@/lib/scroll";
@@ -22,28 +22,35 @@ export function SmoothScroll() {
 }
 
 export function Cursor() {
-  const x = useMotionValue(-100);
-  const y = useMotionValue(-100);
-  const sx = useSpring(x, { stiffness: 500, damping: 40 });
-  const sy = useSpring(y, { stiffness: 500, damping: 40 });
+  // The system arrow is hidden on hover devices, so the dot must sit exactly under the pointer:
+  // positioned straight from the event, with no spring (that trailed behind and felt like
+  // mouse acceleration). Only the hover growth is animated, via scale.
+  const ref = useRef<HTMLDivElement>(null);
   const [hover, setHover] = useState(false);
   useEffect(() => {
-    const move = (e: MouseEvent) => {
-      x.set(e.clientX); y.set(e.clientY);
+    const move = (e: PointerEvent) => {
+      const el = ref.current;
+      if (el) el.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
       setHover(!!(e.target as HTMLElement).closest("a,button,[data-hover]"));
     };
-    window.addEventListener("mousemove", move);
-    return () => window.removeEventListener("mousemove", move);
-  }, [x, y]);
+    window.addEventListener("pointermove", move, { passive: true });
+    return () => window.removeEventListener("pointermove", move);
+  }, []);
   return (
-    <motion.div
+    <div
+      ref={ref}
       aria-hidden
       data-chrome
-      className="pointer-events-none fixed left-0 top-0 z-[70] hidden rounded-full bg-primary mix-blend-difference [@media(hover:hover)]:block"
-      style={{ x: sx, y: sy, translateX: "-50%", translateY: "-50%" }}
-      animate={{ width: hover ? 56 : 12, height: hover ? 56 : 12 }}
-      transition={{ type: "spring", stiffness: 300, damping: 20 }}
-    />
+      className="pointer-events-none fixed left-0 top-0 z-[70] hidden mix-blend-difference [@media(hover:hover)]:block"
+      style={{ transform: "translate3d(-100px, -100px, 0)" }}
+    >
+      <motion.div
+        className="-ml-7 -mt-7 h-14 w-14 rounded-full bg-primary"
+        initial={false}
+        animate={{ scale: hover ? 1 : 12 / 56 }}
+        transition={{ type: "spring", stiffness: 400, damping: 28 }}
+      />
+    </div>
   );
 }
 

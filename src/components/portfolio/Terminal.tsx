@@ -320,14 +320,94 @@ function cowsay(text: string) {
   ].join("\n");
 }
 
+const GLYPHS = "01アイウエオカキクケコサシスセソタチツテト";
+const LIME = "#c8f04a";
+// Spacing of the rain's grid, in CSS pixels, and how often it moves down a row.
+const COLUMN = 16;
+const ROW = 16;
+const TICK = 55;
+
+const glyph = () => GLYPHS[Math.floor(Math.random() * GLYPHS.length)]!;
+
+/**
+ * The matrix screensaver: glyphs fall down columns, a pale head over a lime trail that fades out. It
+ * runs only while it is on screen; under reduced motion it shows a still frame instead.
+ */
+function MatrixRain() {
+  const reduce = useReducedMotion();
+  const ref = useRef<HTMLCanvasElement>(null);
+  useEffect(() => {
+    const canvas = ref.current;
+    const ctx = canvas?.getContext("2d");
+    if (!canvas || !ctx || reduce) return;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const w = canvas.clientWidth;
+    const h = canvas.clientHeight;
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    ctx.scale(dpr, dpr);
+    ctx.font = `13px ${getComputedStyle(canvas).fontFamily}`;
+    ctx.textBaseline = "top";
+    const rows = Math.ceil(h / ROW);
+    // Each column's head row; starting above the top staggers the first drops.
+    const heads = Array.from(
+      { length: Math.floor(w / COLUMN) },
+      () => -Math.floor(Math.random() * rows),
+    );
+    let raf = 0;
+    let last = 0;
+    const step = (now: number) => {
+      raf = requestAnimationFrame(step);
+      if (now - last < TICK) return;
+      last = now;
+      // Fade everything a little towards transparent, so the trails dim over a few rows.
+      ctx.globalCompositeOperation = "destination-out";
+      ctx.fillStyle = "rgba(0, 0, 0, 0.25)";
+      ctx.fillRect(0, 0, w, h);
+      ctx.globalCompositeOperation = "source-over";
+      heads.forEach((y, i) => {
+        if (y > 0) {
+          ctx.fillStyle = LIME;
+          ctx.fillText(glyph(), i * COLUMN, (y - 1) * ROW);
+        }
+        if (y >= 0) {
+          ctx.fillStyle = "#f2ffd6";
+          ctx.fillText(glyph(), i * COLUMN, y * ROW);
+        }
+        // Past the bottom, a column waits a random while before dropping again.
+        heads[i] = y > rows && Math.random() > 0.92 ? -Math.floor(Math.random() * 6) : y + 1;
+      });
+    };
+    // Rain only while visible: off screen, or clipped out of the terminal, nothing is drawn.
+    const io = new IntersectionObserver(([entry]) => {
+      if (entry?.isIntersecting) {
+        if (!raf) raf = requestAnimationFrame(step);
+      } else {
+        cancelAnimationFrame(raf);
+        raf = 0;
+      }
+    });
+    io.observe(canvas);
+    return () => {
+      io.disconnect();
+      cancelAnimationFrame(raf);
+    };
+  }, [reduce]);
+
+  if (reduce) {
+    const row = () => Array.from({ length: 30 }, glyph).join("");
+    return (
+      <pre className="leading-snug text-primary">{Array.from({ length: 6 }, row).join("\n")}</pre>
+    );
+  }
+  return <canvas ref={ref} aria-hidden className="mt-1 block h-40 w-full" />;
+}
+
 function matrix(t: Strings) {
-  const glyphs = "01アイウエオカキクケコサシスセソタチツテト";
-  const row = () =>
-    Array.from({ length: 30 }, () => glyphs[Math.floor(Math.random() * glyphs.length)]).join("");
   return (
     <div>
       {dim(t.wakeUp)}
-      <pre className="leading-snug text-primary">{Array.from({ length: 6 }, row).join("\n")}</pre>
+      <MatrixRain />
     </div>
   );
 }

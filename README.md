@@ -60,7 +60,7 @@ Spoilers. The terminal between the hero and the work hides these; every answer c
 | `make <target>` / `sudo make me a sandwich` | "No rule to make target…" / "okay." (`make me a sandwich` without sudo: "make it yourself", after xkcd) |
 | `sudo <cmd>` | "not in the sudoers file. This incident will be reported." |
 | `ping <host>` | "it's up (Athena checked)"; plain `ping` answers "pong" |
-| `matrix` | "wake up, neo…" and a rain of lime glyphs |
+| `matrix` | "wake up, neo…" and an animated digital rain: lime glyphs falling down columns with pale heads and fading trails (a canvas that only runs while on screen; a still frame under reduced motion) |
 | `exit` | "logout? not yet." |
 
 **Unlisted:** `meow` (Athena), `coffee` and `monster` (the white Monster on the desk), `hi`/`hello`/`hey`/`oi`/`olá`, `42`, `xyzzy` ("Nothing happens.").

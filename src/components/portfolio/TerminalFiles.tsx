@@ -27,7 +27,13 @@ export const link = (href: string, text: string) => (
 
 export const dim = (text: string) => <span className="text-muted-foreground">{text}</span>;
 export const art = (text: string) => <pre className="leading-snug">{text}</pre>;
-export const kitten = (says: string) => [" /\\_/\\", `( o.o )  ${says}`, " > ^ <"].join("\n");
+/** The kitten's face, with what she says beside it; the words wrap, so a phone never cuts them off. */
+export const kitten = (says: string) => (
+  <div className="flex items-center gap-3">
+    <pre className="shrink-0 leading-snug">{" /\\_/\\\n( o.o )\n > ^ <"}</pre>
+    <span>{says}</span>
+  </div>
+);
 export const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "");
 /** A file name for a project or company: "Grimório de Venetia" → "grimorio-de-venetia". */
 const kebab = (s: string) =>
@@ -161,7 +167,7 @@ export const HOME_DIR: Dir = dir({
     }),
   }),
   desk: dir({
-    "kitten.txt": file((l) => art(kitten(KITTEN_SAYS[l]))),
+    "kitten.txt": file((l) => kitten(KITTEN_SAYS[l])),
     "guitar.txt": text({
       en: "acoustic. knows the same four chords as everyone else.",
       pt: "violão. sabe os mesmos quatro acordes que todo mundo.",

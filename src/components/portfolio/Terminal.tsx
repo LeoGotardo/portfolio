@@ -57,10 +57,10 @@ const EN = {
     ["whoami", "who is this"],
     ["about", "a short bio"],
     ["projects", "what I've built"],
-    ["open <project>", "open a project's site or code"],
+    ["open <project>", "open its site or code"],
     ["stack", "the tools I use"],
-    ["ls [-a] [dir]", "list files (-a: hidden ones too)"],
-    ["cd <dir>", "change folder; sections scroll the page"],
+    ["ls [-a]", "list files (-a: hidden)"],
+    ["cd <dir>", "change folder"],
     ["contact", "how to reach me"],
     ["resume", "open my resume (PDF)"],
     ["date", "the time in Londrina"],
@@ -158,12 +158,12 @@ const PT: Strings = {
     ["whoami", "quem é este"],
     ["about", "uma bio curta"],
     ["projects", "o que eu construí"],
-    ["open <projeto>", "abre o site ou o código de um projeto"],
+    ["open <projeto>", "abre site ou código"],
     ["stack", "as ferramentas que uso"],
-    ["ls [-a] [pasta]", "lista arquivos (-a: os ocultos também)"],
-    ["cd <pasta>", "muda de pasta; seções rolam a página"],
+    ["ls [-a]", "arquivos (-a: ocultos)"],
+    ["cd <pasta>", "muda de pasta"],
     ["contact", "como falar comigo"],
-    ["resume", "abre meu currículo (PDF)"],
+    ["resume", "abre o currículo (PDF)"],
     ["date", "a hora em Londrina"],
     ["clear", "limpa a tela"],
   ],
@@ -586,7 +586,7 @@ function run(line: string, ctx: Ctx): ReactNode | "clear" {
     // EGGS, matched by name.
     case "cat": {
       const target = args[0];
-      if (!target) return art(kitten(KITTEN_SAYS[l]));
+      if (!target) return kitten(KITTEN_SAYS[l]);
       const found = resolve(ctx.cwd, target);
       if (!found.ok)
         return found.reason === "denied" ? t.denied("cat", target) : t.noSuch("cat", target);
@@ -595,7 +595,7 @@ function run(line: string, ctx: Ctx): ReactNode | "clear" {
       return found.node.body(l);
     }
     case "meow":
-      return art(kitten(KITTEN_SAYS[l]));
+      return kitten(KITTEN_SAYS[l]);
     case "cowsay":
       return art(cowsay(args.join(" ") || t.moo));
     case "fortune":
@@ -629,7 +629,7 @@ function run(line: string, ctx: Ctx): ReactNode | "clear" {
       return matrix(t);
     case "history":
       return (
-        <pre>
+        <pre className="whitespace-pre-wrap break-words">
           {[...ctx.history]
             .reverse()
             .map((c, i) => `${String(i + 1).padStart(4)}  ${c}`)
@@ -855,7 +855,10 @@ export function Terminal() {
                 leo@londrina: {where} — zsh
               </span>
             </div>
-            <div ref={body} className="h-96 overflow-hidden px-4 py-3 leading-relaxed md:h-[28rem]">
+            <div
+              ref={body}
+              className="h-[min(78svh,40rem)] overflow-hidden px-4 py-3 leading-relaxed md:h-[28rem]"
+            >
               <div role="log" aria-live="polite" aria-label={t.outputLabel}>
                 {entries.map((e) => (
                   <div key={e.id} className="mb-2 last:mb-0">
@@ -866,25 +869,30 @@ export function Terminal() {
                   </div>
                 ))}
               </div>
-              <label className="mt-2 flex items-center gap-2">
+              {/* A long folder in the prompt pushes the field to the next line rather than squeezing it. */}
+              <label className="mt-2 flex flex-wrap items-center gap-x-2">
                 <span className="shrink-0">
                   <Prompt path={where} />
                 </span>
-                {/* While the intro types, the field shows it read-only; focusing the field ends the intro. */}
-                <input
-                  ref={field}
-                  value={typing ?? input}
-                  readOnly={typing !== null}
-                  onChange={(e) => setInput(e.target.value)}
-                  onKeyDown={onKeyDown}
-                  onFocus={takeOver}
-                  aria-label={t.inputLabel}
-                  placeholder={t.placeholder}
-                  autoComplete="off"
-                  autoCapitalize="off"
-                  spellCheck={false}
-                  className="min-w-0 flex-1 bg-transparent text-foreground caret-primary outline-none placeholder:text-muted-foreground/50"
-                />
+                {/* While the intro types, the field shows it read-only; focusing the field ends the intro.
+                    Below md it is set at 16px and scaled to look like 13px, as iOS zooms the page into
+                    any field under 16px. */}
+                <span className="min-w-[10rem] flex-1 overflow-hidden">
+                  <input
+                    ref={field}
+                    value={typing ?? input}
+                    readOnly={typing !== null}
+                    onChange={(e) => setInput(e.target.value)}
+                    onKeyDown={onKeyDown}
+                    onFocus={takeOver}
+                    aria-label={t.inputLabel}
+                    placeholder={t.placeholder}
+                    autoComplete="off"
+                    autoCapitalize="off"
+                    spellCheck={false}
+                    className="block w-[123.08%] origin-left scale-[0.8125] bg-transparent text-[16px] text-foreground caret-primary outline-none placeholder:text-muted-foreground/50 md:w-full md:scale-100 md:text-[13px]"
+                  />
+                </span>
               </label>
             </div>
           </div>

@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
   type ErrorComponentProps,
@@ -14,7 +15,34 @@ import { SpeedInsights } from "@vercel/speed-insights/react";
 
 import appCss from "../styles.css?url";
 
-const SITE = "https://www.leogotardo.com.br";
+import { SITE } from "@/lib/seo";
+import { HOME, type Locale } from "@/lib/i18n";
+
+/** The Portuguese page lives under /pt; everything else is English. */
+function usePathLocale(): Locale {
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  return pathname === "/pt" || pathname.startsWith("/pt/") ? "pt" : "en";
+}
+
+const FALLBACK = {
+  en: {
+    notFound: "Page not found",
+    notFoundText: "The page you're looking for doesn't exist or has been moved.",
+    error: "This page didn't load",
+    errorText: "Something went wrong on our end. You can try refreshing or head back home.",
+    retry: "Try again",
+    home: "Go home",
+  },
+  pt: {
+    notFound: "Página não encontrada",
+    notFoundText: "A página que você procura não existe ou mudou de endereço.",
+    error: "Esta página não carregou",
+    errorText: "Algo deu errado do nosso lado. Tente recarregar ou volte para o início.",
+    retry: "Tentar de novo",
+    home: "Voltar ao início",
+  },
+};
+
 const OG_IMAGE = `${SITE}/og-image-2026.png`;
 const DESCRIPTION =
   "Leonardo Gotardo, software developer in Londrina, Brazil. Backend Python (FastAPI, Flask) and full-stack React/TypeScript, shipping web and mobile apps end to end.";
@@ -22,20 +50,20 @@ const KEYWORDS =
   "Leonardo Gotardo, software developer, full-stack developer, backend developer, embedded systems, REST API, IoT, React, Python, JavaScript, TypeScript, Java, C, HTML, CSS, Lua, Bash, Flask, FastAPI, Laravel, WebSocket, JWT, SQLAlchemy, Vite, Tailwind CSS, React Router, MongoDB, MySQL, PostgreSQL, SQLite, Linux, SSH, NFC, RFID, GPIO, threading, socket programming, Git, PyPI, Vercel, fintech, IrisPay, vending machines, cryptography, AES-256, open source, Python library, web development, Londrina, Paraná, Brazil, Brasil, portfolio, desenvolvedor de software, sistemas embarcados";
 
 function NotFoundComponent() {
+  const locale = usePathLocale();
+  const t = FALLBACK[locale];
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
-        </p>
+        <h2 className="mt-4 text-xl font-semibold text-foreground">{t.notFound}</h2>
+        <p className="mt-2 text-sm text-muted-foreground">{t.notFoundText}</p>
         <div className="mt-6">
           <Link
-            to="/"
+            to={HOME[locale]}
             className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
-            Go home
+            {t.home}
           </Link>
         </div>
       </div>
@@ -46,16 +74,14 @@ function NotFoundComponent() {
 function ErrorComponent({ error, reset }: ErrorComponentProps) {
   console.error(error);
   const router = useRouter();
+  const locale = usePathLocale();
+  const t = FALLBACK[locale];
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
-        <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          This page didn't load
-        </h1>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Something went wrong on our end. You can try refreshing or head back home.
-        </p>
+        <h1 className="text-xl font-semibold tracking-tight text-foreground">{t.error}</h1>
+        <p className="mt-2 text-sm text-muted-foreground">{t.errorText}</p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button
             onClick={() => {
@@ -64,13 +90,13 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
             }}
             className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
-            Try again
+            {t.retry}
           </button>
           <a
-            href="/"
+            href={HOME[locale]}
             className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
           >
-            Go home
+            {t.home}
           </a>
         </div>
       </div>
@@ -95,8 +121,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       // Open Graph (LinkedIn, WhatsApp, Facebook) and Twitter/X; pages override title and description.
       { property: "og:site_name", content: "Leonardo Gotardo" },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: SITE },
-      { property: "og:locale", content: "en_US" },
       { property: "og:image", content: OG_IMAGE },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
@@ -132,10 +156,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         },
       },
     ],
+    // Canonical, hreflang, og:url and og:locale are set by each language's route (src/lib/seo.ts).
     links: [
-      { rel: "canonical", href: SITE },
-      { rel: "alternate", hrefLang: "en", href: SITE },
-      { rel: "alternate", hrefLang: "x-default", href: SITE },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
@@ -160,8 +182,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 });
 
 function RootShell({ children }: { children: ReactNode }) {
+  const lang = usePathLocale() === "pt" ? "pt-BR" : "en";
   return (
-    <html lang="en">
+    <html lang={lang}>
       <head>
         {/* Two Search Console properties; written here because head() keeps one meta per name. */}
         <meta

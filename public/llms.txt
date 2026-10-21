@@ -15,6 +15,7 @@ He graduated in Analysis and Systems Development at IFPR in 2026 and keeps build
 - [GitHub](https://github.com/LeoGotardo)
 - [LinkedIn](https://www.linkedin.com/in/leogotardo/)
 - [Portfolio](https://www.leogotardo.com.br)
+- [Portfolio (PT)](https://www.leogotardo.com.br/pt)
 - [Resume (EN)](https://www.leogotardo.com.br/Leonardo_Gotardo_CV_EN.pdf)
 - [Resume (PT)](https://www.leogotardo.com.br/Leonardo_Gotardo_CV_PT.pdf)
 
@@ -192,3 +193,4 @@ Web system for registering, analyzing, and classifying athletes by physical and 
 - [LinkedIn](https://www.linkedin.com/in/leogotardo/)
 - [GitHub](https://github.com/LeoGotardo)
 - [Portfolio](https://www.leogotardo.com.br)
+- [Portfolio (PT)](https://www.leogotardo.com.br/pt)

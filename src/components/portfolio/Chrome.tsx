@@ -1,7 +1,7 @@
 import { motion, useScroll, useSpring } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import Lenis from "lenis";
-import { RESUME } from "@/data/projects";
+import { HOME, RESUME, useLocale } from "@/lib/i18n";
 import { getLenis, setLenis } from "@/lib/scroll";
 
 export function SmoothScroll() {
@@ -54,15 +54,26 @@ export function Cursor() {
   );
 }
 
-const links = [
-  ["Work", "#work"],
-  ["Projects", "#projects"],
-  ["Experience", "#experience"],
-  ["About", "#about"],
-  ["Contact", "#contact"],
-];
+const NAV = {
+  en: {
+    links: [["Work", "#work"], ["Projects", "#projects"], ["Experience", "#experience"], ["About", "#about"], ["Contact", "#contact"]],
+    // From this width the section links fit beside the logo; the language switch and Resume always show.
+    show: "sm:block",
+    resume: "Resume",
+    // The switch shows the other language and links to it.
+    other: { label: "PT", lang: "pt-BR", title: "Ver em português", href: HOME.pt },
+  },
+  pt: {
+    links: [["Trabalhos", "#work"], ["Projetos", "#projects"], ["Experiência", "#experience"], ["Sobre", "#about"], ["Contato", "#contact"]],
+    show: "min-[720px]:block",
+    resume: "Currículo",
+    other: { label: "EN", lang: "en", title: "View in English", href: HOME.en },
+  },
+};
 
 export function Nav() {
+  const locale = useLocale();
+  const t = NAV[locale];
   const { scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 30 });
   return (
@@ -74,13 +85,17 @@ export function Nav() {
           LG<span className="text-primary animate-blink">_</span>
         </a>
         <nav className="flex items-center gap-1 rounded-full border border-border bg-background/60 p-1 backdrop-blur-md">
-          {links.map(([l, h]) => (
-            <a key={h} href={h} className="hidden rounded-full px-4 py-1.5 font-mono text-xs text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground sm:block">
+          {t.links.map(([l, h]) => (
+            <a key={h} href={h} className={`hidden rounded-full px-2.5 py-1.5 font-mono text-xs text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground md:px-4 ${t.show}`}>
               {l}
             </a>
           ))}
-          <a href={RESUME} target="_blank" rel="noreferrer" className="rounded-full bg-primary px-4 py-1.5 font-mono text-xs text-primary-foreground">
-            Resume
+          {/* A full page load: the other language is its own route, and this resets the theme, Lenis and the terminal. */}
+          <a href={t.other.href} hrefLang={t.other.lang} lang={t.other.lang} title={t.other.title} className="rounded-full px-3 py-1.5 font-mono text-xs text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground">
+            {t.other.label}
+          </a>
+          <a href={RESUME[locale]} target="_blank" rel="noreferrer" className="rounded-full bg-primary px-4 py-1.5 font-mono text-xs text-primary-foreground">
+            {t.resume}
           </a>
         </nav>
       </header>

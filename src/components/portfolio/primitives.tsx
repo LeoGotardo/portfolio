@@ -87,3 +87,13 @@ export function SectionLabel({ n, children }: { n: string; children: ReactNode }
     </div>
   );
 }
+
+/** The shell prompt shared by the hero's whoami window and the terminal section, in a working directory. */
+export function Prompt({ path = "~" }: { path?: string }) {
+  return (
+    <>
+      <span className="text-primary">leo@londrina</span>
+      <span className="text-muted-foreground">:{path}$</span>
+    </>
+  );
+}

@@ -16,7 +16,7 @@ Target roles: Backend Python (FastAPI/Flask) and full-stack web/mobile (React, T
 
 ## Product Purpose
 
-Personal portfolio of Leonardo Gotardo, a software developer in Londrina, Brazil (English only). It exists to turn a visit into a conversation: the primary success action is **getting in touch** (email or LinkedIn). Downloading the resume and opening live projects are supporting actions on the way there.
+Personal portfolio of Leonardo Gotardo, a software developer in Londrina, Brazil, in English (`/`) and Brazilian Portuguese (`/pt`). It exists to turn a visit into a conversation: the primary success action is **getting in touch** (email or LinkedIn). Downloading the resume and opening live projects are supporting actions on the way there.
 
 ## Brand Personality
 

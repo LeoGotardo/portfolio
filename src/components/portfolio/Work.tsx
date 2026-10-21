@@ -8,13 +8,14 @@ import {
   useScroll,
   useTransform,
 } from "motion/react";
-import { Fragment, memo, type RefObject, useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { Fragment, memo, type RefObject, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { featured, projects } from "@/data/projects";
 import { applyTheme, sceneStyle, themes } from "@/data/themes";
-import { Counter, SectionLabel } from "./primitives";
+import { Counter, Reveal, SectionLabel } from "./primitives";
 import { SceneWidget } from "./scenes";
 import { LiveContext } from "@/lib/live";
 import { jumpTo } from "@/lib/scroll";
+import { type Locale, period, tag, useLocale } from "@/lib/i18n";
 
 type SceneProps = {
   name: string;
@@ -186,7 +187,7 @@ const Scene = memo(function Scene(p: SceneProps & SceneCtx) {
           <div className="flex items-baseline gap-4 font-mono text-xs text-muted-foreground">
             <span className="text-primary">{p.index}</span><span>{p.period}</span>
           </div>
-          <h2 className={`mt-3 font-bold tracking-tight ${p.big ? "text-5xl md:text-7xl" : "text-4xl md:text-6xl"}`} style={{ fontFamily: themes[p.name]?.display }}>{p.name}</h2>
+          <h2 className={`mt-3 font-bold tracking-tight ${p.big ? "text-5xl md:text-7xl [@media(min-width:1024px)_and_(max-height:820px)]:text-5xl" : "text-4xl md:text-6xl"}`} style={{ fontFamily: themes[p.name]?.display }}>{p.name}</h2>
           {p.lede && <p className="mt-5 max-w-lg text-lg text-muted-foreground">{p.lede}</p>}
           {p.rows && (
             <dl className="mt-6 space-y-4 text-sm">
@@ -232,29 +233,45 @@ const Scene = memo(function Scene(p: SceneProps & SceneCtx) {
   );
 });
 
-const scenes: (SceneProps & { anchor?: string })[] = [
-  ...featured.map((p) => ({
-    big: true,
-    name: p.name,
-    period: p.period,
-    index: `${p.n} / 03`,
-    rows: [["Problem", p.problem], ["Decision", p.decision], ["Result", p.result]] as [string, string][],
-    stats: p.stats,
-    links: p.links,
-  })),
-  ...projects.map((p, i) => ({
-    ...(i === 0 ? { anchor: "projects" } : {}),
-    name: p.name,
-    period: p.period,
-    index: String(i + 4).padStart(2, "0"),
-    lede: p.desc,
-    tags: p.tags,
-    links: [...(p.live ? [{ label: "Live", href: p.live }] : []), ...(p.code ? [{ label: "Code", href: p.code }] : [])],
-  })),
-];
-const sceneNames = scenes.map((s) => s.name);
+const ROWS: Record<Locale, [string, string, string]> = { en: ["Problem", "Decision", "Result"], pt: ["Problema", "Decisão", "Resultado"] };
+const LINKS: Record<Locale, [string, string]> = { en: ["Live", "Code"], pt: ["No ar", "Código"] };
+
+/** The panels' copy in one language; the names, and so the themes and DOM order, are the same in both. */
+function scenesFor(l: Locale): (SceneProps & { anchor?: string })[] {
+  const [problem, decision, result] = ROWS[l];
+  const [live, code] = LINKS[l];
+  return [
+    ...featured.map((p) => ({
+      big: true,
+      name: p.name,
+      period: period(p.period, l),
+      index: `${p.n} / 03`,
+      rows: [[problem, p.problem[l]], [decision, p.decision[l]], [result, p.result[l]]] as [string, string][],
+      stats: p.stats.map((s) => ({ value: s.value, label: s.label[l] })),
+      links: p.links.map((k) => ({ label: k.label[l], href: k.href })),
+    })),
+    ...projects.map((p, i) => ({
+      ...(i === 0 ? { anchor: "projects" } : {}),
+      name: p.name,
+      period: period(p.period, l),
+      index: String(i + 4).padStart(2, "0"),
+      lede: p.desc[l],
+      tags: p.tags.map((t) => tag(t, l)),
+      links: [...(p.live ? [{ label: live, href: p.live }] : []), ...(p.code ? [{ label: code, href: p.code }] : [])],
+    })),
+  ];
+}
+const sceneNames = [...featured, ...projects].map((p) => p.name);
+
+const COPY = {
+  en: { label: "Selected work", title: ["Things I've", "built"], skip: "Skip projects ↓" },
+  pt: { label: "Trabalhos selecionados", title: ["Coisas que eu", "construí"], skip: "Pular projetos ↓" },
+};
 
 export function Work() {
+  const locale = useLocale();
+  const scenes = useMemo(() => scenesFor(locale), [locale]);
+  const t = COPY[locale];
   const stacking = useStacking();
   const { report, setAfter } = useThemeConductor(sceneNames);
   // Where the reader is relative to the stack, checked on every scroll so that jumping straight to a
@@ -290,7 +307,12 @@ export function Work() {
   return (
     <div id="work">
       <div className="mx-auto max-w-7xl px-6 pt-32 pb-16 md:px-12">
-        <SectionLabel n="01">Selected work</SectionLabel>
+        <SectionLabel n="01">{t.label}</SectionLabel>
+        <Reveal>
+          <h2 className="font-display text-6xl font-bold tracking-tighter md:text-8xl">
+            {t.title[0]} <span className="text-outline">{t.title[1]}</span>.
+          </h2>
+        </Reveal>
       </div>
       {/* Before the panels in the DOM, so keyboard users reach it first; fixed on screen while inside the stack.
           The wrapper takes the project theme, so the button keeps its own show/hide transition. */}
@@ -302,7 +324,7 @@ export function Work() {
         aria-hidden={!inStack}
         className={`fixed bottom-6 right-6 z-50 rounded-full border border-border bg-background/80 px-4 py-2 font-mono text-xs text-foreground backdrop-blur-md transition-[opacity,translate,border-color,color] duration-300 hover:border-primary hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary md:bottom-8 md:right-10 ${inStack ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-3 opacity-0"}`}
       >
-        Skip projects ↓
+        {t.skip}
       </button>
       </div>
       {/*

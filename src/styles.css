@@ -150,6 +150,9 @@
 
 @utility animate-marquee { animation: marquee 30s linear infinite; }
 @utility animate-blink { animation: blink 1s steps(1) infinite; }
+/* The terminal's cheat mode (Konami code): its colours cycle like the RGB on the voxel desk. */
+@keyframes hue { to { filter: hue-rotate(360deg); } }
+@utility animate-hue { animation: hue 4s linear infinite; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::after { animation: none !important; transition: none !important; }

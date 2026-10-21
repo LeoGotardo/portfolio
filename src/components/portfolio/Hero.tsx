@@ -1,9 +1,29 @@
 import { motion, useInView, useReducedMotion, useTransform, useScroll } from "motion/react";
 import { Component, lazy, Suspense, useCallback, useEffect, useRef, useState, type ReactNode } from "react";
-import { MediaSlot, Magnetic } from "./primitives";
-import { PORTRAIT, RESUME } from "@/data/projects";
+import { MediaSlot, Magnetic, Prompt } from "./primitives";
+import { PORTRAIT } from "@/data/projects";
+import { RESUME, useLocale } from "@/lib/i18n";
 
-const SUB = "Backend Python & full-stack React/TypeScript developer";
+const COPY = {
+  en: {
+    sub: "Backend Python & full-stack React/TypeScript developer",
+    intro: "I design and ship APIs, web and mobile apps end to end: FastAPI and PostgreSQL on AWS, React and Capacitor on the screen, Raspberry Pi when hardware is involved.",
+    touch: "Get in touch →",
+    resume: "Resume (PDF)",
+    scroll: "scroll ↓",
+    scene: "3D voxel scene, slowly turning: a tabby kitten with lime eyes lying on an office chair in front of a white desk with a PC showing code, a white RGB keyboard and mouse, a Raspberry Pi, a white Monster energy can and a potted cactus, a white PC tower with RGB fans, and an acoustic guitar on a stand",
+    portrait: "Portrait of Leonardo Gotardo",
+  },
+  pt: {
+    sub: "Desenvolvedor backend Python & full-stack React/TypeScript",
+    intro: "Projeto e entrego APIs, apps web e mobile de ponta a ponta: FastAPI e PostgreSQL na AWS, React e Capacitor na tela, Raspberry Pi quando tem hardware no meio.",
+    touch: "Fale comigo →",
+    resume: "Currículo (PDF)",
+    scroll: "role ↓",
+    scene: "Cena 3D em voxel, girando devagar: um filhote de gato malhado de olhos lime deitado numa cadeira de escritório, em frente a uma mesa branca com um PC mostrando código, teclado e mouse brancos com RGB, um Raspberry Pi, uma lata de Monster branco e um cacto no vaso, um gabinete branco com fans RGB e um violão num suporte",
+    portrait: "Retrato de Leonardo Gotardo",
+  },
+};
 
 // three.js loads only on the client, after the hero has rendered, and only with WebGL.
 const VoxelCat = lazy(() => import("./VoxelCat"));
@@ -81,13 +101,6 @@ function Clock({ live }: { live: boolean }) {
   return <span className="tabular-nums">{t || "--:--:--"}</span>;
 }
 
-const Prompt = () => (
-  <>
-    <span className="text-primary">leo@londrina</span>
-    <span className="text-muted-foreground">:~$</span>
-  </>
-);
-
 /** A small terminal window over the corner of the hero scene: types `whoami` once and answers. */
 function Whoami() {
   const cmd = useTyped("whoami", 3000);
@@ -116,7 +129,9 @@ function Whoami() {
 }
 
 export function Hero() {
-  const typed = useTyped(SUB, 1300);
+  const locale = useLocale();
+  const t = COPY[locale];
+  const typed = useTyped(t.sub, 1300);
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
@@ -155,11 +170,11 @@ export function Hero() {
           </p>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 2.4 }}
             className="mt-4 max-w-xl text-muted-foreground">
-            I design and ship APIs, web and mobile apps end to end: FastAPI and PostgreSQL on AWS, React and Capacitor on the screen, Raspberry Pi when hardware is involved.
+            {t.intro}
           </motion.p>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 2.6 }} className="mt-8 flex flex-wrap gap-3">
-            <Magnetic href="#contact" className="border-primary bg-primary text-primary-foreground">Get in touch →</Magnetic>
-            <Magnetic href={RESUME}>Resume (PDF)</Magnetic>
+            <Magnetic href="#contact" className="border-primary bg-primary text-primary-foreground">{t.touch}</Magnetic>
+            <Magnetic href={RESUME[locale]}>{t.resume}</Magnetic>
           </motion.div>
         </div>
 
@@ -172,10 +187,10 @@ export function Hero() {
           {/* The voxel scene floats on the page background and fades in once its chunk has loaded; without WebGL, or if it fails, the portrait slot stays. */}
           <div
             role={webgl ? "img" : undefined}
-            aria-label={webgl ? "3D voxel scene, slowly turning: a tabby kitten with lime eyes lying on an office chair in front of a white desk with a PC showing code, a white RGB keyboard and mouse, a Raspberry Pi, a white Monster energy can and a potted cactus, a white PC tower with RGB fans, and an acoustic guitar on a stand" : undefined}
+            aria-label={webgl ? t.scene : undefined}
             className={`relative overflow-hidden rounded-lg ${webgl ? "aspect-square" : "aspect-[4/5]"}`}
           >
-            {!webgl && <MediaSlot src={PORTRAIT} label="Retrato 4:5" alt="Portrait of Leonardo Gotardo" className="absolute inset-0" />}
+            {!webgl && <MediaSlot src={PORTRAIT} label="Retrato 4:5" alt={t.portrait} className="absolute inset-0" />}
             {webgl && (
               <div className={`absolute inset-0 transition-opacity duration-700 ${ready ? "opacity-100" : "opacity-0"}`}>
                 <SceneBoundary onError={onFailed}>
@@ -192,7 +207,7 @@ export function Hero() {
 
       <motion.div animate={live ? { y: [0, 10, 0] } : { y: 0 }} transition={live ? { repeat: Infinity, duration: 2 } : { duration: 0.2 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
-        scroll ↓
+        {t.scroll}
       </motion.div>
     </section>
   );

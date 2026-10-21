@@ -1,64 +1,27 @@
 import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
 import { Reveal, SectionLabel } from "./primitives";
+import { jobs } from "@/data/experience";
+import { period, tag, useLocale } from "@/lib/i18n";
 
-type Job = { role: string; org: string; period: string; place: string; intro: string; points: string[]; tags: string[] };
-
-// IrisPay is under NDA: only technologies, working conditions and skills — no products, clients or numbers.
-const jobs: Job[] = [
-  {
-    role: "Software Developer",
-    org: "IrisPay",
-    period: "Sep 2024 – Present",
-    place: "Londrina-PR, Brazil",
-    intro: "Brazilian fintech that converts traditional machines into smart self-service and vending systems with proprietary payment technology.",
-    points: [
-      "Embedded Linux on Raspberry Pi devices running unattended in the field: kiosk display, systemd/OpenRC services, watchdogs, LUKS encryption.",
-      "Python services that control hardware: GPIO, NFC readers, serial protocols and thermal printers, with state machines, threading and asyncio.",
-      "Python APIs (FastAPI, Flask) and real-time communication over WebSockets and sockets; PHP/Laravel frontends and legacy Yii2 maintenance.",
-      "Over-the-air updates with versioned releases, automatic rollback and sandboxed end-to-end tests; containerised services on AWS via GitHub Actions.",
-      "No keyboard, no screen, unreliable network: everything has to recover by itself, and every failure is isolated layer by layer before fixing.",
-    ],
-    tags: ["Raspberry Pi", "Python", "FastAPI", "systemd", "Bash", "Docker", "AWS", "Laravel"],
-  },
-  {
-    role: "Partner",
-    org: "TLG-Web-Dev",
-    period: "Apr 2026 – Present",
-    place: "Web development studio",
-    intro: "Small studio where I'm one of the partners and build client sites.",
-    points: [
-      "GP Barril site (Next.js + TypeScript): Image Optimizer locked to 3 hosts, closing an open-proxy hole.",
-      "Canonical domain fix and a robots policy that separates AI search agents from training crawlers.",
-      "Contact Server Action validated on the server and rate-limited to 3 sends per IP per 10 minutes.",
-    ],
-    tags: ["Next.js", "TypeScript", "Tailwind CSS", "SEO", "Web Security"],
-  },
-  {
-    role: "Service Desk",
-    org: "Persis Internet",
-    period: "Jul 2023 – Mar 2024",
-    place: "Londrina-PR, Brazil",
-    intro: "Regional ISP with more than 100,000 customers.",
-    points: [
-      "Solved complex network problems for non-technical customers, often from ambiguous descriptions.",
-      "Kept service quality high under pressure and turned persistent issues into useful feedback.",
-    ],
-    tags: ["Networking", "Technical Support", "Problem Solving"],
-  },
-];
+const COPY = {
+  en: { label: "Experience", title: ["Where I", "work"] },
+  pt: { label: "Experiência", title: ["Onde eu", "trabalho"] },
+};
 
 export function Experience() {
+  const locale = useLocale();
+  const t = COPY[locale];
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start 70%", "end 60%"] });
   const line = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   return (
     <section id="experience" className="px-6 py-32 md:px-10">
-      <SectionLabel n="02">Experience</SectionLabel>
+      <SectionLabel n="02">{t.label}</SectionLabel>
       <Reveal>
         <h2 className="mb-16 font-display text-6xl font-bold tracking-tighter md:text-8xl">
-          Where I <span className="text-outline">work</span>.
+          {t.title[0]} <span className="text-outline">{t.title[1]}</span>.
         </h2>
       </Reveal>
       <div ref={ref} className="relative pl-8 md:pl-16">
@@ -83,23 +46,23 @@ export function Experience() {
               />
               <div className="grid gap-6 lg:grid-cols-[280px_1fr]">
                 <div>
-                  <div className="font-mono text-xs text-primary">{String(i + 1).padStart(2, "0")} · {j.period}</div>
+                  <div className="font-mono text-xs text-primary">{String(i + 1).padStart(2, "0")} · {period(j.period, locale)}</div>
                   <h3 className="mt-2 font-display text-4xl font-bold">{j.org}</h3>
-                  <div className="mt-1 text-muted-foreground">{j.role}</div>
-                  <div className="font-mono text-xs text-muted-foreground">{j.place}</div>
+                  <div className="mt-1 text-muted-foreground">{j.role[locale]}</div>
+                  <div className="font-mono text-xs text-muted-foreground">{j.place[locale]}</div>
                 </div>
                 <div className="rounded-xl border border-border bg-card p-6 transition-colors hover:border-primary/50">
-                  <p className="text-foreground">{j.intro}</p>
+                  <p className="text-foreground">{j.intro[locale]}</p>
                   <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
                     {j.points.map((p, k) => (
                       <motion.li key={k} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
                         transition={{ delay: 0.1 * k }} className="flex gap-3">
-                        <span className="text-primary">→</span>{p}
+                        <span className="text-primary">→</span>{p[locale]}
                       </motion.li>
                     ))}
                   </ul>
                   <div className="mt-5 flex flex-wrap gap-1.5">
-                    {j.tags.map((t) => <span key={t} className="rounded bg-secondary px-2 py-0.5 font-mono text-[10px]">{t}</span>)}
+                    {j.tags.map((name) => <span key={name} className="rounded bg-secondary px-2 py-0.5 font-mono text-[10px]">{tag(name, locale)}</span>)}
                   </div>
                 </div>
               </div>

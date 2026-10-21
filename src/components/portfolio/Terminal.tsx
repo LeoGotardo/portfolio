@@ -114,23 +114,22 @@ const EN = {
   ],
   moo: "moo",
   wakeUp: "wake up, neo…",
-  uptime: (m: number, s: number) =>
-    `up ${m}m ${s}s · 1 user · load average: 0.42 (mostly the kitten)`,
+  uptime: (m: number, s: number) => `up ${m}m ${s}s · 1 user · load average: 0.42 (mostly Athena)`,
   sandwichSudo: "okay.",
   sandwich: "what? make it yourself.",
   noRule: (t: string) => `make: *** No rule to make target '${t}'. Stop.`,
-  rm: "rm: permission denied. The kitten is asleep on the keyboard.",
-  blame: "it was the cat.",
+  rm: "rm: permission denied. Athena is asleep on the keyboard.",
+  blame: "it was Athena.",
   pushForce: "! [rejected] main -> main (not on a friday)",
   gitStatus: "On branch main. Nothing to commit, working tree clean.",
-  git: "git: the kitten only knows blame, status and push.",
+  git: "git: Athena only knows blame, status and push.",
   fetch: {
     os: "os",
     drink: "drink",
     pet: "pet",
     editorValue: "whatever compiles",
     drinkValue: "white Monster",
-    petValue: "tabby kitten (asleep)",
+    petValue: "Athena, tabby kitten (asleep)",
   },
   historyEmpty: "(empty)",
   vim: (name: string) => `opening ${name}… just kidding, you'd never get out. Try :q anyway.`,
@@ -138,7 +137,7 @@ const EN = {
   coffee: "no coffee on this desk. There's a white Monster, though.",
   monster: "*psst* cracked open a white Monster. Focus +10.",
   ping: (host: string) =>
-    `64 bytes from ${host}: icmp_seq=1 ttl=64 time=0.42 ms · it's up (the kitten checked)`,
+    `64 bytes from ${host}: icmp_seq=1 ttl=64 time=0.42 ms · it's up (Athena checked)`,
   hello: "hi! Type help to look around.",
   answer: "the answer to life, the universe and everything.",
   xyzzy: "Nothing happens.",
@@ -215,23 +214,22 @@ const PT: Strings = {
   ],
   moo: "muu",
   wakeUp: "acorda, neo…",
-  uptime: (m, s) =>
-    `ativo há ${m}m ${s}s · 1 usuário · load average: 0.42 (quase tudo é o gatinho)`,
+  uptime: (m, s) => `ativo há ${m}m ${s}s · 1 usuário · load average: 0.42 (quase tudo é a Athena)`,
   sandwichSudo: "tá bom.",
   sandwich: "quê? faz você mesmo.",
   noRule: (t) => `make: *** Nenhuma regra para processar o alvo '${t}'. Pare.`,
-  rm: "rm: permissão negada. O gatinho está dormindo no teclado.",
-  blame: "foi o gato.",
+  rm: "rm: permissão negada. A Athena está dormindo no teclado.",
+  blame: "foi a Athena.",
   pushForce: "! [rejected] main -> main (não na sexta-feira)",
   gitStatus: "No ramo main. Nada para commitar, árvore de trabalho limpa.",
-  git: "git: o gatinho só conhece blame, status e push.",
+  git: "git: a Athena só conhece blame, status e push.",
   fetch: {
     os: "so",
     drink: "bebida",
     pet: "pet",
     editorValue: "o que compilar",
     drinkValue: "Monster branco",
-    petValue: "filhote malhado (dormindo)",
+    petValue: "Athena, gatinha malhada (dormindo)",
   },
   historyEmpty: "(vazio)",
   vim: (name) => `abrindo ${name}… brincadeira, você nunca ia sair. Tenta :q mesmo assim.`,
@@ -239,7 +237,7 @@ const PT: Strings = {
   coffee: "não tem café nesta mesa. Mas tem um Monster branco.",
   monster: "*psst* abri um Monster branco. Foco +10.",
   ping: (host) =>
-    `64 bytes de ${host}: icmp_seq=1 ttl=64 time=0.42 ms · está no ar (o gatinho conferiu)`,
+    `64 bytes de ${host}: icmp_seq=1 ttl=64 time=0.42 ms · está no ar (a Athena conferiu)`,
   hello: "oi! Digite help para explorar.",
   answer: "a resposta para a vida, o universo e tudo mais.",
   xyzzy: "Nada acontece.",
@@ -265,7 +263,7 @@ function goTo(id: string) {
 
 /* ---------------------------------------------------------------------------------------------
  * EGGS: the jokes behind the "shell" commands in help, plus a few unlisted one-word extras. Some nod
- * to the voxel scene in the hero (the tabby on the chair, the white Monster on the desk), the rest to
+ * to the voxel scene in the hero (Athena, the tabby on the chair, the white Monster on the desk), the rest to
  * old shell and programmer jokes.
  * ------------------------------------------------------------------------------------------- */
 
@@ -322,14 +320,94 @@ function cowsay(text: string) {
   ].join("\n");
 }
 
+const GLYPHS = "01アイウエオカキクケコサシスセソタチツテト";
+const LIME = "#c8f04a";
+// Spacing of the rain's grid, in CSS pixels, and how often it moves down a row.
+const COLUMN = 16;
+const ROW = 16;
+const TICK = 55;
+
+const glyph = () => GLYPHS[Math.floor(Math.random() * GLYPHS.length)]!;
+
+/**
+ * The matrix screensaver: glyphs fall down columns, a pale head over a lime trail that fades out. It
+ * runs only while it is on screen; under reduced motion it shows a still frame instead.
+ */
+function MatrixRain() {
+  const reduce = useReducedMotion();
+  const ref = useRef<HTMLCanvasElement>(null);
+  useEffect(() => {
+    const canvas = ref.current;
+    const ctx = canvas?.getContext("2d");
+    if (!canvas || !ctx || reduce) return;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const w = canvas.clientWidth;
+    const h = canvas.clientHeight;
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    ctx.scale(dpr, dpr);
+    ctx.font = `13px ${getComputedStyle(canvas).fontFamily}`;
+    ctx.textBaseline = "top";
+    const rows = Math.ceil(h / ROW);
+    // Each column's head row; starting above the top staggers the first drops.
+    const heads = Array.from(
+      { length: Math.floor(w / COLUMN) },
+      () => -Math.floor(Math.random() * rows),
+    );
+    let raf = 0;
+    let last = 0;
+    const step = (now: number) => {
+      raf = requestAnimationFrame(step);
+      if (now - last < TICK) return;
+      last = now;
+      // Fade everything a little towards transparent, so the trails dim over a few rows.
+      ctx.globalCompositeOperation = "destination-out";
+      ctx.fillStyle = "rgba(0, 0, 0, 0.25)";
+      ctx.fillRect(0, 0, w, h);
+      ctx.globalCompositeOperation = "source-over";
+      heads.forEach((y, i) => {
+        if (y > 0) {
+          ctx.fillStyle = LIME;
+          ctx.fillText(glyph(), i * COLUMN, (y - 1) * ROW);
+        }
+        if (y >= 0) {
+          ctx.fillStyle = "#f2ffd6";
+          ctx.fillText(glyph(), i * COLUMN, y * ROW);
+        }
+        // Past the bottom, a column waits a random while before dropping again.
+        heads[i] = y > rows && Math.random() > 0.92 ? -Math.floor(Math.random() * 6) : y + 1;
+      });
+    };
+    // Rain only while visible: off screen, or clipped out of the terminal, nothing is drawn.
+    const io = new IntersectionObserver(([entry]) => {
+      if (entry?.isIntersecting) {
+        if (!raf) raf = requestAnimationFrame(step);
+      } else {
+        cancelAnimationFrame(raf);
+        raf = 0;
+      }
+    });
+    io.observe(canvas);
+    return () => {
+      io.disconnect();
+      cancelAnimationFrame(raf);
+    };
+  }, [reduce]);
+
+  if (reduce) {
+    const row = () => Array.from({ length: 30 }, glyph).join("");
+    return (
+      <pre className="leading-snug text-primary">{Array.from({ length: 6 }, row).join("\n")}</pre>
+    );
+  }
+  return <canvas ref={ref} aria-hidden className="mt-1 block h-40 w-full" />;
+}
+
 function matrix(t: Strings) {
-  const glyphs = "01アイウエオカキクケコサシスセソタチツテト";
-  const row = () =>
-    Array.from({ length: 30 }, () => glyphs[Math.floor(Math.random() * glyphs.length)]).join("");
   return (
     <div>
       {dim(t.wakeUp)}
-      <pre className="leading-snug text-primary">{Array.from({ length: 6 }, row).join("\n")}</pre>
+      <MatrixRain />
     </div>
   );
 }

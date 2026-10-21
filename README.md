@@ -11,7 +11,7 @@ Live at [leogotardo.com.br](https://leogotardo.com.br)
 - Tailwind CSS v4 with OKLCH tokens; Lenis smooth scroll; Motion (`motion/react`) for reveals and the scroll-driven project panels
 - Each project is a full-screen panel in that project's own palette and fonts, sliding up over the previous one as you scroll
 - A small interactive terminal between the hero and the work (`help`, `projects`, `cd`, `open`, `contact`…)
-- An original voxel scene in the hero (three.js, lazy-loaded), modelled in code: a tabby kitten lying on an office chair at a desk
+- An original voxel scene in the hero (three.js, lazy-loaded), modelled in code: Athena, a tabby kitten, lying on an office chair at a desk
 - `prefers-reduced-motion` respected: no smooth scroll, stacking or slide transition, and a still voxel scene
 - Deployed on Vercel through nitro's `vercel` preset (`.vercel/output`), with Speed Insights
 
@@ -49,31 +49,31 @@ Spoilers. The terminal between the hero and the work hides these; every answer c
 
 | Command | What it really does |
 | --- | --- |
-| `cat` | with no file, an ASCII kitten says hi |
-| `uptime` | load average 0.42, "mostly the kitten" |
-| `neofetch` | an "LG" logo with drink: white Monster, pet: tabby kitten (asleep) |
+| `cat` | with no file, Athena (the kitten) says hi in ASCII |
+| `uptime` | load average 0.42, "mostly Athena" |
+| `neofetch` | an "LG" logo with drink: white Monster, pet: Athena, tabby kitten (asleep) |
 | `fortune` | one of eight programmer jokes |
 | `cowsay <msg>` | the ASCII cow says it ("moo" by default) |
-| `git blame` / `git push --force` / `git status` | "it was the cat." / rejected, "not on a friday" / clean tree |
+| `git blame` / `git push --force` / `git status` | "it was Athena." / rejected, "not on a friday" / clean tree |
 | `vim`, `vi`, `nvim`, `nano`, `emacs` → `:q` | "you'd never get out" → "put that on your resume" |
-| `rm <file>` | permission denied: the kitten is asleep on the keyboard |
+| `rm <file>` | permission denied: Athena is asleep on the keyboard |
 | `make <target>` / `sudo make me a sandwich` | "No rule to make target…" / "okay." (`make me a sandwich` without sudo: "make it yourself", after xkcd) |
 | `sudo <cmd>` | "not in the sudoers file. This incident will be reported." |
-| `ping <host>` | "it's up (the kitten checked)"; plain `ping` answers "pong" |
-| `matrix` | "wake up, neo…" and a rain of lime glyphs |
+| `ping <host>` | "it's up (Athena checked)"; plain `ping` answers "pong" |
+| `matrix` | "wake up, neo…" and an animated digital rain: lime glyphs falling down columns with pale heads and fading trails (a canvas that only runs while on screen; a still frame under reduced motion) |
 | `exit` | "logout? not yet." |
 
-**Unlisted:** `meow` (the kitten), `coffee` and `monster` (the white Monster on the desk), `hi`/`hello`/`hey`/`oi`/`olá`, `42`, `xyzzy` ("Nothing happens.").
+**Unlisted:** `meow` (Athena), `coffee` and `monster` (the white Monster on the desk), `hi`/`hello`/`hey`/`oi`/`olá`, `42`, `xyzzy` ("Nothing happens.").
 
 **In the file system** (`ls -a` reveals the dotfiles; the home `README.md` says so):
 
-- `.secrets`: "the kitten is the real senior dev. don't tell anyone."
+- `.secrets`: "Athena is the real senior dev. don't tell anyone."
 - `.monster`: "white monster · zero sugar · the third one today"
 - `.bash_history`: `fix`, `fix fix`, `final fix (for real)`, `git push --force`…
-- `.config/kitten.conf`: mood sleepy, favourite spot the office chair, permissions root
+- `.config/kitten.conf`: name athena, mood sleepy, favourite spot the office chair, permissions root
 - `.trash/`: `old-portfolio.html` (a `<marquee>` and "visitors: 3 (two of them were me)") and `tabs-vs-spaces.md`
 - `.ssh/`: locked, "Permission denied (nice try)"
-- `notes/`: `todo.txt` ("name the cat", "fix the off-by-one" twice) and `ideas.txt` ("nobody will ever find them. (you did.)")
+- `notes/`: `todo.txt` ("[x] name the cat (Athena)", "fix the off-by-one" twice) and `ideas.txt` ("nobody will ever find them. (you did.)")
 - `desk/`: the voxel scene's objects (`kitten.txt`, `guitar.txt`, `cactus.txt`, `monster.can`)
 
 **Konami code:** ↑ ↑ ↓ ↓ ← → ← → B A in the terminal turns cheat mode on ("+30 lives") and cycles the window's hues like the RGB on the desk; again turns it off.

@@ -11,7 +11,7 @@ const COPY = {
     touch: "Get in touch →",
     resume: "Resume (PDF)",
     scroll: "scroll ↓",
-    scene: "3D voxel scene, slowly turning: a tabby kitten with lime eyes lying on an office chair in front of a white desk with a PC showing code, a white RGB keyboard and mouse, a Raspberry Pi, a white Monster energy can and a potted cactus, a white PC tower with RGB fans, and an acoustic guitar on a stand",
+    scene: "3D voxel scene, slowly turning: Athena, a tabby kitten with lime eyes, lying on an office chair in front of a white desk with a PC showing code, a white RGB keyboard and mouse, a Raspberry Pi, a white Monster energy can and a potted cactus, a white PC tower with RGB fans, and an acoustic guitar on a stand",
     portrait: "Portrait of Leonardo Gotardo",
   },
   pt: {
@@ -20,7 +20,7 @@ const COPY = {
     touch: "Fale comigo →",
     resume: "Currículo (PDF)",
     scroll: "role ↓",
-    scene: "Cena 3D em voxel, girando devagar: um filhote de gato malhado de olhos lime deitado numa cadeira de escritório, em frente a uma mesa branca com um PC mostrando código, teclado e mouse brancos com RGB, um Raspberry Pi, uma lata de Monster branco e um cacto no vaso, um gabinete branco com fans RGB e um violão num suporte",
+    scene: "Cena 3D em voxel, girando devagar: a Athena, uma gatinha malhada de olhos lime, deitada numa cadeira de escritório, em frente a uma mesa branca com um PC mostrando código, teclado e mouse brancos com RGB, um Raspberry Pi, uma lata de Monster branco e um cacto no vaso, um gabinete branco com fans RGB e um violão num suporte",
     portrait: "Retrato de Leonardo Gotardo",
   },
 };

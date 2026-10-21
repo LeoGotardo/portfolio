@@ -1,0 +1,33 @@
+{
+  "irispay": {
+    "role": "Software Developer",
+    "place": "Londrina-PR, Brazil",
+    "intro": "Brazilian fintech that converts traditional machines into smart self-service and vending systems with proprietary payment technology.",
+    "points": [
+      "Embedded Linux on Raspberry Pi devices running unattended in the field: kiosk display, systemd/OpenRC services, watchdogs, LUKS encryption.",
+      "Python services that control hardware: GPIO, NFC readers, serial protocols and thermal printers, with state machines, threading and asyncio.",
+      "Python APIs (FastAPI, Flask) and real-time communication over WebSockets and sockets; PHP/Laravel frontends and legacy Yii2 maintenance.",
+      "Over-the-air updates with versioned releases, automatic rollback and sandboxed end-to-end tests; containerised services on AWS via GitHub Actions.",
+      "No keyboard, no screen, unreliable network: everything has to recover by itself, and every failure is isolated layer by layer before fixing."
+    ]
+  },
+  "tlg": {
+    "role": "Partner",
+    "place": "Web development studio",
+    "intro": "Small studio where I'm one of the partners and build client sites.",
+    "points": [
+      "GP Barril site (Next.js + TypeScript): Image Optimizer locked to 3 hosts, closing an open-proxy hole.",
+      "Canonical domain fix and a robots policy that separates AI search agents from training crawlers.",
+      "Contact Server Action validated on the server and rate-limited to 3 sends per IP per 10 minutes."
+    ]
+  },
+  "persis": {
+    "role": "Service Desk",
+    "place": "Londrina-PR, Brazil",
+    "intro": "Regional ISP with more than 100,000 customers.",
+    "points": [
+      "Solved complex network problems for non-technical customers, often from ambiguous descriptions.",
+      "Kept service quality high under pressure and turned persistent issues into useful feedback."
+    ]
+  }
+}

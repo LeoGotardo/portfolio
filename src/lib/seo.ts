@@ -1,21 +1,9 @@
-import { HOME, type Locale } from "./i18n";
+import { HOME, i18nFor, LANG, type Locale } from "./i18n";
 
 export const SITE = "https://www.leogotardo.com.br";
 
-const PAGE: Record<Locale, { title: string; description: string; og: string }> = {
-  en: {
-    title: "Leonardo Gotardo — Backend Python & React Developer",
-    description:
-      "Leonardo Gotardo, software developer in Londrina, Brazil. Backend Python (FastAPI, Flask) and full-stack React/TypeScript, shipping web and mobile apps end to end.",
-    og: "en_US",
-  },
-  pt: {
-    title: "Leonardo Gotardo — Desenvolvedor Backend Python & React",
-    description:
-      "Leonardo Gotardo, desenvolvedor de software em Londrina. Backend Python (FastAPI, Flask) e full-stack React/TypeScript, entregando apps web e mobile de ponta a ponta.",
-    og: "pt_BR",
-  },
-};
+// Open Graph locale codes; the title and description are in src/locales/<language>/common.json.
+const OG: Record<Locale, string> = { en: "en_US", pt: "pt_BR" };
 
 const url = (l: Locale) => (l === "en" ? SITE : `${SITE}${HOME[l]}`);
 
@@ -25,7 +13,9 @@ const url = (l: Locale) => (l === "en" ? SITE : `${SITE}${HOME[l]}`);
  */
 export function pageHead(l: Locale) {
   const other: Locale = l === "en" ? "pt" : "en";
-  const { title, description, og } = PAGE[l];
+  const t = i18nFor(l).getFixedT(l);
+  const title = t("seo.title");
+  const description = t("seo.description");
   return {
     meta: [
       { title },
@@ -33,15 +23,15 @@ export function pageHead(l: Locale) {
       { property: "og:title", content: title },
       { property: "og:description", content: description },
       { property: "og:url", content: url(l) },
-      { property: "og:locale", content: og },
-      { property: "og:locale:alternate", content: PAGE[other].og },
+      { property: "og:locale", content: OG[l] },
+      { property: "og:locale:alternate", content: OG[other] },
       { name: "twitter:title", content: title },
       { name: "twitter:description", content: description },
     ],
     links: [
       { rel: "canonical", href: url(l) },
-      { rel: "alternate", hrefLang: "en", href: url("en") },
-      { rel: "alternate", hrefLang: "pt-BR", href: url("pt") },
+      { rel: "alternate", hrefLang: LANG.en, href: url("en") },
+      { rel: "alternate", hrefLang: LANG.pt, href: url("pt") },
       { rel: "alternate", hrefLang: "x-default", href: url("en") },
     ],
   };

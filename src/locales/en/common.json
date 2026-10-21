@@ -1,0 +1,49 @@
+{
+  "seo": {
+    "title": "Leonardo Gotardo — Backend Python & React Developer",
+    "description": "Leonardo Gotardo, software developer in Londrina, Brazil. Backend Python (FastAPI, Flask) and full-stack React/TypeScript, shipping web and mobile apps end to end."
+  },
+  "nav": {
+    "work": "Work",
+    "projects": "Projects",
+    "experience": "Experience",
+    "about": "About",
+    "contact": "Contact",
+    "resume": "Resume",
+    "switch": {
+      "label": "PT",
+      "title": "Ver em português"
+    }
+  },
+  "fallback": {
+    "notFound": "Page not found",
+    "notFoundText": "The page you're looking for doesn't exist or has been moved.",
+    "error": "This page didn't load",
+    "errorText": "Something went wrong on our end. You can try refreshing or head back home.",
+    "retry": "Try again",
+    "home": "Go home"
+  },
+  "months": {
+    "Jan": "Jan",
+    "Feb": "Feb",
+    "Mar": "Mar",
+    "Apr": "Apr",
+    "May": "May",
+    "Jun": "Jun",
+    "Jul": "Jul",
+    "Aug": "Aug",
+    "Sep": "Sep",
+    "Oct": "Oct",
+    "Nov": "Nov",
+    "Dec": "Dec"
+  },
+  "present": "Present",
+  "tags": {
+    "Data Structures": "Data Structures",
+    "Security": "Security",
+    "Web Security": "Web Security",
+    "Networking": "Networking",
+    "Technical Support": "Technical Support",
+    "Problem Solving": "Problem Solving"
+  }
+}

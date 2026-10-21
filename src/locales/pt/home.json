@@ -1,0 +1,45 @@
+{
+  "hero": {
+    "sub": "Desenvolvedor backend Python & full-stack React/TypeScript",
+    "intro": "Projeto e entrego APIs, apps web e mobile de ponta a ponta: FastAPI e PostgreSQL na AWS, React e Capacitor na tela, Raspberry Pi quando tem hardware no meio.",
+    "touch": "Fale comigo →",
+    "resume": "Currículo (PDF)",
+    "scroll": "role ↓",
+    "scene": "Cena 3D em voxel, girando devagar: a Athena, uma gatinha malhada de olhos lime, deitada numa cadeira de escritório, em frente a uma mesa branca com um PC mostrando código, teclado e mouse brancos com RGB, um Raspberry Pi, uma lata de Monster branco e um cacto no vaso, um gabinete branco com fans RGB e um violão num suporte",
+    "portrait": "Retrato de Leonardo Gotardo"
+  },
+  "work": {
+    "label": "Trabalhos selecionados",
+    "title": "Coisas que eu <outline>construí</outline>.",
+    "skip": "Pular projetos ↓",
+    "problem": "Problema",
+    "decision": "Decisão",
+    "result": "Resultado",
+    "live": "No ar",
+    "code": "Código"
+  },
+  "experience": {
+    "label": "Experiência",
+    "title": "Onde eu <outline>trabalho</outline>."
+  },
+  "about": {
+    "label": "Sobre & stack",
+    "lead": "Desenvolvedor de software em Londrina. Hoje na <brand>IrisPay</brand>, transformando máquinas tradicionais em sistemas inteligentes de vending — embarcados, APIs, sockets, criptografia, IoT e web.",
+    "bio": "Formado em Análise e Desenvolvimento de Sistemas pelo IFPR (2026). Sigo criando projetos pessoais que me levam a novas áreas: criptografia, interfaces gráficas, apps mobile, infraestrutura em nuvem e bibliotecas Python no PyPI.",
+    "facts": [
+      { "term": "Localização", "value": "Londrina, Brasil" },
+      { "term": "Idiomas", "value": "PT (nativo) · EN (prof. plena)" },
+      { "term": "Formação", "value": "ADS, IFPR (2026)" },
+      { "term": "Foco", "value": "Python · React/TS · Mobile" }
+    ],
+    "also": "Também: PHP (Laravel, Yii2), C, pytest, Playwright e Vitest."
+  },
+  "contact": {
+    "label": "Contato",
+    "title": "Vamos <accent>falar</accent> <outline>→</outline>",
+    "lede": "Aberto a novas oportunidades e projetos interessantes. Vamos construir algo juntos.",
+    "resume": "Currículo (PDF)",
+    "site": "Precisa de um site para o seu negócio? Me conta.",
+    "subject": "Projeto de site"
+  }
+}

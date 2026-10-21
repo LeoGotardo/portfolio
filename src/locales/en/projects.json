@@ -1,0 +1,50 @@
+{
+  "links": {
+    "live": "Live site",
+    "code": "Code",
+    "codeFront": "Code (Front)",
+    "codeBack": "Code (Back)"
+  },
+  "stats": {
+    "allMine": "commits, all mine",
+    "backendCommits": "of 184 backend commits",
+    "pytestCases": "pytest cases",
+    "e2eRuns": "Playwright E2E runs",
+    "pytestTests": "pytest tests",
+    "checks": "automatic checks"
+  },
+  "featured": {
+    "noharm": {
+      "problem": "A recovery-support app stores deeply private data and runs a public API that has to withstand abuse.",
+      "decision": "FastAPI on Clean Architecture, AES-256 field-level encryption, JWT rotation with a token blacklist, Socket.IO chat and three-layer rate limiting on Redis with atomic Lua scripts.",
+      "result": "Live at noharm.site, with the backend on AWS (ECS, RDS) provisioned by Terraform and Android/iOS builds via Capacitor."
+    },
+    "maindug": {
+      "problem": "Most password managers lock you into someone else's vault.",
+      "decision": "A self-hostable Flask + PostgreSQL webservice plus a browser extension that captures logins and offers autocomplete, with Argon2 hashing and reused/leaked password detection.",
+      "result": "My IFPR final-year project, documented in LaTeX with a threat model and covered by pytest and GitHub Actions CI."
+    },
+    "pitest": {
+      "problem": "Bench operators need to validate Raspberry Pi boards before delivery or after a repair, without a keyboard or SSH.",
+      "decision": "A systemd service that runs on every boot: 7 checks (LAN, Wi-Fi, boot, USB, GPIO, Bluetooth, hotspot) while the screen shows progress and test patterns.",
+      "result": "Results go to a Flask + PostgreSQL dashboard that keeps each board's history by MAC address; the operator confirms screen and LEDs on the site."
+    }
+  },
+  "desc": {
+    "reportgen": "Technical report builder: React front, Express + Puppeteer rendering PDFs on the server. Exports to PDF, DOCX and JSON.",
+    "iptool": "Geographic IP lookup with interactive map, IPv4/IPv6 validation and detailed network data.",
+    "customThread": "Extends threading.Thread with return values, exception propagation and callbacks. Zero dependencies, on PyPI.",
+    "ddgame": "D&D-themed clicker in React and TypeScript: roll the dice for XP and spend it in the upgrade shop. Deployed on Vercel.",
+    "maze": "Maze generator and pathfinding visualizer rewritten in React 19. Compare DFS and BFS on the same maze.",
+    "geoknocker": "Desktop tool for port scanning and IP geolocation with concurrent scanning via threading.",
+    "hashTable": "Hash table in C with chaining and automatic rehashing at 75% load factor.",
+    "venetia": "D&D 5.5 character creator with a 13-step wizard, 333 Vitest tests and 108 Playwright runs. Android via Capacitor.",
+    "phishing": "Typosquatting heuristics plus Google Safe Browsing, VirusTotal and URLhaus verdicts.",
+    "talentScout": "Classifies athletes into tiers with a K-Nearest Neighbors model: PCA, correlation matrix, radar charts."
+  },
+  "stack": {
+    "backend": "Backend",
+    "front": "Front & mobile",
+    "infra": "Infra & embedded"
+  }
+}

@@ -9,7 +9,8 @@ import {
   type ReactNode,
 } from "react";
 import { featured, projects, stack } from "@/data/projects";
-import { type Locale, period, RESUME, useLocale } from "@/lib/i18n";
+import { Trans, useTranslation } from "react-i18next";
+import { type Locale, period, resources, RESUME, useLocale } from "@/lib/i18n";
 import { getLenis } from "@/lib/scroll";
 import { Prompt, Reveal, SectionLabel } from "./primitives";
 import {
@@ -18,7 +19,6 @@ import {
   dim,
   EMAIL,
   GITHUB,
-  KITTEN_SAYS,
   kitten,
   label,
   link,
@@ -26,6 +26,8 @@ import {
   ls,
   resolve,
   slug,
+  terminalT,
+  type TerminalT,
   tree,
 } from "./TerminalFiles";
 
@@ -39,214 +41,12 @@ const INTRO = ["whoami", "help"];
 // The newest lines stay in view; older ones are dropped rather than scrolled, so there is no scrollbar.
 const KEEP = 40;
 
-/* ---------------------------------------------------------------------------------------------
- * Everything the terminal says, per language. Command names stay in English (they are shell
- * commands); their placeholders, descriptions and all output follow the page's language. PT is
- * typed from EN, so a missing line fails to compile.
- * ------------------------------------------------------------------------------------------- */
-
-const EN = {
-  heading: ["Prefer the", "terminal"],
-  placeholder: "type help",
-  inputLabel: "Terminal command. Type help to list the commands.",
-  outputLabel: "Terminal output",
-  pageTitle: "# this page",
-  shellTitle: "# shell",
-  page: [
-    ["help", "list the commands"],
-    ["whoami", "who is this"],
-    ["about", "a short bio"],
-    ["projects", "what I've built"],
-    ["open <project>", "open its site or code"],
-    ["stack", "the tools I use"],
-    ["ls [-a]", "list files (-a: hidden)"],
-    ["cd <dir>", "change folder"],
-    ["contact", "how to reach me"],
-    ["resume", "open my resume (PDF)"],
-    ["date", "the time in Londrina"],
-    ["clear", "clear the screen"],
-  ] as [string, string][],
-  // The easter eggs, passed off as ordinary shell commands.
-  shell: [
-    ["cat <file>", "read a file"],
-    ["pwd", "where you are"],
-    ["tree", "the folder tree"],
-    ["echo <text>", "print text"],
-    ["history", "past commands"],
-    ["uptime", "how long you've been here"],
-    ["neofetch", "system information"],
-    ["fortune", "a random quote"],
-    ["cowsay <msg>", "print a message"],
-    ["git <cmd>", "version control"],
-    ["vim <file>", "edit a file"],
-    ["rm <file>", "remove a file"],
-    ["make <target>", "build a target"],
-    ["sudo <cmd>", "run as admin"],
-    ["ping <host>", "check a connection"],
-    ["matrix", "screensaver"],
-    ["exit", "end the session"],
-  ] as [string, string][],
-  whoami: "leonardo gotardo · backend python & full-stack react/typescript developer",
-  about:
-    "Software developer in Londrina, Brazil, graduated in Analysis and Systems Development at IFPR (2026). I ship APIs, web and mobile apps end to end: FastAPI and PostgreSQL on AWS, React and Capacitor on the screen, Raspberry Pi when hardware is involved.",
-  projectsHint: "open <project> to visit one · cd work to scroll to them",
-  openUsage: "usage: open <project>",
-  openMissing: (q: string) => `open: no project matches "${q}"`,
-  opening: "opening",
-  noSuch: (cmd: string, path: string) => `${cmd}: ${path}: No such file or directory`,
-  notDir: (cmd: string, path: string) => `${cmd}: not a directory: ${path}`,
-  isDir: (path: string) => `cat: ${path}: Is a directory`,
-  denied: (cmd: string, path: string) => `${cmd}: ${path}: Permission denied (nice try)`,
-  dateLocale: "en-GB",
-  sudo: "leo is not in the sudoers file. This incident will be reported.",
-  exit: "logout? not yet. Try contact instead.",
-  notFound: (name: string) => `zsh: command not found: ${name}`,
-  typeHelp: "· type help",
-  fortunes: [
-    "There are only two hard things in computer science: cache invalidation, naming things and off-by-one errors.",
-    "It works on my machine.",
-    "A SQL query walks into a bar, walks up to two tables and asks: may I join you?",
-    "Weeks of coding can save you hours of planning.",
-    "99 little bugs in the code. Take one down, patch it around: 127 little bugs in the code.",
-    "The best code is no code at all.",
-    "Real programmers count from 0.",
-    "!false. It's funny because it's true.",
-  ],
-  moo: "moo",
-  wakeUp: "wake up, neo…",
-  uptime: (m: number, s: number) => `up ${m}m ${s}s · 1 user · load average: 0.42 (mostly Athena)`,
-  sandwichSudo: "okay.",
-  sandwich: "what? make it yourself.",
-  noRule: (t: string) => `make: *** No rule to make target '${t}'. Stop.`,
-  rm: "rm: permission denied. Athena is asleep on the keyboard.",
-  blame: "it was Athena.",
-  pushForce: "! [rejected] main -> main (not on a friday)",
-  gitStatus: "On branch main. Nothing to commit, working tree clean.",
-  git: "git: Athena only knows blame, status and push.",
-  fetch: {
-    os: "os",
-    drink: "drink",
-    pet: "pet",
-    editorValue: "whatever compiles",
-    drinkValue: "white Monster",
-    petValue: "Athena, tabby kitten (asleep)",
-  },
-  historyEmpty: "(empty)",
-  vim: (name: string) => `opening ${name}… just kidding, you'd never get out. Try :q anyway.`,
-  quitVim: "you exited vim. Put that on your resume.",
-  coffee: "no coffee on this desk. There's a white Monster, though.",
-  monster: "*psst* cracked open a white Monster. Focus +10.",
-  ping: (host: string) =>
-    `64 bytes from ${host}: icmp_seq=1 ttl=64 time=0.42 ms · it's up (Athena checked)`,
-  hello: "hi! Type help to look around.",
-  answer: "the answer to life, the universe and everything.",
-  xyzzy: "Nothing happens.",
-  cheatOn: "↑ ↑ ↓ ↓ ← → ← → B A · cheat mode on: +30 lives.",
-  cheatOff: "cheat mode off.",
-};
-type Strings = typeof EN;
-
-const PT: Strings = {
-  heading: ["Prefere o", "terminal"],
-  placeholder: "digite help",
-  inputLabel: "Comando do terminal. Digite help para ver a lista de comandos.",
-  outputLabel: "Saída do terminal",
-  pageTitle: "# esta página",
-  shellTitle: "# shell",
-  page: [
-    ["help", "lista os comandos"],
-    ["whoami", "quem é este"],
-    ["about", "uma bio curta"],
-    ["projects", "o que eu construí"],
-    ["open <projeto>", "abre site ou código"],
-    ["stack", "as ferramentas que uso"],
-    ["ls [-a]", "arquivos (-a: ocultos)"],
-    ["cd <pasta>", "muda de pasta"],
-    ["contact", "como falar comigo"],
-    ["resume", "abre o currículo (PDF)"],
-    ["date", "a hora em Londrina"],
-    ["clear", "limpa a tela"],
-  ],
-  shell: [
-    ["cat <arquivo>", "lê um arquivo"],
-    ["pwd", "onde você está"],
-    ["tree", "a árvore de pastas"],
-    ["echo <texto>", "imprime um texto"],
-    ["history", "comandos anteriores"],
-    ["uptime", "há quanto tempo você está aqui"],
-    ["neofetch", "informações do sistema"],
-    ["fortune", "uma frase aleatória"],
-    ["cowsay <msg>", "imprime uma mensagem"],
-    ["git <cmd>", "controle de versão"],
-    ["vim <arquivo>", "edita um arquivo"],
-    ["rm <arquivo>", "remove um arquivo"],
-    ["make <alvo>", "compila um alvo"],
-    ["sudo <cmd>", "executa como admin"],
-    ["ping <host>", "testa uma conexão"],
-    ["matrix", "protetor de tela"],
-    ["exit", "encerra a sessão"],
-  ],
-  whoami: "leonardo gotardo · desenvolvedor backend python & full-stack react/typescript",
-  about:
-    "Desenvolvedor de software em Londrina, formado em Análise e Desenvolvimento de Sistemas pelo IFPR (2026). Entrego APIs, apps web e mobile de ponta a ponta: FastAPI e PostgreSQL na AWS, React e Capacitor na tela, Raspberry Pi quando tem hardware no meio.",
-  projectsHint: "open <projeto> para visitar um · cd work para rolar até eles",
-  openUsage: "uso: open <projeto>",
-  openMissing: (q) => `open: nenhum projeto corresponde a "${q}"`,
-  opening: "abrindo",
-  noSuch: (cmd, path) => `${cmd}: ${path}: arquivo ou diretório inexistente`,
-  notDir: (cmd, path) => `${cmd}: não é um diretório: ${path}`,
-  isDir: (path) => `cat: ${path}: é um diretório`,
-  denied: (cmd, path) => `${cmd}: ${path}: permissão negada (boa tentativa)`,
-  dateLocale: "pt-BR",
-  sudo: "leo não está no arquivo sudoers. Este incidente será reportado.",
-  exit: "logout? ainda não. Tente contact.",
-  notFound: (name) => `zsh: comando não encontrado: ${name}`,
-  typeHelp: "· digite help",
-  fortunes: [
-    "Só existem duas coisas difíceis em computação: invalidação de cache, dar nome às coisas e erros de off-by-one.",
-    "Na minha máquina funciona.",
-    "Uma query SQL entra num bar, vai até duas mesas e pergunta: posso fazer um join com vocês?",
-    "Semanas programando podem te poupar horas de planejamento.",
-    "99 bugs no código. Corrige um, sobe de novo: 127 bugs no código.",
-    "O melhor código é nenhum código.",
-    "Programador de verdade conta a partir do 0.",
-    "!false. É engraçado porque é verdade.",
-  ],
-  moo: "muu",
-  wakeUp: "acorda, neo…",
-  uptime: (m, s) => `ativo há ${m}m ${s}s · 1 usuário · load average: 0.42 (quase tudo é a Athena)`,
-  sandwichSudo: "tá bom.",
-  sandwich: "quê? faz você mesmo.",
-  noRule: (t) => `make: *** Nenhuma regra para processar o alvo '${t}'. Pare.`,
-  rm: "rm: permissão negada. A Athena está dormindo no teclado.",
-  blame: "foi a Athena.",
-  pushForce: "! [rejected] main -> main (não na sexta-feira)",
-  gitStatus: "No ramo main. Nada para commitar, árvore de trabalho limpa.",
-  git: "git: a Athena só conhece blame, status e push.",
-  fetch: {
-    os: "so",
-    drink: "bebida",
-    pet: "pet",
-    editorValue: "o que compilar",
-    drinkValue: "Monster branco",
-    petValue: "Athena, gatinha malhada (dormindo)",
-  },
-  historyEmpty: "(vazio)",
-  vim: (name) => `abrindo ${name}… brincadeira, você nunca ia sair. Tenta :q mesmo assim.`,
-  quitVim: "você saiu do vim. Coloca isso no currículo.",
-  coffee: "não tem café nesta mesa. Mas tem um Monster branco.",
-  monster: "*psst* abri um Monster branco. Foco +10.",
-  ping: (host) =>
-    `64 bytes de ${host}: icmp_seq=1 ttl=64 time=0.42 ms · está no ar (a Athena conferiu)`,
-  hello: "oi! Digite help para explorar.",
-  answer: "a resposta para a vida, o universo e tudo mais.",
-  xyzzy: "Nada acontece.",
-  cheatOn: "↑ ↑ ↓ ↓ ← → ← → B A · modo cheat ligado: +30 vidas.",
-  cheatOff: "modo cheat desligado.",
-};
-
-const COPY: Record<Locale, Strings> = { en: EN, pt: PT };
-const COMMANDS = [...EN.page, ...EN.shell].map(([c]) => c.split(" ")[0]!);
+// Command names stay in English (they are shell commands); their placeholders, descriptions and all
+// output follow the page's language (src/locales/<language>/terminal.json).
+const COMMANDS = [...resources.en.terminal.page, ...resources.en.terminal.shell].map(
+  ({ cmd }) => cmd.split(" ")[0]!,
+);
+const DATE_LOCALE: Record<Locale, string> = { en: "en-GB", pt: "pt-BR" };
 
 /** Every project, featured first, read when a command runs so it matches the panels below. */
 const allProjects = (l: Locale = "en") => [
@@ -403,10 +203,10 @@ function MatrixRain() {
   return <canvas ref={ref} aria-hidden className="mt-1 block h-40 w-full" />;
 }
 
-function matrix(t: Strings) {
+function matrix(t: TerminalT) {
   return (
     <div>
-      {dim(t.wakeUp)}
+      {dim(t("wakeUp"))}
       <MatrixRain />
     </div>
   );
@@ -418,16 +218,16 @@ const elapsed = (since: number) => {
 };
 
 /** Commands matched on the whole line, before the command name is looked up. */
-function egg(line: string, t: Strings): ReactNode | undefined {
-  if (/^sudo\s+make\s+me\s+a\s+sandwich$/.test(line)) return t.sandwichSudo;
-  if (/^make\s+me\s+a\s+sandwich$/.test(line)) return t.sandwich;
+function egg(line: string, t: TerminalT): ReactNode | undefined {
+  if (/^sudo\s+make\s+me\s+a\s+sandwich$/.test(line)) return t("sandwichSudo");
+  if (/^make\s+me\s+a\s+sandwich$/.test(line)) return t("sandwich");
   const target = /^make(?:\s+(\S+).*)?$/.exec(line);
-  if (target) return t.noRule(target[1] ?? "coffee");
-  if (/^(sudo\s+)?rm(\s|$)/.test(line)) return t.rm;
-  if (/^git\s+blame/.test(line)) return t.blame;
-  if (/^git\s+push\s+(-f|--force)/.test(line)) return t.pushForce;
-  if (/^git\s+status/.test(line)) return t.gitStatus;
-  if (/^git(\s|$)/.test(line)) return t.git;
+  if (target) return t("noRule", { target: target[1] ?? "coffee" });
+  if (/^(sudo\s+)?rm(\s|$)/.test(line)) return t("rm");
+  if (/^git\s+blame/.test(line)) return t("blame");
+  if (/^git\s+push\s+(-f|--force)/.test(line)) return t("pushForce");
+  if (/^git\s+status/.test(line)) return t("gitStatus");
+  if (/^git(\s|$)/.test(line)) return t("git");
   return undefined;
 }
 
@@ -448,7 +248,7 @@ function listArgs(args: string[]) {
 /** Runs one command line; returns what to print, or "clear". */
 function run(line: string, ctx: Ctx): ReactNode | "clear" {
   const l = ctx.locale;
-  const t = COPY[l];
+  const t = terminalT(l);
   const trimmed = line.trim();
   const hidden = egg(trimmed, t);
   if (hidden !== undefined) return hidden;
@@ -461,23 +261,23 @@ function run(line: string, ctx: Ctx): ReactNode | "clear" {
       return (
         <div className="grid gap-x-10 gap-y-2 md:grid-cols-2">
           <div>
-            {dim(t.pageTitle)}
+            {dim(t("pageTitle"))}
             <div className="grid grid-cols-[auto_minmax(0,1fr)] gap-x-4">
-              {t.page.map(([c, d]) => (
-                <div key={c} className="contents">
-                  <span className="text-primary">{c}</span>
-                  {dim(d)}
+              {t("page", { returnObjects: true }).map(({ cmd, desc }) => (
+                <div key={cmd} className="contents">
+                  <span className="text-primary">{cmd}</span>
+                  {dim(desc)}
                 </div>
               ))}
             </div>
           </div>
           <div>
-            {dim(t.shellTitle)}
+            {dim(t("shellTitle"))}
             <div className="flex flex-wrap gap-x-3 md:grid md:grid-cols-[auto_minmax(0,1fr)] md:gap-x-4">
-              {t.shell.map(([c, d]) => (
-                <div key={c} className="contents">
-                  <span className="text-primary">{c}</span>
-                  <span className="hidden text-muted-foreground md:inline">{d}</span>
+              {t("shell", { returnObjects: true }).map(({ cmd, desc }) => (
+                <div key={cmd} className="contents">
+                  <span className="text-primary">{cmd}</span>
+                  <span className="hidden text-muted-foreground md:inline">{desc}</span>
                 </div>
               ))}
             </div>
@@ -485,9 +285,9 @@ function run(line: string, ctx: Ctx): ReactNode | "clear" {
         </div>
       );
     case "whoami":
-      return t.whoami;
+      return t("whoami");
     case "about":
-      return t.about;
+      return t("about");
     case "projects":
       return (
         <div>
@@ -499,27 +299,28 @@ function run(line: string, ctx: Ctx): ReactNode | "clear" {
               </div>
             ))}
           </div>
-          <div className="mt-1">{dim(t.projectsHint)}</div>
+          <div className="mt-1">{dim(t("projectsHint"))}</div>
         </div>
       );
     case "open": {
       const want = slug(args.join(""));
-      if (!want) return t.openUsage;
+      if (!want) return t("openUsage");
       const p = allProjects().find((x) => slug(x.name).startsWith(want));
-      if (!p?.url) return t.openMissing(args.join(" "));
+      if (!p?.url) return t("openMissing", { query: args.join(" ") });
       window.open(p.url, "_blank", "noopener");
       return (
         <>
-          {t.opening} {link(p.url, p.url)}
+          {t("opening")} {link(p.url, p.url)}
         </>
       );
     }
     case "stack":
       return (
         <div>
-          {stack.map(({ group, items }) => (
-            <div key={group.en}>
-              <span className="text-primary">{group[l]}</span> {dim("·")} {items.join(", ")}
+          {stack.map(({ id, items }) => (
+            <div key={id}>
+              <span className="text-primary">{t(`projects:stack.${id}`)}</span> {dim("·")}{" "}
+              {items.join(", ")}
             </div>
           ))}
         </div>
@@ -529,18 +330,18 @@ function run(line: string, ctx: Ctx): ReactNode | "clear" {
       const { all, target } = listArgs(args);
       const found = resolve(ctx.cwd, target);
       if (!found.ok)
-        return found.reason === "denied" ? t.denied(name, target) : t.noSuch(name, target);
+        return t(found.reason === "denied" ? "denied" : "noSuch", { cmd: name, path: target });
       if (found.node.kind === "file") return target;
-      if (found.node.locked) return t.denied(name, target);
+      if (found.node.locked) return t("denied", { cmd: name, path: target });
       return name === "ls" ? ls(found.node, all) : art(tree(found.node, all, label(found.path)));
     }
     case "cd": {
       const target = args[0] ?? "~";
       const found = resolve(ctx.cwd, target);
       if (!found.ok)
-        return found.reason === "denied" ? t.denied("cd", target) : t.noSuch("cd", target);
-      if (found.node.kind === "file") return t.notDir("cd", target);
-      if (found.node.locked) return t.denied("cd", target);
+        return t(found.reason === "denied" ? "denied" : "noSuch", { cmd: "cd", path: target });
+      if (found.node.kind === "file") return t("notDir", { cmd: "cd", path: target });
+      if (found.node.locked) return t("denied", { cmd: "cd", path: target });
       ctx.chdir(found.path);
       if (found.node.section) goTo(found.node.section);
       return null;
@@ -566,11 +367,11 @@ function run(line: string, ctx: Ctx): ReactNode | "clear" {
       window.open(RESUME[l], "_blank", "noopener");
       return (
         <>
-          {t.opening} {link(RESUME[l], "resume.pdf")}
+          {t("opening")} {link(RESUME[l], "resume.pdf")}
         </>
       );
     case "date":
-      return new Date().toLocaleString(t.dateLocale, {
+      return new Date().toLocaleString(DATE_LOCALE[l], {
         timeZone: "America/Sao_Paulo",
         dateStyle: "full",
         timeStyle: "short",
@@ -578,28 +379,32 @@ function run(line: string, ctx: Ctx): ReactNode | "clear" {
     case "echo":
       return args.join(" ");
     case "sudo":
-      return t.sudo;
+      return t("sudo");
     case "exit":
-      return t.exit;
+      return t("exit");
     case "clear":
       return "clear";
     // EGGS, matched by name.
     case "cat": {
       const target = args[0];
-      if (!target) return kitten(KITTEN_SAYS[l]);
+      if (!target) return kitten(t("files.kittenSays"));
       const found = resolve(ctx.cwd, target);
       if (!found.ok)
-        return found.reason === "denied" ? t.denied("cat", target) : t.noSuch("cat", target);
+        return t(found.reason === "denied" ? "denied" : "noSuch", { cmd: "cat", path: target });
       if (found.node.kind === "dir")
-        return found.node.locked ? t.denied("cat", target) : t.isDir(target);
+        return found.node.locked
+          ? t("denied", { cmd: "cat", path: target })
+          : t("isDir", { path: target });
       return found.node.body(l);
     }
     case "meow":
-      return kitten(KITTEN_SAYS[l]);
+      return kitten(t("files.kittenSays"));
     case "cowsay":
-      return art(cowsay(args.join(" ") || t.moo));
-    case "fortune":
-      return t.fortunes[Math.floor(Math.random() * t.fortunes.length)];
+      return art(cowsay(args.join(" ") || t("moo")));
+    case "fortune": {
+      const fortunes = t("fortunes", { returnObjects: true });
+      return fortunes[Math.floor(Math.random() * fortunes.length)];
+    }
     case "neofetch":
       return (
         <div className="flex flex-wrap gap-x-6 gap-y-2">
@@ -610,13 +415,13 @@ function run(line: string, ctx: Ctx): ReactNode | "clear" {
               <span className="text-primary">londrina</span>
             </div>
             {[
-              [t.fetch.os, "Londrina, BR"],
+              [t("fetch.os"), "Londrina, BR"],
               ["shell", "zsh"],
               ["uptime", `${elapsed(ctx.since)[0]}m ${elapsed(ctx.since)[1]}s`],
               ["stack", "Python · FastAPI · React/TS"],
-              ["editor", t.fetch.editorValue],
-              [t.fetch.drink, t.fetch.drinkValue],
-              [t.fetch.pet, t.fetch.petValue],
+              ["editor", t("fetch.editorValue")],
+              [t("fetch.drink"), t("fetch.drinkValue")],
+              [t("fetch.pet"), t("fetch.petValue")],
             ].map(([k, v]) => (
               <div key={k}>
                 <span className="text-primary">{k}</span> {dim("·")} {v}
@@ -633,42 +438,44 @@ function run(line: string, ctx: Ctx): ReactNode | "clear" {
           {[...ctx.history]
             .reverse()
             .map((c, i) => `${String(i + 1).padStart(4)}  ${c}`)
-            .join("\n") || t.historyEmpty}
+            .join("\n") || t("historyEmpty")}
         </pre>
       );
-    case "uptime":
-      return t.uptime(...elapsed(ctx.since));
+    case "uptime": {
+      const [minutes, seconds] = elapsed(ctx.since);
+      return t("uptime", { minutes, seconds });
+    }
     case "vim":
     case "vi":
     case "nvim":
     case "nano":
     case "emacs":
-      return t.vim(name);
+      return t("vim", { name });
     case ":q":
     case ":q!":
     case ":wq":
     case ":x":
-      return t.quitVim;
+      return t("quitVim");
     case "coffee":
-      return t.coffee;
+      return t("coffee");
     case "monster":
-      return t.monster;
+      return t("monster");
     case "ping":
-      return args[0] ? t.ping(args[0]) : "pong";
+      return args[0] ? t("ping", { host: args[0] }) : "pong";
     case "hello":
     case "hi":
     case "hey":
     case "oi":
     case "olá":
-      return t.hello;
+      return t("hello");
     case "42":
-      return t.answer;
+      return t("answer");
     case "xyzzy":
-      return t.xyzzy;
+      return t("xyzzy");
     default:
       return (
         <>
-          {t.notFound(name)} {dim(t.typeHelp)}
+          {t("notFound", { name })} {dim(t("typeHelp"))}
         </>
       );
   }
@@ -699,7 +506,7 @@ type Entry = { id: number; path: string; cmd: string; out: ReactNode };
 
 export function Terminal() {
   const locale = useLocale();
-  const t = COPY[locale];
+  const { t } = useTranslation("terminal");
   const reduce = useReducedMotion();
   const ref = useRef<HTMLDivElement>(null);
   const seen = useInView(ref, { once: true, amount: 0.4 });
@@ -800,7 +607,7 @@ export function Terminal() {
       keys.current = [];
       setInput("");
       setCheat((on) => !on);
-      print("", cheat ? t.cheatOff : t.cheatOn);
+      print("", t(cheat ? "cheatOff" : "cheatOn"));
       return;
     }
     if (e.key === "Enter") {
@@ -830,10 +637,14 @@ export function Terminal() {
   return (
     <section id="shell" className="px-6 pt-24 md:px-10">
       <div className="mx-auto max-w-4xl">
-        <SectionLabel n="00">Shell</SectionLabel>
+        <SectionLabel n="00">{t("label")}</SectionLabel>
         <Reveal>
           <h2 className="mb-10 font-display text-4xl font-bold tracking-tighter md:text-6xl">
-            {t.heading[0]} <span className="text-outline">{t.heading[1]}</span>?
+            <Trans
+              t={t}
+              i18nKey="heading"
+              components={{ outline: <span className="text-outline" /> }}
+            />
           </h2>
         </Reveal>
         <Reveal delay={0.1}>
@@ -859,7 +670,7 @@ export function Terminal() {
               ref={body}
               className="h-[min(78svh,40rem)] overflow-hidden px-4 py-3 leading-relaxed md:h-[28rem]"
             >
-              <div role="log" aria-live="polite" aria-label={t.outputLabel}>
+              <div role="log" aria-live="polite" aria-label={t("outputLabel")}>
                 {entries.map((e) => (
                   <div key={e.id} className="mb-2 last:mb-0">
                     <div>
@@ -885,8 +696,8 @@ export function Terminal() {
                     onChange={(e) => setInput(e.target.value)}
                     onKeyDown={onKeyDown}
                     onFocus={takeOver}
-                    aria-label={t.inputLabel}
-                    placeholder={t.placeholder}
+                    aria-label={t("inputLabel")}
+                    placeholder={t("placeholder")}
                     autoComplete="off"
                     autoCapitalize="off"
                     spellCheck={false}

@@ -2,13 +2,17 @@
 import type { ReactNode } from "react";
 import { featured, projects, stack } from "@/data/projects";
 import { jobs } from "@/data/experience";
-import { type Locale, period, RESUME, type Text } from "@/lib/i18n";
+import { i18nFor, type Locale, period, type Resources, RESUME } from "@/lib/i18n";
 
 /**
  * The terminal's file system: leo's home directory. The page's sections are folders (cd into one and
  * the page scrolls there) holding real content from the site's data; the rest, mostly dotfiles, is
  * where easter eggs hide. Names are the same in both languages; contents follow the page's.
  */
+
+/** The terminal's copy in one language; projects: and jobs: reach the copy the page shows. */
+export const terminalT = (l: Locale) => i18nFor(l).getFixedT(l, ["terminal", "projects", "jobs"]);
+export type TerminalT = ReturnType<typeof terminalT>;
 
 export const EMAIL = "contato@leogotardo.com.br";
 export const LINKEDIN = "https://www.linkedin.com/in/leogotardo/";
@@ -54,8 +58,12 @@ export type Dir = {
 };
 export type Node = File | Dir;
 
-const file = (body: (l: Locale) => ReactNode): File => ({ kind: "file", body });
-const text = (t: Text) => file((l) => <pre className="whitespace-pre-wrap">{t[l]}</pre>);
+const file = (body: (t: TerminalT, l: Locale) => ReactNode): File => ({
+  kind: "file",
+  body: (l) => body(terminalT(l), l),
+});
+const text = (key: keyof Resources["terminal"]["files"]) =>
+  file((t) => <pre className="whitespace-pre-wrap">{t(`files.${key}`)}</pre>);
 const dir = (children: Record<string, Node>, extra: Partial<Dir> = {}): Dir => ({
   kind: "dir",
   children,
@@ -63,13 +71,18 @@ const dir = (children: Record<string, Node>, extra: Partial<Dir> = {}): Dir => (
 });
 
 /** A project as a markdown-ish file: name and period, what it is, and where to see it. */
-function projectFile(name: string, when: string, about: Text, href: string | undefined) {
-  return file((l) => (
+function projectFile(
+  name: string,
+  when: string,
+  about: (t: TerminalT) => string,
+  href: string | undefined,
+) {
+  return file((t, l) => (
     <div>
       <div>
         <span className="text-primary"># {name}</span> {dim(`· ${period(when, l)}`)}
       </div>
-      <div className="mt-1">{about[l]}</div>
+      <div className="mt-1">{about(t)}</div>
       {href && <div className="mt-1">→ {link(href, href)}</div>}
     </div>
   ));
@@ -79,11 +92,16 @@ const work = dir(
   Object.fromEntries([
     ...featured.map((p) => [
       `${kebab(p.name)}.md`,
-      projectFile(p.name, p.period, p.problem, p.links[0]?.href),
+      projectFile(
+        p.name,
+        p.period,
+        (t) => t(`projects:featured.${p.id}.problem`),
+        p.links[0]?.href,
+      ),
     ]),
     ...projects.map((p) => [
       `${kebab(p.name)}.md`,
-      projectFile(p.name, p.period, p.desc, p.live ?? p.code),
+      projectFile(p.name, p.period, (t) => t(`projects:desc.${p.id}`), p.live ?? p.code),
     ]),
   ]),
   { section: "work" },
@@ -93,15 +111,15 @@ const experience = dir(
   Object.fromEntries(
     jobs.map((j) => [
       `${kebab(j.org)}.md`,
-      file((l) => (
+      file((t, l) => (
         <div>
           <div>
             <span className="text-primary"># {j.org}</span> {dim(`· ${period(j.period, l)}`)}
           </div>
           <div>
-            {j.role[l]} {dim(`· ${j.place[l]}`)}
+            {t(`jobs:${j.id}.role`)} {dim(`· ${t(`jobs:${j.id}.place`)}`)}
           </div>
-          <div className="mt-1">{j.intro[l]}</div>
+          <div className="mt-1">{t(`jobs:${j.id}.intro`)}</div>
         </div>
       )),
     ]),
@@ -111,15 +129,14 @@ const experience = dir(
 
 const about = dir(
   {
-    "bio.txt": text({
-      en: "Software developer in Londrina, Brazil, graduated in Analysis and Systems Development at IFPR (2026). I ship APIs, web and mobile apps end to end: FastAPI and PostgreSQL on AWS, React and Capacitor on the screen, Raspberry Pi when hardware is involved.",
-      pt: "Desenvolvedor de software em Londrina, formado em Análise e Desenvolvimento de Sistemas pelo IFPR (2026). Entrego APIs, apps web e mobile de ponta a ponta: FastAPI e PostgreSQL na AWS, React e Capacitor na tela, Raspberry Pi quando tem hardware no meio.",
-    }),
-    "stack.txt": file((l) => (
+    // The same bio the about command prints.
+    "bio.txt": file((t) => <pre className="whitespace-pre-wrap">{t("about")}</pre>),
+    "stack.txt": file((t) => (
       <div>
-        {stack.map(({ group, items }) => (
-          <div key={group.en}>
-            <span className="text-primary">{group[l]}</span> {dim("·")} {items.join(", ")}
+        {stack.map(({ id, items }) => (
+          <div key={id}>
+            <span className="text-primary">{t(`projects:stack.${id}`)}</span> {dim("·")}{" "}
+            {items.join(", ")}
           </div>
         ))}
       </div>
@@ -142,82 +159,36 @@ const contact = dir(
  * voxel scene in the hero) hold the rest.
  * ------------------------------------------------------------------------------------------- */
 
-export const KITTEN_SAYS: Text = {
-  en: "meow. Athena, the tabby on the chair, says hi.",
-  pt: "miau. a Athena, a gatinha malhada da cadeira, manda um oi.",
-};
-
 export const HOME_DIR: Dir = dir({
-  "README.md": text({
-    en: "welcome to leo's home directory.\nthe sections of the page are folders here: cd into one and the page scrolls there.\nsome files are hidden. ls -a might help.",
-    pt: "bem-vindo à pasta pessoal do leo.\nas seções da página são pastas aqui: entre numa com cd e a página rola até ela.\nalguns arquivos estão escondidos. ls -a pode ajudar.",
-  }),
+  "README.md": text("readme"),
   work,
   experience,
   about,
   contact,
   notes: dir({
-    "todo.txt": text({
-      en: "[x] ship the portfolio\n[x] add a cat\n[x] name the cat (Athena)\n[ ] fix the off-by-one\n[ ] fix the off-by-one\n[ ] drink less white monster",
-      pt: "[x] lançar o portfólio\n[x] colocar uma gata\n[x] dar um nome pra gata (Athena)\n[ ] corrigir o off-by-one\n[ ] corrigir o off-by-one\n[ ] tomar menos monster branco",
-    }),
-    "ideas.txt": text({
-      en: "a terminal inside the portfolio. with easter eggs. nobody will ever find them.\n\n(you did.)",
-      pt: "um terminal dentro do portfólio. com easter eggs. ninguém nunca vai achar.\n\n(você achou.)",
-    }),
+    "todo.txt": text("todo"),
+    "ideas.txt": text("ideas"),
   }),
   desk: dir({
-    "kitten.txt": file((l) => kitten(KITTEN_SAYS[l])),
-    "guitar.txt": text({
-      en: "acoustic. knows the same four chords as everyone else.",
-      pt: "violão. sabe os mesmos quatro acordes que todo mundo.",
-    }),
-    "cactus.txt": text({
-      en: "never watered. thriving.",
-      pt: "nunca foi regado. está ótimo.",
-    }),
-    "monster.can": text({
-      en: "empty. there's another one under the desk.",
-      pt: "vazia. tem outra embaixo da mesa.",
-    }),
+    "kitten.txt": file((t) => kitten(t("files.kittenSays"))),
+    "guitar.txt": text("guitar"),
+    "cactus.txt": text("cactus"),
+    "monster.can": text("monsterCan"),
   }),
-  "resume.pdf": file((l) => (
+  "resume.pdf": file((t, l) => (
     <>
-      {link(RESUME[l], "resume.pdf")}{" "}
-      {dim(
-        l === "pt"
-          ? "· arquivo binário; use resume para abrir"
-          : "· binary file; use resume to open it",
-      )}
+      {link(RESUME[l], "resume.pdf")} {dim(t("files.resumeHint"))}
     </>
   )),
-  ".secrets": text({
-    en: "Athena is the real senior dev. don't tell anyone.",
-    pt: "a Athena é a verdadeira dev sênior. não conta pra ninguém.",
-  }),
-  ".monster": text({
-    en: "white monster · zero sugar · the third one today",
-    pt: "monster branco · zero açúcar · o terceiro de hoje",
-  }),
-  ".bash_history": text({
-    en: 'npm install\nrm -rf node_modules\nnpm install\ngit commit -m "fix"\ngit commit -m "fix fix"\ngit commit -m "final fix (for real)"\ngit push --force\nsudo make me a sandwich\nexit',
-    pt: 'npm install\nrm -rf node_modules\nnpm install\ngit commit -m "fix"\ngit commit -m "fix do fix"\ngit commit -m "fix final (agora vai)"\ngit push --force\nsudo make me a sandwich\nexit',
-  }),
+  ".secrets": text("secrets"),
+  ".monster": text("monster"),
+  ".bash_history": text("bashHistory"),
   ".config": dir({
-    "kitten.conf": text({
-      en: "name = athena\nmood = sleepy\nnap_schedule = always\nfavourite_spot = office chair\npermissions = root",
-      pt: "nome = athena\nhumor = sonolenta\nhorario_da_soneca = sempre\nlugar_favorito = cadeira de escritório\npermissoes = root",
-    }),
+    "kitten.conf": text("kittenConf"),
   }),
   ".trash": dir({
-    "old-portfolio.html": text({
-      en: "<marquee>welcome to my homepage!!</marquee>\n<!-- visitors: 3 (two of them were me) -->",
-      pt: "<marquee>bem-vindo à minha homepage!!</marquee>\n<!-- visitantes: 3 (dois eram eu) -->",
-    }),
-    "tabs-vs-spaces.md": text({
-      en: "decided: spaces. moving on.",
-      pt: "decidido: espaços. próximo assunto.",
-    }),
+    "old-portfolio.html": text("oldPortfolio"),
+    "tabs-vs-spaces.md": text("tabsVsSpaces"),
   }),
   ".ssh": dir({}, { locked: true }),
 });

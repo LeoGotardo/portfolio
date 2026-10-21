@@ -2,26 +2,22 @@ import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
 import { Reveal, SectionLabel } from "./primitives";
 import { jobs } from "@/data/experience";
+import { Trans, useTranslation } from "react-i18next";
 import { period, tag, useLocale } from "@/lib/i18n";
-
-const COPY = {
-  en: { label: "Experience", title: ["Where I", "work"] },
-  pt: { label: "Experiência", title: ["Onde eu", "trabalho"] },
-};
 
 export function Experience() {
   const locale = useLocale();
-  const t = COPY[locale];
+  const { t } = useTranslation(["home", "jobs"]);
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start 70%", "end 60%"] });
   const line = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   return (
     <section id="experience" className="px-6 py-32 md:px-10">
-      <SectionLabel n="02">{t.label}</SectionLabel>
+      <SectionLabel n="02">{t("experience.label")}</SectionLabel>
       <Reveal>
         <h2 className="mb-16 font-display text-6xl font-bold tracking-tighter md:text-8xl">
-          {t.title[0]} <span className="text-outline">{t.title[1]}</span>.
+          <Trans t={t} i18nKey="experience.title" components={{ outline: <span className="text-outline" /> }} />
         </h2>
       </Reveal>
       <div ref={ref} className="relative pl-8 md:pl-16">
@@ -48,16 +44,16 @@ export function Experience() {
                 <div>
                   <div className="font-mono text-xs text-primary">{String(i + 1).padStart(2, "0")} · {period(j.period, locale)}</div>
                   <h3 className="mt-2 font-display text-4xl font-bold">{j.org}</h3>
-                  <div className="mt-1 text-muted-foreground">{j.role[locale]}</div>
-                  <div className="font-mono text-xs text-muted-foreground">{j.place[locale]}</div>
+                  <div className="mt-1 text-muted-foreground">{t(`jobs:${j.id}.role`)}</div>
+                  <div className="font-mono text-xs text-muted-foreground">{t(`jobs:${j.id}.place`)}</div>
                 </div>
                 <div className="rounded-xl border border-border bg-card p-6 transition-colors hover:border-primary/50">
-                  <p className="text-foreground">{j.intro[locale]}</p>
+                  <p className="text-foreground">{t(`jobs:${j.id}.intro`)}</p>
                   <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-                    {j.points.map((p, k) => (
+                    {t(`jobs:${j.id}.points`, { returnObjects: true }).map((p, k) => (
                       <motion.li key={k} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
                         transition={{ delay: 0.1 * k }} className="flex gap-3">
-                        <span className="text-primary">→</span>{p[locale]}
+                        <span className="text-primary">→</span>{p}
                       </motion.li>
                     ))}
                   </ul>

@@ -1,0 +1,33 @@
+{
+  "irispay": {
+    "role": "Desenvolvedor de Software",
+    "place": "Londrina-PR, Brasil",
+    "intro": "Fintech brasileira que transforma máquinas tradicionais em sistemas inteligentes de autoatendimento e vending com tecnologia de pagamento própria.",
+    "points": [
+      "Linux embarcado em dispositivos Raspberry Pi rodando sozinhos em campo: display em modo quiosque, serviços systemd/OpenRC, watchdogs, criptografia LUKS.",
+      "Serviços Python que controlam hardware: GPIO, leitores NFC, protocolos seriais e impressoras térmicas, com máquinas de estado, threading e asyncio.",
+      "APIs Python (FastAPI, Flask) e comunicação em tempo real via WebSockets e sockets; frontends em PHP/Laravel e manutenção de um sistema legado em Yii2.",
+      "Atualizações remotas (OTA) com releases versionadas, rollback automático e testes ponta a ponta isolados; serviços em contêineres na AWS via GitHub Actions.",
+      "Sem teclado, sem tela, rede instável: tudo precisa se recuperar sozinho, e cada falha é isolada camada por camada antes de ser corrigida."
+    ]
+  },
+  "tlg": {
+    "role": "Sócio",
+    "place": "Estúdio de desenvolvimento web",
+    "intro": "Pequeno estúdio em que sou um dos sócios e desenvolvo sites para clientes.",
+    "points": [
+      "Site do GP Barril (Next.js + TypeScript): Image Optimizer restrito a 3 hosts, fechando uma brecha de proxy aberto.",
+      "Correção do domínio canônico e uma política de robots que separa os agentes de busca de IA dos crawlers de treinamento.",
+      "Server Action de contato validada no servidor e limitada a 3 envios por IP a cada 10 minutos."
+    ]
+  },
+  "persis": {
+    "role": "Service Desk",
+    "place": "Londrina-PR, Brasil",
+    "intro": "Provedor de internet regional com mais de 100.000 clientes.",
+    "points": [
+      "Resolvi problemas complexos de rede para clientes leigos, muitas vezes a partir de descrições ambíguas.",
+      "Mantive a qualidade do atendimento sob pressão e transformei problemas recorrentes em feedback útil."
+    ]
+  }
+}

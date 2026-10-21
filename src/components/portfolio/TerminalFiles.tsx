@@ -137,8 +137,8 @@ const contact = dir(
  * ------------------------------------------------------------------------------------------- */
 
 export const KITTEN_SAYS: Text = {
-  en: "meow. the tabby on the chair says hi.",
-  pt: "miau. o filhote malhado na cadeira manda um oi.",
+  en: "meow. Athena, the tabby on the chair, says hi.",
+  pt: "miau. a Athena, a gatinha malhada da cadeira, manda um oi.",
 };
 
 export const HOME_DIR: Dir = dir({
@@ -152,8 +152,8 @@ export const HOME_DIR: Dir = dir({
   contact,
   notes: dir({
     "todo.txt": text({
-      en: "[x] ship the portfolio\n[x] add a cat\n[ ] name the cat\n[ ] fix the off-by-one\n[ ] fix the off-by-one\n[ ] drink less white monster",
-      pt: "[x] lançar o portfólio\n[x] colocar um gato\n[ ] dar um nome pro gato\n[ ] corrigir o off-by-one\n[ ] corrigir o off-by-one\n[ ] tomar menos monster branco",
+      en: "[x] ship the portfolio\n[x] add a cat\n[x] name the cat (Athena)\n[ ] fix the off-by-one\n[ ] fix the off-by-one\n[ ] drink less white monster",
+      pt: "[x] lançar o portfólio\n[x] colocar uma gata\n[x] dar um nome pra gata (Athena)\n[ ] corrigir o off-by-one\n[ ] corrigir o off-by-one\n[ ] tomar menos monster branco",
     }),
     "ideas.txt": text({
       en: "a terminal inside the portfolio. with easter eggs. nobody will ever find them.\n\n(you did.)",
@@ -186,8 +186,8 @@ export const HOME_DIR: Dir = dir({
     </>
   )),
   ".secrets": text({
-    en: "the kitten is the real senior dev. don't tell anyone.",
-    pt: "o gatinho é o verdadeiro dev sênior. não conta pra ninguém.",
+    en: "Athena is the real senior dev. don't tell anyone.",
+    pt: "a Athena é a verdadeira dev sênior. não conta pra ninguém.",
   }),
   ".monster": text({
     en: "white monster · zero sugar · the third one today",
@@ -199,8 +199,8 @@ export const HOME_DIR: Dir = dir({
   }),
   ".config": dir({
     "kitten.conf": text({
-      en: "mood = sleepy\nnap_schedule = always\nfavourite_spot = office chair\npermissions = root",
-      pt: "humor = sonolento\nhorario_da_soneca = sempre\nlugar_favorito = cadeira de escritório\npermissoes = root",
+      en: "name = athena\nmood = sleepy\nnap_schedule = always\nfavourite_spot = office chair\npermissions = root",
+      pt: "nome = athena\nhumor = sonolenta\nhorario_da_soneca = sempre\nlugar_favorito = cadeira de escritório\npermissoes = root",
     }),
   }),
   ".trash": dir({

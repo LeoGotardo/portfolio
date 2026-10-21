@@ -114,23 +114,22 @@ const EN = {
   ],
   moo: "moo",
   wakeUp: "wake up, neo…",
-  uptime: (m: number, s: number) =>
-    `up ${m}m ${s}s · 1 user · load average: 0.42 (mostly the kitten)`,
+  uptime: (m: number, s: number) => `up ${m}m ${s}s · 1 user · load average: 0.42 (mostly Athena)`,
   sandwichSudo: "okay.",
   sandwich: "what? make it yourself.",
   noRule: (t: string) => `make: *** No rule to make target '${t}'. Stop.`,
-  rm: "rm: permission denied. The kitten is asleep on the keyboard.",
-  blame: "it was the cat.",
+  rm: "rm: permission denied. Athena is asleep on the keyboard.",
+  blame: "it was Athena.",
   pushForce: "! [rejected] main -> main (not on a friday)",
   gitStatus: "On branch main. Nothing to commit, working tree clean.",
-  git: "git: the kitten only knows blame, status and push.",
+  git: "git: Athena only knows blame, status and push.",
   fetch: {
     os: "os",
     drink: "drink",
     pet: "pet",
     editorValue: "whatever compiles",
     drinkValue: "white Monster",
-    petValue: "tabby kitten (asleep)",
+    petValue: "Athena, tabby kitten (asleep)",
   },
   historyEmpty: "(empty)",
   vim: (name: string) => `opening ${name}… just kidding, you'd never get out. Try :q anyway.`,
@@ -138,7 +137,7 @@ const EN = {
   coffee: "no coffee on this desk. There's a white Monster, though.",
   monster: "*psst* cracked open a white Monster. Focus +10.",
   ping: (host: string) =>
-    `64 bytes from ${host}: icmp_seq=1 ttl=64 time=0.42 ms · it's up (the kitten checked)`,
+    `64 bytes from ${host}: icmp_seq=1 ttl=64 time=0.42 ms · it's up (Athena checked)`,
   hello: "hi! Type help to look around.",
   answer: "the answer to life, the universe and everything.",
   xyzzy: "Nothing happens.",
@@ -215,23 +214,22 @@ const PT: Strings = {
   ],
   moo: "muu",
   wakeUp: "acorda, neo…",
-  uptime: (m, s) =>
-    `ativo há ${m}m ${s}s · 1 usuário · load average: 0.42 (quase tudo é o gatinho)`,
+  uptime: (m, s) => `ativo há ${m}m ${s}s · 1 usuário · load average: 0.42 (quase tudo é a Athena)`,
   sandwichSudo: "tá bom.",
   sandwich: "quê? faz você mesmo.",
   noRule: (t) => `make: *** Nenhuma regra para processar o alvo '${t}'. Pare.`,
-  rm: "rm: permissão negada. O gatinho está dormindo no teclado.",
-  blame: "foi o gato.",
+  rm: "rm: permissão negada. A Athena está dormindo no teclado.",
+  blame: "foi a Athena.",
   pushForce: "! [rejected] main -> main (não na sexta-feira)",
   gitStatus: "No ramo main. Nada para commitar, árvore de trabalho limpa.",
-  git: "git: o gatinho só conhece blame, status e push.",
+  git: "git: a Athena só conhece blame, status e push.",
   fetch: {
     os: "so",
     drink: "bebida",
     pet: "pet",
     editorValue: "o que compilar",
     drinkValue: "Monster branco",
-    petValue: "filhote malhado (dormindo)",
+    petValue: "Athena, gatinha malhada (dormindo)",
   },
   historyEmpty: "(vazio)",
   vim: (name) => `abrindo ${name}… brincadeira, você nunca ia sair. Tenta :q mesmo assim.`,
@@ -239,7 +237,7 @@ const PT: Strings = {
   coffee: "não tem café nesta mesa. Mas tem um Monster branco.",
   monster: "*psst* abri um Monster branco. Foco +10.",
   ping: (host) =>
-    `64 bytes de ${host}: icmp_seq=1 ttl=64 time=0.42 ms · está no ar (o gatinho conferiu)`,
+    `64 bytes de ${host}: icmp_seq=1 ttl=64 time=0.42 ms · está no ar (a Athena conferiu)`,
   hello: "oi! Digite help para explorar.",
   answer: "a resposta para a vida, o universo e tudo mais.",
   xyzzy: "Nada acontece.",
@@ -265,7 +263,7 @@ function goTo(id: string) {
 
 /* ---------------------------------------------------------------------------------------------
  * EGGS: the jokes behind the "shell" commands in help, plus a few unlisted one-word extras. Some nod
- * to the voxel scene in the hero (the tabby on the chair, the white Monster on the desk), the rest to
+ * to the voxel scene in the hero (Athena, the tabby on the chair, the white Monster on the desk), the rest to
  * old shell and programmer jokes.
  * ------------------------------------------------------------------------------------------- */
 

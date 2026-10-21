@@ -1,0 +1,50 @@
+{
+  "links": {
+    "live": "Site no ar",
+    "code": "Código",
+    "codeFront": "Código (front)",
+    "codeBack": "Código (back)"
+  },
+  "stats": {
+    "allMine": "commits, todos meus",
+    "backendCommits": "de 184 commits do backend",
+    "pytestCases": "casos de teste pytest",
+    "e2eRuns": "execuções E2E no Playwright",
+    "pytestTests": "testes pytest",
+    "checks": "testes automáticos"
+  },
+  "featured": {
+    "noharm": {
+      "problem": "Um app de apoio à recuperação guarda dados extremamente privados e mantém uma API pública que precisa resistir a abusos.",
+      "decision": "FastAPI com Clean Architecture, criptografia AES-256 por campo, rotação de JWT com blacklist de tokens, chat via Socket.IO e rate limiting em três camadas no Redis com scripts Lua atômicos.",
+      "result": "No ar em noharm.site, com o backend na AWS (ECS, RDS) provisionado por Terraform e builds Android/iOS via Capacitor."
+    },
+    "maindug": {
+      "problem": "A maioria dos gerenciadores de senha prende você no cofre de outra pessoa.",
+      "decision": "Um webservice Flask + PostgreSQL que você mesmo hospeda, mais uma extensão de navegador que captura logins e oferece preenchimento automático, com hash Argon2 e detecção de senhas reutilizadas e vazadas.",
+      "result": "Meu TCC no IFPR, documentado em LaTeX com modelo de ameaças e coberto por pytest e CI no GitHub Actions."
+    },
+    "pitest": {
+      "problem": "Operadores de bancada precisam validar placas Raspberry Pi antes da entrega ou depois de um reparo, sem teclado nem SSH.",
+      "decision": "Um serviço systemd que roda a cada boot: 7 testes (LAN, Wi-Fi, boot, USB, GPIO, Bluetooth, hotspot) enquanto a tela mostra o progresso e padrões de teste.",
+      "result": "Os resultados vão para um painel Flask + PostgreSQL que guarda o histórico de cada placa pelo endereço MAC; o operador confirma tela e LEDs no site."
+    }
+  },
+  "desc": {
+    "reportgen": "Gerador de relatórios técnicos: front em React, Express + Puppeteer renderizando PDFs no servidor. Exporta para PDF, DOCX e JSON.",
+    "iptool": "Consulta geográfica de IP com mapa interativo, validação IPv4/IPv6 e dados detalhados de rede.",
+    "customThread": "Estende threading.Thread com valores de retorno, propagação de exceções e callbacks. Zero dependências, no PyPI.",
+    "ddgame": "Clicker com tema de D&D em React e TypeScript: role os dados para ganhar XP e gaste na loja de upgrades. Publicado na Vercel.",
+    "maze": "Gerador de labirintos e visualizador de pathfinding reescrito em React 19. Compare DFS e BFS no mesmo labirinto.",
+    "geoknocker": "Ferramenta desktop de varredura de portas e geolocalização de IP, com varredura concorrente via threading.",
+    "hashTable": "Tabela hash em C com encadeamento e rehash automático a 75% de fator de carga.",
+    "venetia": "Criador de personagens de D&D 5.5 com um assistente de 13 etapas, 333 testes Vitest e 108 execuções Playwright. Android via Capacitor.",
+    "phishing": "Heurísticas de typosquatting mais os veredictos do Google Safe Browsing, VirusTotal e URLhaus.",
+    "talentScout": "Classifica atletas em níveis com um modelo K-Nearest Neighbors: PCA, matriz de correlação, gráficos de radar."
+  },
+  "stack": {
+    "backend": "Backend",
+    "front": "Front & mobile",
+    "infra": "Infra & embarcados"
+  }
+}

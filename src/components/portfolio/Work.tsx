@@ -15,7 +15,8 @@ import { Counter, Reveal, SectionLabel } from "./primitives";
 import { SceneWidget } from "./scenes";
 import { LiveContext } from "@/lib/live";
 import { jumpTo } from "@/lib/scroll";
-import { type Locale, period, tag, useLocale } from "@/lib/i18n";
+import { Trans, useTranslation } from "react-i18next";
+import { i18nFor, type Locale, period, tag, useLocale } from "@/lib/i18n";
 
 type SceneProps = {
   name: string;
@@ -233,45 +234,41 @@ const Scene = memo(function Scene(p: SceneProps & SceneCtx) {
   );
 });
 
-const ROWS: Record<Locale, [string, string, string]> = { en: ["Problem", "Decision", "Result"], pt: ["Problema", "Decisão", "Resultado"] };
-const LINKS: Record<Locale, [string, string]> = { en: ["Live", "Code"], pt: ["No ar", "Código"] };
-
 /** The panels' copy in one language; the names, and so the themes and DOM order, are the same in both. */
 function scenesFor(l: Locale): (SceneProps & { anchor?: string })[] {
-  const [problem, decision, result] = ROWS[l];
-  const [live, code] = LINKS[l];
+  const t = i18nFor(l).getFixedT(l, ["home", "projects"]);
   return [
     ...featured.map((p) => ({
       big: true,
       name: p.name,
       period: period(p.period, l),
       index: `${p.n} / 03`,
-      rows: [[problem, p.problem[l]], [decision, p.decision[l]], [result, p.result[l]]] as [string, string][],
-      stats: p.stats.map((s) => ({ value: s.value, label: s.label[l] })),
-      links: p.links.map((k) => ({ label: k.label[l], href: k.href })),
+      rows: (["problem", "decision", "result"] as const).map(
+        (k): [string, string] => [t(`work.${k}`), t(`projects:featured.${p.id}.${k}`)],
+      ),
+      stats: p.stats.map((s) => ({ value: s.value, label: t(`projects:stats.${s.label}`) })),
+      links: p.links.map((k) => ({ label: t(`projects:links.${k.label}`), href: k.href })),
     })),
     ...projects.map((p, i) => ({
       ...(i === 0 ? { anchor: "projects" } : {}),
       name: p.name,
       period: period(p.period, l),
       index: String(i + 4).padStart(2, "0"),
-      lede: p.desc[l],
-      tags: p.tags.map((t) => tag(t, l)),
-      links: [...(p.live ? [{ label: live, href: p.live }] : []), ...(p.code ? [{ label: code, href: p.code }] : [])],
+      lede: t(`projects:desc.${p.id}`),
+      tags: p.tags.map((name) => tag(name, l)),
+      links: [
+        ...(p.live ? [{ label: t("work.live"), href: p.live }] : []),
+        ...(p.code ? [{ label: t("work.code"), href: p.code }] : []),
+      ],
     })),
   ];
 }
 const sceneNames = [...featured, ...projects].map((p) => p.name);
 
-const COPY = {
-  en: { label: "Selected work", title: ["Things I've", "built"], skip: "Skip projects ↓" },
-  pt: { label: "Trabalhos selecionados", title: ["Coisas que eu", "construí"], skip: "Pular projetos ↓" },
-};
-
 export function Work() {
   const locale = useLocale();
   const scenes = useMemo(() => scenesFor(locale), [locale]);
-  const t = COPY[locale];
+  const { t } = useTranslation("home");
   const stacking = useStacking();
   const { report, setAfter } = useThemeConductor(sceneNames);
   // Where the reader is relative to the stack, checked on every scroll so that jumping straight to a
@@ -307,10 +304,10 @@ export function Work() {
   return (
     <div id="work">
       <div className="mx-auto max-w-7xl px-6 pt-32 pb-16 md:px-12">
-        <SectionLabel n="01">{t.label}</SectionLabel>
+        <SectionLabel n="01">{t("work.label")}</SectionLabel>
         <Reveal>
           <h2 className="font-display text-6xl font-bold tracking-tighter md:text-8xl">
-            {t.title[0]} <span className="text-outline">{t.title[1]}</span>.
+            <Trans t={t} i18nKey="work.title" components={{ outline: <span className="text-outline" /> }} />
           </h2>
         </Reveal>
       </div>
@@ -324,7 +321,7 @@ export function Work() {
         aria-hidden={!inStack}
         className={`fixed bottom-6 right-6 z-50 rounded-full border border-border bg-background/80 px-4 py-2 font-mono text-xs text-foreground backdrop-blur-md transition-[opacity,translate,border-color,color] duration-300 hover:border-primary hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary md:bottom-8 md:right-10 ${inStack ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-3 opacity-0"}`}
       >
-        {t.skip}
+        {t("work.skip")}
       </button>
       </div>
       {/*

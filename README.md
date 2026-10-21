@@ -7,7 +7,7 @@ Live at [leogotardo.com.br](https://leogotardo.com.br)
 ## Stack
 
 - TanStack Start (React 19, server-rendered) on Vite
-- English at `/` and Brazilian Portuguese at `/pt` (`src/lib/i18n.ts`), each with its own head and hreflang
+- English at `/` and Brazilian Portuguese at `/pt`, each with its own head and hreflang; copy translated with i18next + react-i18next (JSON per language in `src/locales/`)
 - Tailwind CSS v4 with OKLCH tokens; Lenis smooth scroll; Motion (`motion/react`) for reveals and the scroll-driven project panels
 - Each project is a full-screen panel in that project's own palette and fonts, sliding up over the previous one as you scroll
 - A small interactive terminal between the hero and the work (`help`, `projects`, `cd`, `open`, `contact`…)
@@ -22,8 +22,9 @@ src/
   routes/               __root.tsx (shared head: Open Graph, JSON-LD, favicons), index.tsx (/) and pt.tsx (/pt)
   components/portfolio/ Home (the page), sections (Chrome, Hero, Terminal, Work, Experience, About),
                         VoxelCat (the hero's 3D scene), TerminalFiles (the terminal's file system), scene mocks
-  data/                 projects.ts, experience.ts and themes.ts (per-project palettes)
-  lib/                  i18n.ts (locales, { en, pt } copy helpers), seo.ts (per-language head), scroll.ts (Lenis)
+  data/                 projects.ts, experience.ts and themes.ts (per-project palettes): what is the same in both languages
+  locales/              en/ and pt/: the copy as JSON, one file per namespace (common, home, projects, jobs, terminal)
+  lib/                  i18n.ts (one i18next instance per language, period/tag helpers), seo.ts (per-language head), scroll.ts (Lenis)
 public/                 Static assets: resumes (EN/PT PDF), project previews, favicons, og-image, sitemap, robots.txt, llms.txt
 docs/archive/          Docs of the previous design (Ultramarine); current: DESIGN.md and PRODUCT.md
 ```
@@ -39,11 +40,11 @@ bun run lint
 
 ## Content
 
-Copy lives in `src/data/projects.ts` (projects, featured case studies, stack) and in the section components (`Experience.tsx`, `About.tsx`, `Terminal.tsx`…), written in both languages as `{ en, pt }`. Keep `public/llms.txt` in sync when it changes. Screenshots live in `public/previews/`. The portrait is picked up from `src/assets/photo.webp` at build time and only shows where WebGL is unavailable; elsewhere the hero shows the voxel scene (`src/components/portfolio/VoxelCat.tsx`).
+Copy lives in `src/locales/en/*.json` and `src/locales/pt/*.json`, one file per namespace: `common` (head, nav, 404 and error pages, months, tags), `home` (the sections), `projects` (featured case studies, descriptions, stack groups), `jobs` (experience) and `terminal` (its output and files). English is the source: its keys type every `t()` call, so a key missing in Portuguese fails to compile, and `src/test/locales.test.ts` fails on extra keys, lists of a different length or a lost `{{placeholder}}` or `<tag>`. The data in `src/data/` holds what is the same in both languages (names, periods, numbers, links) and points to its copy by id. Headings with a styled word use `<Trans>` with named tags (`Things I've <outline>built</outline>.`). Keep `public/llms.txt` in sync when the copy changes. Screenshots live in `public/previews/`. The portrait is picked up from `src/assets/photo.webp` at build time and only shows where WebGL is unavailable; elsewhere the hero shows the voxel scene (`src/components/portfolio/VoxelCat.tsx`).
 
 ## Terminal easter eggs
 
-Spoilers. The terminal between the hero and the work hides these; every answer comes in the page's language. Commands and copy live in `src/components/portfolio/Terminal.tsx` (the `EN`/`PT` objects and `run()`), the file system in `src/components/portfolio/TerminalFiles.tsx` (`HOME_DIR`).
+Spoilers. The terminal between the hero and the work hides these; every answer comes in the page's language. Commands live in `src/components/portfolio/Terminal.tsx` (`run()`), the file system in `src/components/portfolio/TerminalFiles.tsx` (`HOME_DIR`), and everything they print in `src/locales/<language>/terminal.json`.
 
 **Disguised in `help`.** The "shell" group lists them with straight-faced descriptions:
 

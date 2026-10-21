@@ -16,32 +16,14 @@ import { SpeedInsights } from "@vercel/speed-insights/react";
 import appCss from "../styles.css?url";
 
 import { SITE } from "@/lib/seo";
-import { HOME, type Locale } from "@/lib/i18n";
+import { I18nextProvider, useTranslation } from "react-i18next";
+import { HOME, i18nFor, LANG, type Locale, useLocale } from "@/lib/i18n";
 
 /** The Portuguese page lives under /pt; everything else is English. */
 function usePathLocale(): Locale {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   return pathname === "/pt" || pathname.startsWith("/pt/") ? "pt" : "en";
 }
-
-const FALLBACK = {
-  en: {
-    notFound: "Page not found",
-    notFoundText: "The page you're looking for doesn't exist or has been moved.",
-    error: "This page didn't load",
-    errorText: "Something went wrong on our end. You can try refreshing or head back home.",
-    retry: "Try again",
-    home: "Go home",
-  },
-  pt: {
-    notFound: "Página não encontrada",
-    notFoundText: "A página que você procura não existe ou mudou de endereço.",
-    error: "Esta página não carregou",
-    errorText: "Algo deu errado do nosso lado. Tente recarregar ou volte para o início.",
-    retry: "Tentar de novo",
-    home: "Voltar ao início",
-  },
-};
 
 const OG_IMAGE = `${SITE}/og-image-2026.png`;
 const DESCRIPTION =
@@ -50,20 +32,20 @@ const KEYWORDS =
   "Leonardo Gotardo, software developer, full-stack developer, backend developer, embedded systems, REST API, IoT, React, Python, JavaScript, TypeScript, Java, C, HTML, CSS, Lua, Bash, Flask, FastAPI, Laravel, WebSocket, JWT, SQLAlchemy, Vite, Tailwind CSS, React Router, MongoDB, MySQL, PostgreSQL, SQLite, Linux, SSH, NFC, RFID, GPIO, threading, socket programming, Git, PyPI, Vercel, fintech, IrisPay, vending machines, cryptography, AES-256, open source, Python library, web development, Londrina, Paraná, Brazil, Brasil, portfolio, desenvolvedor de software, sistemas embarcados";
 
 function NotFoundComponent() {
-  const locale = usePathLocale();
-  const t = FALLBACK[locale];
+  const locale = useLocale();
+  const { t } = useTranslation();
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">{t.notFound}</h2>
-        <p className="mt-2 text-sm text-muted-foreground">{t.notFoundText}</p>
+        <h2 className="mt-4 text-xl font-semibold text-foreground">{t("fallback.notFound")}</h2>
+        <p className="mt-2 text-sm text-muted-foreground">{t("fallback.notFoundText")}</p>
         <div className="mt-6">
           <Link
             to={HOME[locale]}
             className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
-            {t.home}
+            {t("fallback.home")}
           </Link>
         </div>
       </div>
@@ -74,14 +56,16 @@ function NotFoundComponent() {
 function ErrorComponent({ error, reset }: ErrorComponentProps) {
   console.error(error);
   const router = useRouter();
-  const locale = usePathLocale();
-  const t = FALLBACK[locale];
+  const locale = useLocale();
+  const { t } = useTranslation();
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
-        <h1 className="text-xl font-semibold tracking-tight text-foreground">{t.error}</h1>
-        <p className="mt-2 text-sm text-muted-foreground">{t.errorText}</p>
+        <h1 className="text-xl font-semibold tracking-tight text-foreground">
+          {t("fallback.error")}
+        </h1>
+        <p className="mt-2 text-sm text-muted-foreground">{t("fallback.errorText")}</p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button
             onClick={() => {
@@ -90,13 +74,13 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
             }}
             className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
-            {t.retry}
+            {t("fallback.retry")}
           </button>
           <a
             href={HOME[locale]}
             className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
           >
-            {t.home}
+            {t("fallback.home")}
           </a>
         </div>
       </div>
@@ -182,9 +166,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 });
 
 function RootShell({ children }: { children: ReactNode }) {
-  const lang = usePathLocale() === "pt" ? "pt-BR" : "en";
+  const locale = usePathLocale();
   return (
-    <html lang={lang}>
+    <html lang={LANG[locale]}>
       <head>
         {/* Two Search Console properties; written here because head() keeps one meta per name. */}
         <meta
@@ -198,7 +182,8 @@ function RootShell({ children }: { children: ReactNode }) {
         <HeadContent />
       </head>
       <body>
-        {children}
+        {/* The page, and the 404 and error pages, read their copy from this language's instance. */}
+        <I18nextProvider i18n={i18nFor(locale)}>{children}</I18nextProvider>
         <Scripts />
       </body>
     </html>

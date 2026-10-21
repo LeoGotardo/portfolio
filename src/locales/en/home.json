@@ -1,0 +1,45 @@
+{
+  "hero": {
+    "sub": "Backend Python & full-stack React/TypeScript developer",
+    "intro": "I design and ship APIs, web and mobile apps end to end: FastAPI and PostgreSQL on AWS, React and Capacitor on the screen, Raspberry Pi when hardware is involved.",
+    "touch": "Get in touch →",
+    "resume": "Resume (PDF)",
+    "scroll": "scroll ↓",
+    "scene": "3D voxel scene, slowly turning: Athena, a tabby kitten with lime eyes, lying on an office chair in front of a white desk with a PC showing code, a white RGB keyboard and mouse, a Raspberry Pi, a white Monster energy can and a potted cactus, a white PC tower with RGB fans, and an acoustic guitar on a stand",
+    "portrait": "Portrait of Leonardo Gotardo"
+  },
+  "work": {
+    "label": "Selected work",
+    "title": "Things I've <outline>built</outline>.",
+    "skip": "Skip projects ↓",
+    "problem": "Problem",
+    "decision": "Decision",
+    "result": "Result",
+    "live": "Live",
+    "code": "Code"
+  },
+  "experience": {
+    "label": "Experience",
+    "title": "Where I <outline>work</outline>."
+  },
+  "about": {
+    "label": "About & stack",
+    "lead": "Software Developer in Londrina. Currently at <brand>IrisPay</brand>, turning traditional machines into smart vending systems — embedded, APIs, sockets, cryptography, IoT and web.",
+    "bio": "Graduated in Analysis and Systems Development at IFPR (2026). I keep building side projects that push me into new areas: cryptography, GUI programming, mobile apps, cloud infrastructure and Python libraries on PyPI.",
+    "facts": [
+      { "term": "Location", "value": "Londrina, Brasil" },
+      { "term": "Languages", "value": "PT (Native) · EN (Full Prof.)" },
+      { "term": "Education", "value": "ADS, IFPR (2026)" },
+      { "term": "Focus", "value": "Python · React/TS · Mobile" }
+    ],
+    "also": "Also: PHP (Laravel, Yii2), C, pytest, Playwright and Vitest."
+  },
+  "contact": {
+    "label": "Contact",
+    "title": "Let's <accent>talk</accent> <outline>→</outline>",
+    "lede": "Open to new opportunities and interesting projects. Let's build something together.",
+    "resume": "Resume (PDF)",
+    "site": "Need a website for your business? Tell me about it.",
+    "subject": "Website project"
+  }
+}
